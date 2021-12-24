@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:tailboard_app/screens/bls_protocol_screen.dart';
 import 'package:tailboard_app/widgets/app_scaffold.dart';
 import 'package:tailboard_app/widgets/launcher_tile.dart';
 
@@ -20,7 +21,12 @@ class QuickProtocolsScreen extends StatelessWidget {
           LauncherTile(
             icon: Icons.local_hospital,
             title: 'BLS',
-            onTap: () {},
+            onTap: () {
+              Navigator.of(context)
+                  .push(MaterialPageRoute(builder: (BuildContext context) {
+                return const BLSProtocolScreen();
+              }));
+            },
           ),
           LauncherTile(
             icon: Icons.favorite,
