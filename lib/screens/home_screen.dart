@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:tailboard_app/screens/quick_protocols_screen.dart';
 import 'package:tailboard_app/widgets/app_scaffold.dart';
 import 'package:tailboard_app/widgets/launcher_tile.dart';
 
@@ -23,8 +24,23 @@ class _HomeScreenState extends State<HomeScreen> {
         crossAxisCount: 2,
         children: <Widget>[
           LauncherTile(
-            icon: Icons.flash_on,
+            icon: Icons.bolt,
             title: 'Quick Protocols',
+            onTap: () {
+              Navigator.of(context)
+                  .push(MaterialPageRoute(builder: (BuildContext context) {
+                return const QuickProtocolsScreen();
+              }));
+            },
+          ),
+          LauncherTile(
+            icon: Icons.assignment,
+            title: 'Tasks',
+            onTap: () {},
+          ),
+          LauncherTile(
+            icon: Icons.calendar_today,
+            title: 'Calendar',
             onTap: () {},
           ),
           LauncherTile(

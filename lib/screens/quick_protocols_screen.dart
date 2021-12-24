@@ -18,13 +18,33 @@ class QuickProtocolsScreen extends StatelessWidget {
         crossAxisCount: 2,
         children: <Widget>[
           LauncherTile(
-            icon: Icons.add,
+            icon: Icons.local_hospital,
             title: 'BLS',
             onTap: () {},
           ),
           LauncherTile(
-            icon: Icons.add_box,
+            icon: Icons.favorite,
             title: 'ACLS',
+            onTap: () {},
+          ),
+          LauncherTile(
+            icon: Icons.remove_circle,
+            title: 'Bradycardia',
+            onTap: () {},
+          ),
+          LauncherTile(
+            icon: Icons.add_circle,
+            title: 'Tachycardia',
+            onTap: () {},
+          ),
+          LauncherTile(
+            icon: Icons.medical_services,
+            title: 'ROSC',
+            onTap: () {},
+          ),
+          LauncherTile(
+            icon: Icons.local_pharmacy,
+            title: 'Opioids',
             onTap: () {},
           ),
         ],
