@@ -15,7 +15,7 @@ class LauncherTile extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return InkWell(
-      onTap: () {},
+      onTap: onTap,
       child: Container(
         padding: const EdgeInsets.all(8),
         color: Theme.of(context).cardColor,
