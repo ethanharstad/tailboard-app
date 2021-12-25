@@ -2,30 +2,68 @@ import 'package:flutter/material.dart';
 import 'package:graphview/GraphView.dart';
 import 'package:tailboard_app/widgets/app_scaffold.dart';
 
-class BLSProtocolScreen extends StatefulWidget {
-  const BLSProtocolScreen({Key? key}) : super(key: key);
+class BLSProtocolGraphScreen extends StatefulWidget {
+  const BLSProtocolGraphScreen({Key? key}) : super(key: key);
 
   @override
-  State<StatefulWidget> createState() => _BLSProtocolsScreenState();
+  State<StatefulWidget> createState() => _BLSProtocolGraphScreenState();
 }
 
-class _BLSProtocolsScreenState extends State<BLSProtocolScreen> {
+class _BLSProtocolGraphScreenState extends State<BLSProtocolGraphScreen> {
   var algo = {
     "nodes": [
-      {"id": 1, "label": "Verify Scene Safety"},
-      {"id": 2, "label": "Check for responsiveness"},
+      {
+        "id": 1,
+        "label": "Verify Scene Safety",
+        "color": "green",
+      },
+      {
+        "id": 2,
+        "label": "Check for responsiveness",
+        "color": "orange",
+      },
       {
         "id": 3,
         "label": "Look for breathing and check pulse.",
-        "type": "choice"
+        "type": "choice",
+        "color": "red",
       },
-      {"id": 4, "label": "Monitor until emergency responders arrive."},
-      {"id": 5, "label": "Provide rescue breathing: 1 breath every 6 seconds."},
-      {"id": 6, "label": "Start CPR"},
-      {"id": 7, "label": "AED arrives"},
-      {"id": 8, "label": "Check rhythm. Shockable rhythm?", "type": "choice"},
-      {"id": 9, "label": "Give 1 shock."},
-      {"id": 10, "label": "Resume CPR immediately for 2 minutes."},
+      {
+        "id": 4,
+        "label": "Monitor until emergency responders arrive.",
+        "color": "green",
+      },
+      {
+        "id": 5,
+        "label": "Provide rescue breathing: 1 breath every 6 seconds.",
+        "color": "green",
+      },
+      {
+        "id": 6,
+        "label": "Start CPR",
+        "color": "blue",
+      },
+      {
+        "id": 7,
+        "label": "AED arrives",
+        "color": "gray",
+      },
+      {
+        "id": 8,
+        "label": "Check rhythm. Shockable rhythm?",
+        "type": "choice",
+        "color": "red",
+      },
+      {
+        "id": 9,
+        "label": "Give 1 shock.",
+        "color": "blue",
+      },
+      {
+        "id": 10,
+        "label": "Resume CPR immediately for 2 minutes.",
+        "color": "blue",
+      },
     ],
     "edges": [
       {"from": 1, "to": 2},
@@ -84,7 +122,7 @@ class _BLSProtocolsScreenState extends State<BLSProtocolScreen> {
         child: Center(
           child: InteractiveViewer(
             constrained: false,
-            minScale: 0.01,
+            minScale: 0.00001,
             child: GraphView(
               algorithm: SugiyamaAlgorithm(builder),
               graph: graph,
