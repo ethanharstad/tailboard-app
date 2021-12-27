@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:tailboard_app/widgets/app_scaffold.dart';
+import 'package:tailboard_app/widgets/beta_toast.dart';
 
 enum Status { none, complete, choice }
 
@@ -11,14 +12,14 @@ const colorMap = {
   'gray': Colors.grey,
 };
 
-class BLSProtocolStepperScreen extends StatefulWidget {
-  const BLSProtocolStepperScreen({Key? key}) : super(key: key);
+class BLSProtocolScreen extends StatefulWidget {
+  const BLSProtocolScreen({Key? key}) : super(key: key);
 
   @override
-  State<StatefulWidget> createState() => _BLSProtocolStepperScreenState();
+  State<StatefulWidget> createState() => _BLSProtocolScreenState();
 }
 
-class _BLSProtocolStepperScreenState extends State<BLSProtocolStepperScreen> {
+class _BLSProtocolScreenState extends State<BLSProtocolScreen> {
   final algo = {
     "start": 1,
     "nodes": [
@@ -103,6 +104,7 @@ class _BLSProtocolStepperScreenState extends State<BLSProtocolStepperScreen> {
   void initState() {
     super.initState();
     currentNode = algo['start'] as int;
+    BetaToast.showBetaToast(context, 'bls_protocol_screen');
   }
 
   Widget buildNode({
@@ -172,7 +174,6 @@ class _BLSProtocolStepperScreenState extends State<BLSProtocolStepperScreen> {
 
   @override
   Widget build(BuildContext context) {
-    debugPrint("$history");
     return AppScaffold(
       title: 'BLS Protocol',
       body: Padding(

@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:tailboard_app/screens/bls_protocol_graph_screen.dart';
-import 'package:tailboard_app/screens/bls_protocol_pdf_screen.dart';
-import 'package:tailboard_app/screens/bls_protocol_stepper_screen.dart';
+import 'package:tailboard_app/screens/bls_protocol_screen.dart';
 import 'package:tailboard_app/widgets/app_scaffold.dart';
 import 'package:tailboard_app/widgets/launcher_tile.dart';
+import 'package:tailboard_app/widgets/unimplemented_dialog.dart';
 
 class QuickProtocolsScreen extends StatelessWidget {
   const QuickProtocolsScreen({
@@ -22,58 +21,44 @@ class QuickProtocolsScreen extends StatelessWidget {
         children: <Widget>[
           LauncherTile(
             icon: Icons.local_hospital,
-            title: 'BLS (Graph)',
-            onTap: () {
-              Navigator.of(context)
-                  .push(MaterialPageRoute(builder: (BuildContext context) {
-                return const BLSProtocolGraphScreen();
-              }));
-            },
-          ),
-          LauncherTile(
-            icon: Icons.local_hospital,
-            title: 'BLS (PDF)',
-            onTap: () {
-              Navigator.of(context)
-                  .push(MaterialPageRoute(builder: (BuildContext context) {
-                return BLSProtocolPdfScreen();
-              }));
-            },
-          ),
-          LauncherTile(
-            icon: Icons.local_hospital,
-            title: 'BLS (Steps)',
-            onTap: () {
-              Navigator.of(context)
-                  .push(MaterialPageRoute(builder: (BuildContext context) {
-                return const BLSProtocolStepperScreen();
-              }));
-            },
+            title: 'BLS',
+            onTap: () => Navigator.of(context).push(MaterialPageRoute(
+                builder: (BuildContext context) => const BLSProtocolScreen())),
           ),
           LauncherTile(
             icon: Icons.favorite,
             title: 'ACLS',
-            onTap: () {},
+            onTap: () => showDialog<void>(
+                context: context,
+                builder: (BuildContext context) => const UnimplementedDialog()),
           ),
           LauncherTile(
             icon: Icons.remove_circle,
             title: 'Bradycardia',
-            onTap: () {},
+            onTap: () => showDialog<void>(
+                context: context,
+                builder: (BuildContext context) => const UnimplementedDialog()),
           ),
           LauncherTile(
             icon: Icons.add_circle,
             title: 'Tachycardia',
-            onTap: () {},
+            onTap: () => showDialog<void>(
+                context: context,
+                builder: (BuildContext context) => const UnimplementedDialog()),
           ),
           LauncherTile(
             icon: Icons.medical_services,
             title: 'ROSC',
-            onTap: () {},
+            onTap: () => showDialog<void>(
+                context: context,
+                builder: (BuildContext context) => const UnimplementedDialog()),
           ),
           LauncherTile(
             icon: Icons.local_pharmacy,
             title: 'Opioids',
-            onTap: () {},
+            onTap: () => showDialog<void>(
+                context: context,
+                builder: (BuildContext context) => const UnimplementedDialog()),
           ),
         ],
       ),
