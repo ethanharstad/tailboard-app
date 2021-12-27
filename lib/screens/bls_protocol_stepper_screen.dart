@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:graphview/GraphView.dart';
 import 'package:tailboard_app/widgets/app_scaffold.dart';
 
 enum Status { none, complete, choice }

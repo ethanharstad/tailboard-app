@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
+import 'package:tailboard_app/widgets/auth_gate.dart';
 import 'firebase_options.dart';
-import 'package:tailboard_app/screens/home_screen.dart';
 
 const String appName = "Tailboard";
 
@@ -24,7 +24,7 @@ class TailboardApp extends StatelessWidget {
         visualDensity: VisualDensity.adaptivePlatformDensity,
         primarySwatch: Colors.red,
       ),
-      home: const HomeScreen(title: appName),
+      home: const AuthGate(),
     );
   }
 }

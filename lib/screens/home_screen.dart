@@ -3,20 +3,13 @@ import 'package:tailboard_app/screens/quick_protocols_screen.dart';
 import 'package:tailboard_app/widgets/app_scaffold.dart';
 import 'package:tailboard_app/widgets/launcher_tile.dart';
 
-class HomeScreen extends StatefulWidget {
-  const HomeScreen({Key? key, required this.title}) : super(key: key);
+class HomeScreen extends StatelessWidget {
+  const HomeScreen({Key? key}) : super(key: key);
 
-  final String title;
-
-  @override
-  State<HomeScreen> createState() => _HomeScreenState();
-}
-
-class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
     return AppScaffold(
-      title: widget.title,
+      title: "Tailboard",
       body: GridView.count(
         padding: const EdgeInsets.all(16),
         mainAxisSpacing: 8,
@@ -53,3 +46,4 @@ class _HomeScreenState extends State<HomeScreen> {
     );
   }
 }
+
