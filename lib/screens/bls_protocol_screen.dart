@@ -182,35 +182,46 @@ class _BLSProtocolScreenState extends State<BLSProtocolScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return AppScaffold(
-      title: 'BLS Protocol',
-      actions: <Widget>[
-        IconButton(
-          onPressed: () => setState(() {
-            docView = !docView;
-          }),
-          icon: const Icon(Icons.file_present),
-        ),
-      ],
-      body: Padding(
-        padding: const EdgeInsets.all(8),
-        child: docView
-            ? PdfView(controller: pdfController)
-            : SingleChildScrollView(
-                child: Column(
-                  children: <Widget>[
-                    for (var e in history) ...[
-                      buildNode(
-                        id: e['id'],
-                        state: e['state'] as Status,
-                        time: e['time'] as DateTime,
-                      ),
-                      const SizedBox(height: 4),
+    return WillPopScope(
+      onWillPop: () async {
+        if (docView) {
+          setState(() {
+            docView = false;
+          });
+          return false;
+        }
+        return true;
+      },
+      child: AppScaffold(
+        title: 'BLS Protocol',
+        actions: <Widget>[
+          IconButton(
+            onPressed: () => setState(() {
+              docView = !docView;
+            }),
+            icon: const Icon(Icons.file_present),
+          ),
+        ],
+        body: Padding(
+          padding: const EdgeInsets.all(8),
+          child: docView
+              ? PdfView(controller: pdfController)
+              : SingleChildScrollView(
+                  child: Column(
+                    children: <Widget>[
+                      for (var e in history) ...[
+                        buildNode(
+                          id: e['id'],
+                          state: e['state'] as Status,
+                          time: e['time'] as DateTime,
+                        ),
+                        const SizedBox(height: 4),
+                      ],
+                      buildNode(id: currentNode),
                     ],
-                    buildNode(id: currentNode),
-                  ],
+                  ),
                 ),
-              ),
+        ),
       ),
     );
   }
