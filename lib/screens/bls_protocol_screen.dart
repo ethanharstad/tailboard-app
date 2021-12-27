@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:tailboard_app/widgets/app_scaffold.dart';
+import 'package:tailboard_app/widgets/beta_toast.dart';
 
 enum Status { none, complete, choice }
 
@@ -103,6 +104,7 @@ class _BLSProtocolScreenState extends State<BLSProtocolScreen> {
   void initState() {
     super.initState();
     currentNode = algo['start'] as int;
+    BetaToast.showBetaToast(context);
   }
 
   Widget buildNode({
