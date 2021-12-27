@@ -1,6 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:tailboard_app/screens/bls_protocol_graph_screen.dart';
-import 'package:tailboard_app/screens/bls_protocol_pdf_screen.dart';
 import 'package:tailboard_app/screens/bls_protocol_screen.dart';
 import 'package:tailboard_app/widgets/app_scaffold.dart';
 import 'package:tailboard_app/widgets/launcher_tile.dart';
@@ -25,42 +23,42 @@ class QuickProtocolsScreen extends StatelessWidget {
             icon: Icons.local_hospital,
             title: 'BLS',
             onTap: () => Navigator.of(context).push(MaterialPageRoute(
-                builder: (BuildContext context) => BLSProtocolScreen())),
+                builder: (BuildContext context) => const BLSProtocolScreen())),
           ),
           LauncherTile(
             icon: Icons.favorite,
             title: 'ACLS',
             onTap: () => showDialog<void>(
                 context: context,
-                builder: (BuildContext context) => UnimplementedDialog()),
+                builder: (BuildContext context) => const UnimplementedDialog()),
           ),
           LauncherTile(
             icon: Icons.remove_circle,
             title: 'Bradycardia',
             onTap: () => showDialog<void>(
                 context: context,
-                builder: (BuildContext context) => UnimplementedDialog()),
+                builder: (BuildContext context) => const UnimplementedDialog()),
           ),
           LauncherTile(
             icon: Icons.add_circle,
             title: 'Tachycardia',
             onTap: () => showDialog<void>(
                 context: context,
-                builder: (BuildContext context) => UnimplementedDialog()),
+                builder: (BuildContext context) => const UnimplementedDialog()),
           ),
           LauncherTile(
             icon: Icons.medical_services,
             title: 'ROSC',
             onTap: () => showDialog<void>(
                 context: context,
-                builder: (BuildContext context) => UnimplementedDialog()),
+                builder: (BuildContext context) => const UnimplementedDialog()),
           ),
           LauncherTile(
             icon: Icons.local_pharmacy,
             title: 'Opioids',
             onTap: () => showDialog<void>(
                 context: context,
-                builder: (BuildContext context) => UnimplementedDialog()),
+                builder: (BuildContext context) => const UnimplementedDialog()),
           ),
         ],
       ),

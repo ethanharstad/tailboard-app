@@ -30,17 +30,17 @@ class HomeScreen extends StatelessWidget {
           LauncherTile(
             icon: Icons.assignment,
             title: 'Tasks',
-            onTap: () => showDialog<void>(context: context, builder: (BuildContext context) => UnimplementedDialog()),
+            onTap: () => showDialog<void>(context: context, builder: (BuildContext context) => const UnimplementedDialog()),
           ),
           LauncherTile(
             icon: Icons.calendar_today,
             title: 'Calendar',
-            onTap: () => showDialog<void>(context: context, builder: (BuildContext context) => UnimplementedDialog()),
+            onTap: () => showDialog<void>(context: context, builder: (BuildContext context) => const UnimplementedDialog()),
           ),
           LauncherTile(
             icon: Icons.description,
             title: 'Forms',
-            onTap: () => showDialog<void>(context: context, builder: (BuildContext context) => UnimplementedDialog()),
+            onTap: () => showDialog<void>(context: context, builder: (BuildContext context) => const UnimplementedDialog()),
           ),
         ],
       ),
