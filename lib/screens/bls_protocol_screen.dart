@@ -104,7 +104,7 @@ class _BLSProtocolScreenState extends State<BLSProtocolScreen> {
   void initState() {
     super.initState();
     currentNode = algo['start'] as int;
-    BetaToast.showBetaToast(context);
+    BetaToast.showBetaToast(context, 'bls_protocol_screen');
   }
 
   Widget buildNode({
@@ -174,7 +174,6 @@ class _BLSProtocolScreenState extends State<BLSProtocolScreen> {
 
   @override
   Widget build(BuildContext context) {
-    debugPrint("$history");
     return AppScaffold(
       title: 'BLS Protocol',
       body: Padding(
