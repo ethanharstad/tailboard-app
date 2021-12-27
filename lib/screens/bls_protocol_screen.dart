@@ -120,6 +120,7 @@ class _BLSProtocolScreenState extends State<BLSProtocolScreen> {
     Directory appDocDir = await getApplicationDocumentsDirectory();
     debugPrint('Application Documents Directory: ${appDocDir.path}');
     File downloadToFile = File('${appDocDir.path}/$filename');
+    await downloadToFile.create(recursive: true);
 
     try {
       await FirebaseStorage.instance.ref(filename).writeToFile(downloadToFile);
