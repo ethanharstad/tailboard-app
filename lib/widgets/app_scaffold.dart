@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:tailboard_app/widgets/app_drawer.dart';
 
 class AppScaffold extends StatelessWidget {
   const AppScaffold({
@@ -16,6 +17,7 @@ class AppScaffold extends StatelessWidget {
       appBar: AppBar(
         title: Text(title),
       ),
+      drawer: const AppDrawer(),
       body: body,
     );
   }
