@@ -1,5 +1,8 @@
+import 'dart:io';
 import 'package:flutter/material.dart';
+import 'package:firebase_storage/firebase_storage.dart';
 import 'package:native_pdf_view/native_pdf_view.dart';
+import 'package:path_provider/path_provider.dart';
 import 'package:tailboard_app/widgets/app_scaffold.dart';
 import 'package:tailboard_app/widgets/beta_toast.dart';
 
@@ -23,6 +26,7 @@ class BLSProtocolScreen extends StatefulWidget {
 class _BLSProtocolScreenState extends State<BLSProtocolScreen> {
   final algo = {
     "start": 1,
+    "document": "global/protocols/AlgorithmBLS_Adult_200624.pdf",
     "nodes": [
       {
         "id": 1,
@@ -102,17 +106,32 @@ class _BLSProtocolScreenState extends State<BLSProtocolScreen> {
   int currentNode = -1;
   bool docView = false;
 
-  final pdfController = PdfController(
-    document: PdfDocument.openAsset(
-      'assets/protocols/AlgorithmBLS_Adult_200624.pdf',
-    ),
-  );
+  PdfController? pdfController;
 
   @override
   void initState() {
     super.initState();
     currentNode = algo['start'] as int;
+    downloadDocument(algo['document'] as String);
     BetaToast.showBetaToast(context, 'bls_protocol_screen');
+  }
+
+  Future<void> downloadDocument(String filename) async {
+    Directory appDocDir = await getApplicationDocumentsDirectory();
+    debugPrint('Application Documents Directory: ${appDocDir.path}');
+    File downloadToFile = File('${appDocDir.path}/$filename');
+
+    try {
+      await FirebaseStorage.instance.ref(filename).writeToFile(downloadToFile);
+      debugPrint('got file: ${downloadToFile.path}');
+      setState(() {
+        pdfController = PdfController(
+          document: PdfDocument.openFile(downloadToFile.path),
+        );
+      });
+    } on FirebaseException catch (e) {
+      debugPrint(e.toString());
+    }
   }
 
   Widget buildNode({
@@ -205,7 +224,11 @@ class _BLSProtocolScreenState extends State<BLSProtocolScreen> {
         body: Padding(
           padding: const EdgeInsets.all(8),
           child: docView
-              ? PdfView(controller: pdfController)
+              ? pdfController != null
+                  ? PdfView(controller: pdfController!)
+                  : const Center(
+                      child: CircularProgressIndicator(),
+                    )
               : SingleChildScrollView(
                   child: Column(
                     children: <Widget>[
