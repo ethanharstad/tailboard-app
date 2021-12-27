@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:tailboard_app/screens/bls_protocol_graph_screen.dart';
 import 'package:tailboard_app/screens/bls_protocol_pdf_screen.dart';
-import 'package:tailboard_app/screens/bls_protocol_stepper_screen.dart';
+import 'package:tailboard_app/screens/bls_protocol_screen.dart';
 import 'package:tailboard_app/widgets/app_scaffold.dart';
 import 'package:tailboard_app/widgets/launcher_tile.dart';
 import 'package:tailboard_app/widgets/unimplemented_dialog.dart';
@@ -22,22 +22,10 @@ class QuickProtocolsScreen extends StatelessWidget {
         crossAxisCount: 2,
         children: <Widget>[
           LauncherTile(
-              icon: Icons.local_hospital,
-              title: 'BLS (Graph)',
-              onTap: () => Navigator.of(context).push(MaterialPageRoute(
-                  builder: (BuildContext context) =>
-                      const BLSProtocolGraphScreen()))),
-          LauncherTile(
             icon: Icons.local_hospital,
-            title: 'BLS (PDF)',
+            title: 'BLS',
             onTap: () => Navigator.of(context).push(MaterialPageRoute(
-                builder: (BuildContext context) => BLSProtocolPdfScreen())),
-          ),
-          LauncherTile(
-            icon: Icons.local_hospital,
-            title: 'BLS (Steps)',
-            onTap: () => Navigator.of(context).push(MaterialPageRoute(
-                builder: (BuildContext context) => BLSProtocolStepperScreen())),
+                builder: (BuildContext context) => BLSProtocolScreen())),
           ),
           LauncherTile(
             icon: Icons.favorite,

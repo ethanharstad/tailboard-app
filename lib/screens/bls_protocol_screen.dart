@@ -11,14 +11,14 @@ const colorMap = {
   'gray': Colors.grey,
 };
 
-class BLSProtocolStepperScreen extends StatefulWidget {
-  const BLSProtocolStepperScreen({Key? key}) : super(key: key);
+class BLSProtocolScreen extends StatefulWidget {
+  const BLSProtocolScreen({Key? key}) : super(key: key);
 
   @override
-  State<StatefulWidget> createState() => _BLSProtocolStepperScreenState();
+  State<StatefulWidget> createState() => _BLSProtocolScreenState();
 }
 
-class _BLSProtocolStepperScreenState extends State<BLSProtocolStepperScreen> {
+class _BLSProtocolScreenState extends State<BLSProtocolScreen> {
   final algo = {
     "start": 1,
     "nodes": [
