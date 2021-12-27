@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:native_pdf_view/native_pdf_view.dart';
 import 'package:tailboard_app/widgets/app_scaffold.dart';
 import 'package:tailboard_app/widgets/beta_toast.dart';
 
@@ -99,6 +100,13 @@ class _BLSProtocolScreenState extends State<BLSProtocolScreen> {
 
   var history = [];
   int currentNode = -1;
+  bool docView = false;
+
+  final pdfController = PdfController(
+    document: PdfDocument.openAsset(
+      'assets/protocols/AlgorithmBLS_Adult_200624.pdf',
+    ),
+  );
 
   @override
   void initState() {
@@ -176,23 +184,33 @@ class _BLSProtocolScreenState extends State<BLSProtocolScreen> {
   Widget build(BuildContext context) {
     return AppScaffold(
       title: 'BLS Protocol',
+      actions: <Widget>[
+        IconButton(
+          onPressed: () => setState(() {
+            docView = !docView;
+          }),
+          icon: const Icon(Icons.file_present),
+        ),
+      ],
       body: Padding(
         padding: const EdgeInsets.all(8),
-        child: SingleChildScrollView(
-          child: Column(
-            children: <Widget>[
-              for (var e in history) ...[
-                buildNode(
-                  id: e['id'],
-                  state: e['state'] as Status,
-                  time: e['time'] as DateTime,
+        child: docView
+            ? PdfView(controller: pdfController)
+            : SingleChildScrollView(
+                child: Column(
+                  children: <Widget>[
+                    for (var e in history) ...[
+                      buildNode(
+                        id: e['id'],
+                        state: e['state'] as Status,
+                        time: e['time'] as DateTime,
+                      ),
+                      const SizedBox(height: 4),
+                    ],
+                    buildNode(id: currentNode),
+                  ],
                 ),
-                const SizedBox(height: 4),
-              ],
-              buildNode(id: currentNode),
-            ],
-          ),
-        ),
+              ),
       ),
     );
   }
