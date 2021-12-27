@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:tailboard_app/screens/quick_protocols_screen.dart';
 import 'package:tailboard_app/widgets/app_scaffold.dart';
 import 'package:tailboard_app/widgets/launcher_tile.dart';
+import 'package:tailboard_app/widgets/unimplemented_dialog.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({Key? key}) : super(key: key);
@@ -29,17 +30,17 @@ class HomeScreen extends StatelessWidget {
           LauncherTile(
             icon: Icons.assignment,
             title: 'Tasks',
-            onTap: () {},
+            onTap: () => showDialog<void>(context: context, builder: (BuildContext context) => UnimplementedDialog()),
           ),
           LauncherTile(
             icon: Icons.calendar_today,
             title: 'Calendar',
-            onTap: () {},
+            onTap: () => showDialog<void>(context: context, builder: (BuildContext context) => UnimplementedDialog()),
           ),
           LauncherTile(
             icon: Icons.description,
             title: 'Forms',
-            onTap: () {},
+            onTap: () => showDialog<void>(context: context, builder: (BuildContext context) => UnimplementedDialog()),
           ),
         ],
       ),
