@@ -15,7 +15,7 @@ void main() async {
 }
 
 Future<void> requestStoragePermission() async {
-  final status = await Permission.storage.request();
+  await Permission.storage.request();
 }
 
 class TailboardApp extends StatefulWidget {

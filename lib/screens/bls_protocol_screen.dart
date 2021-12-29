@@ -90,7 +90,7 @@ class _BLSProtocolScreenState extends State<BLSProtocolScreen> {
     "edges": [
       {"from": 1, "to": 2},
       {"from": 2, "to": 3},
-      {"from": 3, "to": 4, "label": "Normal breathing, pulse felt"},
+      {"from": 3, "to": 4, "label": "Normal"},
       {"from": 3, "to": 5, "label": "Abnormal breathing, pulse felt"},
       {"from": 3, "to": 6, "label": "No breathing, pulse not felt"},
       {"from": 6, "to": 7},
@@ -123,6 +123,7 @@ class _BLSProtocolScreenState extends State<BLSProtocolScreen> {
     await downloadToFile.create(recursive: true);
 
     try {
+      // TODO Add progress indicator for download
       await FirebaseStorage.instance.ref(filename).writeToFile(downloadToFile);
       debugPrint('got file: ${downloadToFile.path}');
       setState(() {
@@ -165,7 +166,9 @@ class _BLSProtocolScreenState extends State<BLSProtocolScreen> {
             Row(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: <Widget>[
-                Expanded(child: Text(node['label'])),
+                Expanded(
+                  child: Text(node['label']),
+                ),
                 if (time != null) ...[
                   const SizedBox(width: 8),
                   Text(
