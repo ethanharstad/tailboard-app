@@ -2,6 +2,7 @@ import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:flutter/foundation.dart';
 
 part 'algorithm.freezed.dart';
+part 'algorithm.g.dart';
 
 @freezed
 class Algorithm with _$Algorithm {
@@ -12,4 +13,6 @@ class Algorithm with _$Algorithm {
     String? document,
     @Default([]) steps,
   }) = _Algorithm;
+
+  factory Algorithm.fromJson(Map<String, dynamic> json) => _$AlgorithmFromJson(json);
 }
