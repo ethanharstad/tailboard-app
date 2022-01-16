@@ -11,6 +11,7 @@ class Algorithm with _$Algorithm {
     required String id,
     required String name,
     required String start,
+    required Set<String> tags,
     String? document,
     @Default([]) List<AlgorithmStep> steps,
   }) = _Algorithm;

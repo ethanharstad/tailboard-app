@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:tailboard_app/protocols/screens/algorithm_list_screen.dart';
 import 'package:tailboard_app/screens/quick_protocols_screen.dart';
 import 'package:tailboard_app/widgets/app_scaffold.dart';
 import 'package:tailboard_app/widgets/launcher_tile.dart';
@@ -23,7 +24,7 @@ class HomeScreen extends StatelessWidget {
             onTap: () {
               Navigator.of(context)
                   .push(MaterialPageRoute(builder: (BuildContext context) {
-                return const QuickProtocolsScreen();
+                return const AlgorithmListScreen();
               }));
             },
           ),
