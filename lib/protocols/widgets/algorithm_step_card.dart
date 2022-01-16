@@ -29,7 +29,7 @@ class AlgorithmStepCard extends StatelessWidget {
     MaterialColor baseColor = colorMap[step.color] ?? Colors.grey;
     // TODO card color/style tweaks
     Color color = baseColor.shade200;
-    Color borderColor = baseColor.shade500;
+    // Color borderColor = baseColor.shade500;
 
     return Card(
       color: color,

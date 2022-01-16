@@ -11,6 +11,7 @@ import 'package:tailboard_app/protocols/models/algorithm_transition.dart';
 import 'package:tailboard_app/protocols/widgets/algorithm_stepper.dart';
 import 'package:tailboard_app/widgets/app_scaffold.dart';
 import 'package:tailboard_app/widgets/beta_toast.dart';
+import 'package:tailboard_app/widgets/unimplemented_dialog.dart';
 
 class AlgorithmDetailScreen extends StatefulWidget {
   const AlgorithmDetailScreen({Key? key, required this.algorithm})
@@ -73,6 +74,13 @@ class _AlgorithmDetailScreenState extends State<AlgorithmDetailScreen> {
         title: widget.algorithm.name,
         actions: <Widget>[
           IconButton(
+            onPressed: () => showDialog(
+              context: context,
+              builder: (BuildContext context) => const UnimplementedDialog(featureName: 'History Saving'),
+            ),
+            icon: const Icon(Icons.save),
+          ),
+          IconButton(
             onPressed: () => setState(() {
               docView = !docView;
             }),
@@ -90,7 +98,8 @@ class _AlgorithmDetailScreenState extends State<AlgorithmDetailScreen> {
               : AlgorithmStepper(
                   step: currentStep,
                   history: history,
-                  onTransition: (AlgorithmTransition transition) => setState(() {
+                  onTransition: (AlgorithmTransition transition) =>
+                      setState(() {
                     history[DateTime.now()] = currentStep;
                     currentStep = widget.algorithm.steps
                         .firstWhere((element) => element.id == transition.to);
