@@ -7,7 +7,7 @@ part 'algorithm_transition.g.dart';
 @freezed
 class AlgorithmTransition with _$AlgorithmTransition {
   factory AlgorithmTransition({
-    required String from,
+    required String id,
     required String to,
     String? body,
   }) = _AlgorithmTransition;

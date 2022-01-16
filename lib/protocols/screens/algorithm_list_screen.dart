@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:tailboard_app/protocols/models/algorithm.dart';
 import 'package:tailboard_app/protocols/widgets/algorithm_list_tile.dart';
 import 'package:tailboard_app/widgets/app_scaffold.dart';
+import 'package:tailboard_app/protocols/data/algorithms.dart';
 
 class AlgorithmListScreen extends StatefulWidget {
   const AlgorithmListScreen({
@@ -18,11 +19,6 @@ class _AlgorithmListScreenState extends State<AlgorithmListScreen> {
     'BLS',
     'ALS',
   };
-
-  final List<Algorithm> algorithms = [
-    Algorithm(id: 'bls', name: 'BLS', tags: {'BLS'}, start: '1'),
-    Algorithm(id: 'acls', name: 'ACLS', tags: {'ALS', 'Cardiac'}, start: '1'),
-  ];
 
   @override
   Widget build(BuildContext context) {
