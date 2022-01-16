@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:tailboard_app/protocols/models/algorithm.dart';
+import 'package:tailboard_app/protocols/screens/algorithm_detail_screen.dart';
 import 'package:tailboard_app/protocols/widgets/algorithm_list_tile.dart';
 import 'package:tailboard_app/widgets/app_scaffold.dart';
 import 'package:tailboard_app/protocols/data/algorithms.dart';
@@ -67,7 +68,10 @@ class _AlgorithmListScreenState extends State<AlgorithmListScreen> {
                       icon: Icons.error,
                       title: algorithm.name,
                       tags: algorithm.tags,
-                      onTap: () {},
+                      onTap: () => Navigator.of(context).push(MaterialPageRoute(
+                        builder: (BuildContext context) =>
+                            AlgorithmDetailScreen(algorithm: algorithm),
+                      )),
                     ),
               ],
             ),
