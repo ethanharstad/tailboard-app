@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:tailboard_app/protocols/screens/algorithm_list_screen.dart';
-import 'package:tailboard_app/screens/quick_protocols_screen.dart';
 import 'package:tailboard_app/widgets/app_scaffold.dart';
 import 'package:tailboard_app/widgets/launcher_tile.dart';
 import 'package:tailboard_app/widgets/unimplemented_dialog.dart';
