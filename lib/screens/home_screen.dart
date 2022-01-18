@@ -12,9 +12,7 @@ class HomeScreen extends StatelessWidget {
     return AppScaffold(
       title: "Tailboard",
       body: GridView.count(
-        padding: const EdgeInsets.all(16),
-        mainAxisSpacing: 8,
-        crossAxisSpacing: 8,
+        padding: const EdgeInsets.all(4),
         crossAxisCount: 2,
         children: <Widget>[
           LauncherTile(
