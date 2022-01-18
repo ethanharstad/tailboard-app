@@ -17,18 +17,14 @@ class LauncherTile extends StatelessWidget {
     return Card(
       child: InkWell(
         onTap: onTap,
-        child: Container(
-          padding: const EdgeInsets.all(8),
-          color: Theme.of(context).cardColor,
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            mainAxisSize: MainAxisSize.max,
-            children: <Widget>[
-              Icon(icon, size: 64),
-              const SizedBox(height: 4),
-              Text(title, style: Theme.of(context).textTheme.headline6),
-            ],
-          ),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          mainAxisSize: MainAxisSize.max,
+          children: <Widget>[
+            Icon(icon, size: 64),
+            const SizedBox(height: 4),
+            Text(title, style: Theme.of(context).textTheme.headline6),
+          ],
         ),
       ),
     );
