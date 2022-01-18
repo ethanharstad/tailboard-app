@@ -1,25 +1,25 @@
 import 'package:flutter/material.dart';
-import 'package:shared_preferences/shared_preferences.dart';
+import 'package:hive_flutter/hive_flutter.dart';
 
 class BetaToast extends SnackBar {
   final String? id;
+  final Box box;
 
-  BetaToast({this.id, Key? key})
+  BetaToast({this.id, required this.box, Key? key})
       : super(
           key: key,
           content:
               const Text('This is a beta feature and may not work correctly.'),
           action: id != null ? SnackBarAction(label: 'Dismiss', onPressed: () async {
-            SharedPreferences prefs = await SharedPreferences.getInstance();
-            prefs.setBool(_getKey(id), true);
+            box.put(_getKey(id), true);
           }) : null,
         );
 
   static void showBetaToast(BuildContext context, [String? id]) async {
-    SharedPreferences prefs = await SharedPreferences.getInstance();
-    if (id == null || prefs.getBool(_getKey(id)) != true) {
+    Box box = await Hive.openBox<bool>('betaPreferences');
+    if (id == null || box.get(_getKey(id)) != true) {
       WidgetsBinding.instance?.addPostFrameCallback((_) {
-        ScaffoldMessenger.of(context).showSnackBar(BetaToast(id: id));
+        ScaffoldMessenger.of(context).showSnackBar(BetaToast(id: id, box: box));
       });
     }
   }
