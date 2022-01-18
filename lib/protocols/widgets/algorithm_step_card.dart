@@ -41,11 +41,19 @@ class AlgorithmStepCard extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: <Widget>[
                 Expanded(child: Text(step.body)),
-                if (time != null) ...[
+                if (step.label != null || time != null) ...[
                   const SizedBox(width: 8),
-                  Text(
-                    "${time?.hour.toString().padLeft(2, '0')}:${time?.minute.toString().padLeft(2, '0')}",
-                    style: Theme.of(context).textTheme.caption,
+                  Column(
+                    crossAxisAlignment: CrossAxisAlignment.end,
+                    children: <Widget>[
+                      if (step.label != null)
+                        Text(step.label!, style: Theme.of(context).textTheme.subtitle1,),
+                      if (time != null)
+                        Text(
+                          "${time?.hour.toString().padLeft(2, '0')}:${time?.minute.toString().padLeft(2, '0')}",
+                          style: Theme.of(context).textTheme.caption,
+                        ),
+                    ],
                   ),
                 ],
               ],
