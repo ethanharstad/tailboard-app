@@ -8,6 +8,7 @@ import 'package:path_provider/path_provider.dart';
 import 'package:tailboard_app/protocols/models/algorithm.dart';
 import 'package:tailboard_app/protocols/models/algorithm_step.dart';
 import 'package:tailboard_app/protocols/models/algorithm_transition.dart';
+import 'package:tailboard_app/protocols/widgets/algorithm_drawer.dart';
 import 'package:tailboard_app/protocols/widgets/algorithm_stepper.dart';
 import 'package:tailboard_app/widgets/app_scaffold.dart';
 import 'package:tailboard_app/widgets/beta_toast.dart';
@@ -28,6 +29,7 @@ class _AlgorithmDetailScreenState extends State<AlgorithmDetailScreen> {
   PdfController? pdfController;
   late AlgorithmStep currentStep;
   LinkedHashMap<DateTime, AlgorithmStep> history = LinkedHashMap();
+  final GlobalKey<ScaffoldState> scaffoldKey = GlobalKey<ScaffoldState>();
 
   @override
   void initState() {
@@ -71,12 +73,19 @@ class _AlgorithmDetailScreenState extends State<AlgorithmDetailScreen> {
         return true;
       },
       child: AppScaffold(
+        scaffoldKey: scaffoldKey,
         title: widget.algorithm.name,
+        endDrawer: widget.algorithm.notes.isNotEmpty
+            ? AlgorithmDrawer(
+                notes: widget.algorithm.notes,
+              )
+            : null,
         actions: <Widget>[
           IconButton(
             onPressed: () => showDialog(
               context: context,
-              builder: (BuildContext context) => const UnimplementedDialog(featureName: 'History Saving'),
+              builder: (BuildContext context) =>
+                  const UnimplementedDialog(featureName: 'History Saving'),
             ),
             icon: const Icon(Icons.save),
           ),
@@ -84,13 +93,22 @@ class _AlgorithmDetailScreenState extends State<AlgorithmDetailScreen> {
             onPressed: () => setState(() {
               docView = !docView;
             }),
-            icon: const Icon(Icons.file_present),
+            icon: const Icon(Icons.attach_file),
+          ),
+          IconButton(
+            onPressed: widget.algorithm.notes.isNotEmpty
+                ? () {
+                    scaffoldKey.currentState!.openEndDrawer();
+                  }
+                : null,
+            icon: const Icon(Icons.notes),
           ),
         ],
         body: Padding(
           padding: const EdgeInsets.all(8),
           child: docView
               ? pdfController != null
+                  // FIXME can only view the document once
                   ? PdfView(controller: pdfController!)
                   : const Center(
                       child: CircularProgressIndicator(),

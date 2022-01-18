@@ -4,6 +4,83 @@ final Map<String, dynamic> aclsJson = {
   "tags": ["ALS", "Adult", "Cardiac"],
   "document": "global/protocols/AlgorithmACLS_CA_200612.pdf",
   "start": "1",
+  "notes": [
+    {
+      "id": "1",
+      "weight": 1,
+      "title": "CPR Quality",
+      "body": """
+- Push hard (at least 2 inches [5 cm]) and fast (100-120/min) and allow complete chest recoil.
+- Minimize interruptions in compressions.
+- Avoid excessive ventilation.
+- Change compressor every 2 minutes, or sooner if fatigued.
+- If no advanced airway, 30:2 compression-ventilation ratio, or 1 breath every 6 seconds.
+- Quantitative waveform capnography:
+  – If Petco2 is low or decreasing, reassess CPR quality.
+      """
+    },
+    {
+      "id": "2",
+      "weight": 2,
+      "title": "Shock Energy for Defibrillation",
+      "body": """
+- Biphasic: Manufacturer recommendation (eg, initial dose of 120-200 J); if unknown, use maximum available. Second and subsequent doses should be equivalent, and higher doses may be considered.
+- Monophasic: 360 J
+      """
+    },
+    {
+      "id": "3",
+      "weight": 3,
+      "title": "Drug Therapy",
+      "body": """
+- Epinephrine IV/IO dose: 1 mg every 3-5 minutes
+- Amiodarone IV/IO dose:
+    First dose: 300 mg bolus.
+    Second dose: 150 mg.
+  or
+  Lidocaine IV/IO dose:
+    First dose: 1-1.5 mg/kg.
+    Second dose: 0.5-0.75 mg/kg.
+      """
+    },
+    {
+      "id": "4",
+      "weight": 4,
+      "title": "Advanced Airway",
+      "body": """
+- Endotracheal intubation or supraglottic advanced airway
+- Waveform capnography or capnometry to confirm and monitor ET tube placement
+- Once advanced airway in place, give 1 breath every 6 seconds (10 breaths/min) with continuous chest compressions
+      """
+    },
+    {
+      "id": "5",
+      "weight": 5,
+      "title": "Return of Spontaneous Circulation (ROSC)",
+      "body": """
+- Pulse and blood pressure
+- Abrupt sustained increase in Petco2 (typically ≥40 mm Hg)
+- Spontaneous arterial pressure waves with intra-arterial monitoring
+      """
+    },
+    {
+      "id": "6",
+      "weight": 6,
+      "title": "Reversible Causes",
+      "body": """
+- Hypovolemia
+- Hypoxia
+- Hydrogen ion (acidosis)
+- Hypo/hyperkalemia
+- Hypothermia
+- Tension pneumothorax
+- Tamponade, cardiac
+- Toxins
+- Thrombosis, pulmonary
+- Thrombosis, coronary
+      """
+    },
+  ],
   "steps": [
     {
       "id": "0",

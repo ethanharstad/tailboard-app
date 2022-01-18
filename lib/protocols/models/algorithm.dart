@@ -2,6 +2,8 @@ import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:flutter/foundation.dart';
 import 'package:tailboard_app/protocols/models/algorithm_step.dart';
 
+import 'algorithm_note.dart';
+
 part 'algorithm.freezed.dart';
 part 'algorithm.g.dart';
 
@@ -14,6 +16,7 @@ class Algorithm with _$Algorithm {
     required Set<String> tags,
     String? document,
     @Default([]) List<AlgorithmStep> steps,
+    @Default([]) List<AlgorithmNote> notes,
   }) = _Algorithm;
 
   factory Algorithm.fromJson(Map<String, dynamic> json) => _$AlgorithmFromJson(json);
