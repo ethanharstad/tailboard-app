@@ -37,26 +37,29 @@ class AlgorithmStepCard extends StatelessWidget {
         children: <Widget>[
           Padding(
             padding: const EdgeInsets.all(4.0),
-            child: Row(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: <Widget>[
-                Expanded(child: Text(step.body)),
-                if (step.label != null || time != null) ...[
-                  const SizedBox(width: 8),
-                  Column(
-                    crossAxisAlignment: CrossAxisAlignment.end,
-                    children: <Widget>[
-                      if (step.label != null)
-                        Text(step.label!, style: Theme.of(context).textTheme.subtitle1,),
-                      if (time != null)
-                        Text(
-                          "${time?.hour.toString().padLeft(2, '0')}:${time?.minute.toString().padLeft(2, '0')}",
-                          style: Theme.of(context).textTheme.caption,
-                        ),
-                    ],
-                  ),
+            child: IntrinsicHeight(
+              child: Row(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: <Widget>[
+                  Expanded(child: Text(step.body)),
+                  // TODO add inline actions like drug calc or noteref
+                  if (step.label != null || time != null) ...[
+                    const VerticalDivider(),
+                    Column(
+                      crossAxisAlignment: CrossAxisAlignment.end,
+                      children: <Widget>[
+                        if (step.label != null)
+                          Text(step.label!, style: Theme.of(context).textTheme.subtitle1,),
+                        if (time != null)
+                          Text(
+                            "${time?.hour.toString().padLeft(2, '0')}:${time?.minute.toString().padLeft(2, '0')}",
+                            style: Theme.of(context).textTheme.caption,
+                          ),
+                      ],
+                    ),
+                  ],
                 ],
-              ],
+              ),
             ),
           ),
           if (!complete)

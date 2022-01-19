@@ -140,8 +140,8 @@ final Map<String, dynamic> aclsJson = {
       "color": "red",
       "type": "choice",
       "transitions": [
-        {"id": "6-0", "to": "0", "body": "No"},
         {"id": "6-7", "to": "7", "body": "Yes"},
+        {"id": "6-0", "to": "0", "body": "No"},
       ],
     },
     {
@@ -168,8 +168,8 @@ final Map<String, dynamic> aclsJson = {
       "color": "red",
       "type": "choice",
       "transitions": [
-        {"id": "9-0", "to": "0", "body": "No"},
         {"id": "9-10", "to": "10", "body": "Yes"},
+        {"id": "9-0", "to": "0", "body": "No"},
       ],
     },
     {
@@ -222,9 +222,9 @@ final Map<String, dynamic> aclsJson = {
       "color": "red",
       "type": "choice",
       "transitions": [
-        {"id": "15-16", "to": "16", "body": "No"},
         // TODO "Go to 5 or 5"?
         {"id": "17-10", "to": "10", "body": "Yes"},
+        {"id": "15-16", "to": "16", "body": "No"},
       ],
     },
     {
@@ -242,9 +242,9 @@ final Map<String, dynamic> aclsJson = {
       "color": "red",
       "type": "choice",
       "transitions": [
-        {"id": "17-0", "to": "0", "body": "No"},
         // TODO "Go to 5 or 5"?
         {"id": "17-10", "to": "10", "body": "Yes"},
+        {"id": "17-0", "to": "0", "body": "No"},
       ],
     },
   ],
