@@ -19,6 +19,8 @@ class _AlgorithmListScreenState extends State<AlgorithmListScreen> {
   final Set<String> filters = {
     'BLS',
     'ALS',
+    'Adult',
+    'Pediatric',
   };
 
   @override
