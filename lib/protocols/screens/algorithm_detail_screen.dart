@@ -26,7 +26,8 @@ class AlgorithmDetailScreen extends StatefulWidget {
 
 class _AlgorithmDetailScreenState extends State<AlgorithmDetailScreen> {
   bool docView = false;
-  PdfController? pdfController;
+  Future<PdfDocument>? _pdfDocument;
+  PdfController? _pdfController;
   late AlgorithmStep currentStep;
   LinkedHashMap<DateTime, AlgorithmStep> history = LinkedHashMap();
   final GlobalKey<ScaffoldState> scaffoldKey = GlobalKey<ScaffoldState>();
@@ -50,9 +51,10 @@ class _AlgorithmDetailScreenState extends State<AlgorithmDetailScreen> {
     try {
       // TODO Add progress indicator for download
       await FirebaseStorage.instance.ref(filename).writeToFile(downloadToFile);
+      _pdfDocument = PdfDocument.openFile(downloadToFile.path);
       setState(() {
-        pdfController = PdfController(
-          document: PdfDocument.openFile(downloadToFile.path),
+        _pdfController = PdfController(
+          document: _pdfDocument!,
         );
       });
     } on FirebaseException catch (e) {
@@ -90,9 +92,14 @@ class _AlgorithmDetailScreenState extends State<AlgorithmDetailScreen> {
             icon: const Icon(Icons.save),
           ),
           IconButton(
-            onPressed: () => setState(() {
-              docView = !docView;
-            }),
+            onPressed: () {
+              setState(() {
+                _pdfController = PdfController(
+                  document: _pdfDocument!,
+                );
+                docView = !docView;
+              });
+            },
             icon: const Icon(Icons.attach_file),
           ),
           IconButton(
@@ -107,9 +114,8 @@ class _AlgorithmDetailScreenState extends State<AlgorithmDetailScreen> {
         body: Padding(
           padding: const EdgeInsets.all(8),
           child: docView
-              ? pdfController != null
-                  // FIXME can only view the document once
-                  ? PdfView(controller: pdfController!)
+              ? _pdfController != null
+                  ? PdfView(controller: _pdfController!)
                   : const Center(
                       child: CircularProgressIndicator(),
                     )
