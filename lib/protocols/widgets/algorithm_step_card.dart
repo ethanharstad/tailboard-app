@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:styled_text/styled_text.dart';
 import 'package:tailboard_app/protocols/models/algorithm_step.dart';
-import 'package:tailboard_app/protocols/models/algorithm_transition.dart';
 
 const colorMap = {
   'green': Colors.green,
@@ -14,15 +14,11 @@ class AlgorithmStepCard extends StatelessWidget {
   const AlgorithmStepCard({
     Key? key,
     required this.step,
-    this.onTransition,
-    this.complete = false,
     this.time,
   }) : super(key: key);
 
   final AlgorithmStep step;
-  final bool complete;
   final DateTime? time;
-  final Function(AlgorithmTransition transition)? onTransition;
 
   @override
   Widget build(BuildContext context) {
@@ -41,7 +37,15 @@ class AlgorithmStepCard extends StatelessWidget {
               child: Row(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: <Widget>[
-                  Expanded(child: Text(step.body)),
+                  Expanded(
+                    child: StyledText(
+                      text: step.body,
+                      tags: {
+                        'bold': StyledTextTag(style: const TextStyle(fontWeight: FontWeight.bold)),
+                        'italic': StyledTextTag(style: const TextStyle(fontStyle: FontStyle.italic)),
+                      },
+                    ),
+                  ),
                   // TODO add inline actions like drug calc or noteref
                   if (step.label != null || time != null) ...[
                     const VerticalDivider(),
@@ -49,7 +53,10 @@ class AlgorithmStepCard extends StatelessWidget {
                       crossAxisAlignment: CrossAxisAlignment.end,
                       children: <Widget>[
                         if (step.label != null)
-                          Text(step.label!, style: Theme.of(context).textTheme.subtitle1,),
+                          Text(
+                            step.label!,
+                            style: Theme.of(context).textTheme.subtitle1,
+                          ),
                         if (time != null)
                           Text(
                             "${time?.hour.toString().padLeft(2, '0')}:${time?.minute.toString().padLeft(2, '0')}",
@@ -62,19 +69,6 @@ class AlgorithmStepCard extends StatelessWidget {
               ),
             ),
           ),
-          if (!complete)
-            Wrap(
-              spacing: 8,
-              runSpacing: 0,
-              alignment: WrapAlignment.center,
-              children: <Widget>[
-                for (var transition in step.transitions)
-                  ElevatedButton(
-                    onPressed: () => onTransition!(transition),
-                    child: Text(transition.body ?? 'Next'),
-                  ),
-              ],
-            ),
         ],
       ),
     );
