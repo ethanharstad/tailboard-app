@@ -15,6 +15,8 @@ class AlgorithmStep with _$AlgorithmStep {
     String? type,
     required String body,
     @Default([]) List<AlgorithmTransition> transitions,
+    @Default(false) bool advance,
+    int? duration,
   }) = _AlgorithmStep;
 
   factory AlgorithmStep.fromJson(Map<String, dynamic> json) => _$AlgorithmStepFromJson(json);
