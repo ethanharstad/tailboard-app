@@ -91,8 +91,9 @@ final Map<String, dynamic> aclsJson = {
     {
       "id": "1",
       "label": "1",
-      "body": "Start CPR\nGive oxygen\nAttach monitor/defibrillator",
+      "body": "<bold>Start CPR</bold>\n- Give oxygen\n- Attach monitor/defibrillator",
       "color": "blue",
+      "advance": true,
       "transitions": [
         {"id": "1-2", "to": "2"}
       ],
@@ -112,6 +113,7 @@ final Map<String, dynamic> aclsJson = {
       "label": "2",
       "body": "VF/pVT",
       "color": "gray",
+      "advance": true,
       "transitions": [
         {"id": "3-4", "to": "4"},
       ],
@@ -128,8 +130,9 @@ final Map<String, dynamic> aclsJson = {
     {
       "id": "5",
       "label": "4",
-      "body": "CPR 2 min\nIV/IO access",
+      "body": "<bold>CPR 2 min</bold>\n- IV/IO access",
       "color": "blue",
+      "duration": 120,
       "transitions": [
         {"id": "5-6", "to": "6"},
       ],
@@ -156,8 +159,9 @@ final Map<String, dynamic> aclsJson = {
     {
       "id": "8",
       "label": "6",
-      "body": "CPR 2 min\nEpinephrine every 3-5 min\nConsider advanced airway, capnography",
+      "body": "<bold>CPR 2 min</bold>\n- <bold>Epinephrine</bold> every 3-5 min\n- Consider advanced airway, capnography",
       "color": "blue",
+      "duration": 120,
       "transitions": [
         {"id": "8-9", "to": "9"},
       ],
@@ -184,8 +188,9 @@ final Map<String, dynamic> aclsJson = {
     {
       "id": "11",
       "label": "8",
-      "body": "CPR 2 min\nAmiodarone or lidocaine\nTreat reversible causes",
+      "body": "<bold>CPR 2 min</bold>\n- <bold>Amiodarone</bold> or <bold>lidocaine</bold>\n- Treat reversible causes",
       "color": "blue",
+      "duration": 120,
       "transitions": [
         {"id": "11-6", "to": "6"},
       ],
@@ -195,14 +200,16 @@ final Map<String, dynamic> aclsJson = {
       "label": "9",
       "body": "Asytole/PEA",
       "color": "gray",
+      "advance": true,
       "transitions": [
         {"id": "12-13", "to": "13"},
       ],
     },
     {
       "id": "13",
-      "body": "Epinephrine ASAP",
+      "body": "<bold>Epinephrine</bold> ASAP",
       "color": "red",
+      "advance": true,
       "transitions": [
         {"id": "13-14", "to": "14"}
       ],
@@ -210,8 +217,9 @@ final Map<String, dynamic> aclsJson = {
     {
       "id": "14",
       "label": "10",
-      "body": "CPR 2 min\nIV/IO access\nEpinephrine every 3-5 min\nConsider advanced airway, capnography",
+      "body": "<bold>CPR 2 min</bold>\n- IV/IO access\n- <bold>Epinephrine</bold> every 3-5 min\n- Consider advanced airway, capnography",
       "color": "blue",
+      "duration": 120,
       "transitions": [
         {"id": "14-15", "to": "15"},
       ],
@@ -230,8 +238,9 @@ final Map<String, dynamic> aclsJson = {
     {
       "id": "16",
       "label": "11",
-      "body": "CPR 2 min\nTreat reversible causes",
+      "body": "<bold>CPR 2 min</bold>\n- Treat reversible causes",
       "color": "blue",
+      "duration": 120,
       "transitions": [
         {"id": "16-17", "to": "17"},
       ],
