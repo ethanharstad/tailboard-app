@@ -52,7 +52,7 @@ class AlgorithmBloc extends Bloc<AlgorithmEvent, AlgorithmState> {
     if (step.advance == true) {
       try {
         add(AlgorithmEvent.transition(step.transitions.single));
-      } on StateError catch (e) {
+      } on StateError {
         add(const AlgorithmError(
             message:
                 "Attempted automatic transition from a step with an invalid amount of transitions."));

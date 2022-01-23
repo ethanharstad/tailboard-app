@@ -2,9 +2,11 @@ import 'dart:collection';
 import 'dart:io';
 
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:native_pdf_view/native_pdf_view.dart';
 import 'package:path_provider/path_provider.dart';
+import 'package:tailboard_app/protocols/blocs/algorithm_bloc.dart';
 import 'package:tailboard_app/protocols/models/algorithm.dart';
 import 'package:tailboard_app/protocols/models/algorithm_step.dart';
 import 'package:tailboard_app/protocols/models/algorithm_transition.dart';
@@ -25,22 +27,26 @@ class AlgorithmDetailScreen extends StatefulWidget {
 }
 
 class _AlgorithmDetailScreenState extends State<AlgorithmDetailScreen> {
+  AlgorithmBloc bloc = AlgorithmBloc();
   bool docView = false;
   Future<PdfDocument>? _pdfDocument;
   PdfController? _pdfController;
-  late AlgorithmStep currentStep;
-  LinkedHashMap<DateTime, AlgorithmStep> history = LinkedHashMap();
   final GlobalKey<ScaffoldState> scaffoldKey = GlobalKey<ScaffoldState>();
 
   @override
   void initState() {
     super.initState();
-    currentStep = widget.algorithm.steps
-        .firstWhere((element) => element.id == widget.algorithm.start);
+    bloc.add(AlgorithmLoaded(algorithm: widget.algorithm));
     if (widget.algorithm.document != null) {
       downloadDocument(widget.algorithm.document!);
     }
     BetaToast.showBetaToast(context, 'protocol_detail_screen');
+  }
+  
+  @override
+  void dispose() {
+    bloc.close();
+    super.dispose();
   }
 
   Future<void> downloadDocument(String filename) async {
@@ -74,61 +80,64 @@ class _AlgorithmDetailScreenState extends State<AlgorithmDetailScreen> {
         }
         return true;
       },
-      child: AppScaffold(
-        scaffoldKey: scaffoldKey,
-        title: widget.algorithm.name,
-        endDrawer: widget.algorithm.notes.isNotEmpty
-            ? AlgorithmDrawer(
-                notes: widget.algorithm.notes,
-              )
-            : null,
-        actions: <Widget>[
-          IconButton(
-            onPressed: () => showDialog(
-              context: context,
-              builder: (BuildContext context) =>
-                  const UnimplementedDialog(featureName: 'History Saving'),
+      child: BlocProvider.value(
+        value: bloc,
+        child: AppScaffold(
+          scaffoldKey: scaffoldKey,
+          title: widget.algorithm.name,
+          endDrawer: widget.algorithm.notes.isNotEmpty
+              ? AlgorithmDrawer(
+                  notes: widget.algorithm.notes,
+                )
+              : null,
+          actions: <Widget>[
+            IconButton(
+              onPressed: () => showDialog(
+                context: context,
+                builder: (BuildContext context) =>
+                    const UnimplementedDialog(featureName: 'History Saving'),
+              ),
+              icon: const Icon(Icons.save),
             ),
-            icon: const Icon(Icons.save),
+            IconButton(
+              onPressed: () {
+                setState(() {
+                  _pdfController = PdfController(
+                    document: _pdfDocument!,
+                  );
+                  docView = !docView;
+                });
+              },
+              icon: const Icon(Icons.attach_file),
+            ),
+            IconButton(
+              onPressed: widget.algorithm.notes.isNotEmpty
+                  ? () {
+                      scaffoldKey.currentState!.openEndDrawer();
+                    }
+                  : null,
+              icon: const Icon(Icons.notes),
+            ),
+          ],
+          body: Padding(
+            padding: const EdgeInsets.all(8),
+            child: docView
+                ? _pdfController != null
+                    ? PdfView(controller: _pdfController!)
+                    : const Center(
+                        child: CircularProgressIndicator(),
+                      )
+                : AlgorithmStepper(
+                    step: currentStep,
+                    history: history,
+                    onTransition: (AlgorithmTransition transition) =>
+                        setState(() {
+                      history[DateTime.now()] = currentStep;
+                      currentStep = widget.algorithm.steps
+                          .firstWhere((element) => element.id == transition.to);
+                    }),
+                  ),
           ),
-          IconButton(
-            onPressed: () {
-              setState(() {
-                _pdfController = PdfController(
-                  document: _pdfDocument!,
-                );
-                docView = !docView;
-              });
-            },
-            icon: const Icon(Icons.attach_file),
-          ),
-          IconButton(
-            onPressed: widget.algorithm.notes.isNotEmpty
-                ? () {
-                    scaffoldKey.currentState!.openEndDrawer();
-                  }
-                : null,
-            icon: const Icon(Icons.notes),
-          ),
-        ],
-        body: Padding(
-          padding: const EdgeInsets.all(8),
-          child: docView
-              ? _pdfController != null
-                  ? PdfView(controller: _pdfController!)
-                  : const Center(
-                      child: CircularProgressIndicator(),
-                    )
-              : AlgorithmStepper(
-                  step: currentStep,
-                  history: history,
-                  onTransition: (AlgorithmTransition transition) =>
-                      setState(() {
-                    history[DateTime.now()] = currentStep;
-                    currentStep = widget.algorithm.steps
-                        .firstWhere((element) => element.id == transition.to);
-                  }),
-                ),
         ),
       ),
     );
