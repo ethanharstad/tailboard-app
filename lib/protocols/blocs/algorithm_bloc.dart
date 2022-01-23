@@ -30,7 +30,7 @@ class AlgorithmBloc extends Bloc<AlgorithmEvent, AlgorithmState> {
         AlgorithmContentState prev = state as AlgorithmContentState;
         AlgorithmStep next = prev.algorithm.steps
             .firstWhere((element) => element.id == event.transition.to);
-        var history = LinkedHashMap<DateTime, AlgorithmStep>.fromIterable(prev.history.entries);
+        var history = LinkedHashMap<DateTime, AlgorithmStep>.from(prev.history);
         history[DateTime.now()] = prev.currentStep;
         emit(AlgorithmState.content(
           algorithm: prev.algorithm,

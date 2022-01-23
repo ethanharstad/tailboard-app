@@ -1,4 +1,3 @@
-import 'dart:collection';
 import 'dart:io';
 
 import 'package:flutter/material.dart';
@@ -8,8 +7,6 @@ import 'package:native_pdf_view/native_pdf_view.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:tailboard_app/protocols/blocs/algorithm_bloc.dart';
 import 'package:tailboard_app/protocols/models/algorithm.dart';
-import 'package:tailboard_app/protocols/models/algorithm_step.dart';
-import 'package:tailboard_app/protocols/models/algorithm_transition.dart';
 import 'package:tailboard_app/protocols/widgets/algorithm_drawer.dart';
 import 'package:tailboard_app/protocols/widgets/algorithm_stepper.dart';
 import 'package:tailboard_app/widgets/app_scaffold.dart';
@@ -42,7 +39,7 @@ class _AlgorithmDetailScreenState extends State<AlgorithmDetailScreen> {
     }
     BetaToast.showBetaToast(context, 'protocol_detail_screen');
   }
-  
+
   @override
   void dispose() {
     bloc.close();
@@ -100,14 +97,16 @@ class _AlgorithmDetailScreenState extends State<AlgorithmDetailScreen> {
               icon: const Icon(Icons.save),
             ),
             IconButton(
-              onPressed: () {
-                setState(() {
-                  _pdfController = PdfController(
-                    document: _pdfDocument!,
-                  );
-                  docView = !docView;
-                });
-              },
+              onPressed: _pdfController != null
+                  ? () {
+                      setState(() {
+                        _pdfController = PdfController(
+                          document: _pdfDocument!,
+                        );
+                        docView = !docView;
+                      });
+                    }
+                  : null,
               icon: const Icon(Icons.attach_file),
             ),
             IconButton(
@@ -127,16 +126,7 @@ class _AlgorithmDetailScreenState extends State<AlgorithmDetailScreen> {
                     : const Center(
                         child: CircularProgressIndicator(),
                       )
-                : AlgorithmStepper(
-                    step: currentStep,
-                    history: history,
-                    onTransition: (AlgorithmTransition transition) =>
-                        setState(() {
-                      history[DateTime.now()] = currentStep;
-                      currentStep = widget.algorithm.steps
-                          .firstWhere((element) => element.id == transition.to);
-                    }),
-                  ),
+                : const AlgorithmStepper(),
           ),
         ),
       ),
