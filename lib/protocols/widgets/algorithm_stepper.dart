@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:tailboard_app/protocols/blocs/algorithm_bloc.dart';
@@ -15,15 +17,36 @@ class AlgorithmStepper extends StatefulWidget {
 
 class _AlgorithmStepperState extends State<AlgorithmStepper> {
   final ScrollController _controller = ScrollController();
+  final Stopwatch _stopwatch = Stopwatch();
+  Duration duration = const Duration();
+
+  @override
+  void initState() {
+    super.initState();
+    Timer.periodic(const Duration(seconds: 1), (_) {
+      setState(() {
+        duration = _stopwatch.elapsed;
+      });
+    });
+    _stopwatch.start();
+  }
 
   @override
   Widget build(BuildContext context) {
-    if(_controller.positions.isNotEmpty) {
+    if (_controller.positions.isNotEmpty) {
       WidgetsBinding.instance?.addPostFrameCallback((_) {
         _controller.jumpTo(_controller.position.maxScrollExtent);
       });
     }
-    return BlocBuilder<AlgorithmBloc, AlgorithmState>(
+    return BlocConsumer<AlgorithmBloc, AlgorithmState>(
+      listener: (BuildContext context, AlgorithmState state) {
+        if(state is AlgorithmContentState) {
+          _stopwatch.reset();
+          setState(() {
+            duration = const Duration();
+          });
+        }
+      },
       builder: (BuildContext context, AlgorithmState state) {
         if (state is AlgorithmContentState) {
           return ListView(
@@ -40,13 +63,22 @@ class _AlgorithmStepperState extends State<AlgorithmStepper> {
                 spacing: 8,
                 runSpacing: 0,
                 alignment: WrapAlignment.center,
+                crossAxisAlignment: WrapCrossAlignment.center,
                 children: <Widget>[
+                  Text(
+                      '${duration.inMinutes}:${duration.inSeconds.remainder(60).toString().padLeft(2, '0')}'),
                   for (var transition in state.currentStep.transitions)
-                    ElevatedButton(
+                    _stopwatch.elapsed.inSeconds > (state.currentStep.duration ?? -1) ?
+                      ElevatedButton(
+                        onPressed: () => BlocProvider.of<AlgorithmBloc>(context)
+                            .add(AlgorithmEvent.transition(transition)),
+                        child: Text(transition.body ?? 'Next'),
+                      )
+                        : OutlinedButton(
                       onPressed: () => BlocProvider.of<AlgorithmBloc>(context)
                           .add(AlgorithmEvent.transition(transition)),
                       child: Text(transition.body ?? 'Next'),
-                    ),
+                    )
                 ],
               ),
             ],
