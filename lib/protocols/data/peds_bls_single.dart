@@ -9,6 +9,7 @@ final Map<String, dynamic> pedsBlsSingleJson = {
       "id": "1",
       "body": "Verify Scene Safety",
       "color": "green",
+      "advance": true,
       "transitions": [
         {"id": "1-2", "to": "2"}
       ],
@@ -16,8 +17,9 @@ final Map<String, dynamic> pedsBlsSingleJson = {
     {
       "id": "2",
       "body":
-      "Check for responsiveness.\nShout for nearby help.\nActivate emergency response system via mobile device.",
+      "- Check for responsiveness.\n- Shout for nearby help.\n- Activate emergency response system via mobile device.",
       "color": "orange",
+      "advance": true,
       "transitions": [
         {"id": "2-3", "to": "3"},
       ],
@@ -25,7 +27,7 @@ final Map<String, dynamic> pedsBlsSingleJson = {
     {
       "id": "3",
       "body":
-      "Look for no breathing or only gasping and check pulse (simultaneously). Is pulse definitely felt within 10 seconds?",
+      "Look for no breathing or only gasping and check pulse (simultaneously).\nIs pulse <bold>definitely</bold> felt within 10 seconds?",
       "type": "choice",
       "color": "red",
       "transitions": [
@@ -38,36 +40,48 @@ final Map<String, dynamic> pedsBlsSingleJson = {
       "id": "4",
       "body": "Monitor until emergency responders arrive.",
       "color": "green",
+      "duration": 300,
+      "transitions": [
+        {"id": "4-3", "to": "3", "body": "Reevaluate (5 min)"},
+      ],
     },
     {
       "id": "5",
       "body":
-      "Provide rescue breathing, 1 breath every 2-3 seconds.\nAsses pulse rate for no more than 10 seconds.",
+      "- Provide rescue breathing, 1 breath every 2-3 seconds.\n- Asses pulse rate for no more than 10 seconds.",
       "color": "green",
-      "transitions": [],
+      "advance": true,
+      "transitions": [
+        {"id": "5-6", "to": "6"},
+      ],
     },
     {
       "id": "6",
-      "body": "HR <60/min with signs of poor perfusion?",
+      "body": "HR \<60/min with signs of poor perfusion?",
       "color": "red",
       "type": "choice",
       "transitions": [
-        {"id": "6-7", "to": "7", "body": "Yes"},
+        // {"id": "6-7", "to": "7", "body": "Yes"},
+        {"id": "6-11", "to": "11", "body": "Yes"},
         {"id": "6-8", "to": "8", "body": "No"},
       ],
     },
-    {
-      "id": "7",
-      "body": "Start CPR.",
-      "color": "gray",
-      "transitions": [
-        {"id": "7-11", "to": "11", "body": "Start CPR"},
-      ],
-    },
+    // {
+    //   "id": "7",
+    //   "body": "Start CPR.",
+    //   "color": "gray",
+    //   "transitions": [
+    //     {"id": "7-11", "to": "11", "body": "Start CPR"},
+    //   ],
+    // },
     {
       "id": "8",
-      "body": "Continue rescue breathing; check pulse every 2 minutes.\nIf no pulse, start CPR.",
+      "body": "- Continue rescue breathing; check pulse every 2 minutes.\n- If no pulse, start CPR.",
       "color": "green",
+      "duration": 120,
+      "transitions": [
+        {"id": "8-6", "to": "6", "body": "Reevaluate (2 min)"},
+      ],
     },
     {
       "id": "9",
@@ -84,14 +98,16 @@ final Map<String, dynamic> pedsBlsSingleJson = {
       "id": "10",
       "body": "Activate emergency response system (if not already done), and retrieve AED/defibrillator.",
       "color": "green",
+      "advance": true,
       "transitions": [
         {"id": "10-11", "to": "11"},
       ],
     },
     {
       "id": "11",
-      "body": "Start CPR\n- 1 rescuer: Perform cycles of 30 compressions and 2 breaths.\n- When second rescuer arrives, perform cycles of 15 compressions and 2 breaths.\n- Use AED as soon as it is available.",
+      "body": "<bold>Start CPR</bold>\n- 1 rescuer: Perform cycles of 30 compressions and 2 breaths.\n- When second rescuer arrives, perform cycles of 15 compressions and 2 breaths.\n- Use AED as soon as it is available.",
       "color": "blue",
+      "duration": 120,
       "transitions": [
         {"id": "11-12", "to": "12"},
       ],
@@ -100,6 +116,7 @@ final Map<String, dynamic> pedsBlsSingleJson = {
       "id": "12",
       "body": "After about 2 minutes, if still alone, activate emergency response system and retrieve AED (if not already done).",
       "color": "orange",
+      "advance": true,
       "transitions": [
         {"id": "12-13", "to": "13"},
       ],
@@ -118,6 +135,7 @@ final Map<String, dynamic> pedsBlsSingleJson = {
       "id": "14",
       "body": "- Give 1 shock. Resume CPR immediately for 2 minutes (until prompted by AED to allow rhythm check).\n- Continue until ALS providers take over or the child starts to move.",
       "color": "blue",
+      "duration": 120,
       "transitions": [
         {"id": "14-13", "to": "13", "body": "2 minutes"},
       ],
@@ -126,6 +144,7 @@ final Map<String, dynamic> pedsBlsSingleJson = {
       "id": "15",
       "body": "- Resume CPR immediately for 2 minutes (until prompted by AED to allow rhythm check).\n- Continue until ALS providers take over or the child starts to move.",
       "color": "blue",
+      "duration": 120,
       "transitions": [
         {"id": "15-13", "to": "13", "body": "2 minutes"},
       ],

@@ -18,17 +18,24 @@ class AlgorithmStepper extends StatefulWidget {
 class _AlgorithmStepperState extends State<AlgorithmStepper> {
   final ScrollController _controller = ScrollController();
   final Stopwatch _stopwatch = Stopwatch();
+  late Timer _ticker;
   Duration duration = const Duration();
 
   @override
   void initState() {
     super.initState();
-    Timer.periodic(const Duration(seconds: 1), (_) {
+    _ticker = Timer.periodic(const Duration(seconds: 1), (_) {
       setState(() {
         duration = _stopwatch.elapsed;
       });
     });
     _stopwatch.start();
+  }
+
+  @override
+  void dispose() {
+    _ticker.cancel();
+    super.dispose();
   }
 
   @override
