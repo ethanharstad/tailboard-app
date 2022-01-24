@@ -40,11 +40,6 @@ class _AlgorithmStepperState extends State<AlgorithmStepper> {
 
   @override
   Widget build(BuildContext context) {
-    if (_controller.positions.isNotEmpty) {
-      WidgetsBinding.instance?.addPostFrameCallback((_) {
-        _controller.jumpTo(_controller.position.maxScrollExtent);
-      });
-    }
     return BlocConsumer<AlgorithmBloc, AlgorithmState>(
       listener: (BuildContext context, AlgorithmState state) {
         if(state is AlgorithmContentState) {
@@ -52,6 +47,9 @@ class _AlgorithmStepperState extends State<AlgorithmStepper> {
           setState(() {
             duration = const Duration();
           });
+          if (_controller.positions.isNotEmpty) {
+            _controller.jumpTo(_controller.position.maxScrollExtent);
+          }
         }
       },
       builder: (BuildContext context, AlgorithmState state) {

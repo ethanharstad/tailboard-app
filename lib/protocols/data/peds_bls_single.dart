@@ -57,7 +57,7 @@ final Map<String, dynamic> pedsBlsSingleJson = {
     },
     {
       "id": "6",
-      "body": "HR \<60/min with signs of poor perfusion?",
+      "body": "HR &lt;60/min with signs of poor perfusion?",
       "color": "red",
       "type": "choice",
       "transitions": [

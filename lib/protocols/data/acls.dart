@@ -85,8 +85,11 @@ final Map<String, dynamic> aclsJson = {
     {
       "id": "0",
       "label": "12",
-      // TODO "Go to 10 or 11"?
-      "body": "If no signs of ROSC, go to 10 or 11\nIf ROSC, go to Post-Cardiac Arrest Care\nConsider appropriateness of continued resuscitation"
+      "body": "- If no signs of ROSC, go to 10 or 11\n- If ROSC, go to Post-Cardiac Arrest Care\n- Consider appropriateness of continued resuscitation",
+      "transitions": [
+        {"id": "0-14", "to": "14", "body": "Epi >3 min"},
+        {"id": "0-16", "to": "16", "body": "Epi <3 min"},
+      ],
     },
     {
       "id": "1",
@@ -124,7 +127,7 @@ final Map<String, dynamic> aclsJson = {
       "body": "Shock",
       "color": "red",
       "transitions": [
-        {"id": "4-5", "to": "5"}
+        {"id": "4-5", "to": "5", "body": "Shocked"}
       ],
     },
     {
@@ -153,7 +156,7 @@ final Map<String, dynamic> aclsJson = {
       "body": "Shock",
       "color": "red",
       "transitions": [
-        {"id": "7-8", "to": "8"}
+        {"id": "7-8", "to": "8", "body": "Shocked"}
       ],
     },
     {
@@ -182,7 +185,7 @@ final Map<String, dynamic> aclsJson = {
       "body": "Shock",
       "color": "red",
       "transitions": [
-        {"id": "10-11", "to": "11"}
+        {"id": "10-11", "to": "11", "body": "Shocked"}
       ],
     },
     {
@@ -230,7 +233,6 @@ final Map<String, dynamic> aclsJson = {
       "color": "red",
       "type": "choice",
       "transitions": [
-        // TODO "Go to 5 or 5"?
         {"id": "17-10", "to": "10", "body": "Yes"},
         {"id": "15-16", "to": "16", "body": "No"},
       ],
@@ -251,7 +253,6 @@ final Map<String, dynamic> aclsJson = {
       "color": "red",
       "type": "choice",
       "transitions": [
-        // TODO "Go to 5 or 5"?
         {"id": "17-10", "to": "10", "body": "Yes"},
         {"id": "17-0", "to": "0", "body": "No"},
       ],
