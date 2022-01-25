@@ -7,6 +7,7 @@ class AppScaffold extends StatelessWidget {
     required this.title,
     required this.body,
     this.actions = const [],
+    this.floatingActionButton,
     this.endDrawer,
     this.scaffoldKey,
   }) : super(key: key);
@@ -14,6 +15,7 @@ class AppScaffold extends StatelessWidget {
   final String title;
   final Widget body;
   final Widget? endDrawer;
+  final Widget? floatingActionButton;
   final List<Widget> actions;
   final Key? scaffoldKey;
 
@@ -27,6 +29,7 @@ class AppScaffold extends StatelessWidget {
       ),
       drawer: const AppDrawer(),
       endDrawer: endDrawer,
+      floatingActionButton: floatingActionButton,
       body: body,
     );
   }

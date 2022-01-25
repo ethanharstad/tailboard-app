@@ -1,7 +1,7 @@
 import 'dart:collection';
 
 import 'package:freezed_annotation/freezed_annotation.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:replay_bloc/replay_bloc.dart';
 
 import 'package:tailboard_app/protocols/models/algorithm.dart';
 import 'package:tailboard_app/protocols/models/algorithm_step.dart';
@@ -12,7 +12,7 @@ part 'algorithm_state.dart';
 
 part 'algorithm_bloc.freezed.dart';
 
-class AlgorithmBloc extends Bloc<AlgorithmEvent, AlgorithmState> {
+class AlgorithmBloc extends Bloc<AlgorithmEvent, AlgorithmState> with ReplayBlocMixin {
   AlgorithmBloc() : super(const AlgorithmState.loading()) {
     on<AlgorithmLoaded>((event, emit) {
       AlgorithmStep start = event.algorithm.steps
@@ -46,6 +46,14 @@ class AlgorithmBloc extends Bloc<AlgorithmEvent, AlgorithmState> {
     on<AlgorithmError>((event, emit) {
       emit(AlgorithmState.error(message: event.message));
     });
+  }
+
+  @override
+  bool shouldReplay(AlgorithmState state) {
+    if(state is AlgorithmContentState) {
+      return true;
+    }
+    return false;
   }
 
   void _processTransition(AlgorithmStep step) {
