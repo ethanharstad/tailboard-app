@@ -11,6 +11,7 @@ part 'algorithm_event.dart';
 part 'algorithm_state.dart';
 
 part 'algorithm_bloc.freezed.dart';
+part 'algorithm_bloc.g.dart';
 
 class AlgorithmBloc extends Bloc<AlgorithmEvent, AlgorithmState> with ReplayBlocMixin {
   AlgorithmBloc() : super(const AlgorithmState.loading()) {
@@ -48,14 +49,6 @@ class AlgorithmBloc extends Bloc<AlgorithmEvent, AlgorithmState> with ReplayBloc
     });
   }
 
-  @override
-  bool shouldReplay(AlgorithmState state) {
-    if(state is AlgorithmContentState) {
-      return true;
-    }
-    return false;
-  }
-
   void _processTransition(AlgorithmStep step) {
     if (step.advance == true) {
       try {
@@ -66,5 +59,24 @@ class AlgorithmBloc extends Bloc<AlgorithmEvent, AlgorithmState> with ReplayBloc
                 "Attempted automatic transition from a step with an invalid amount of transitions."));
       }
     }
+  }
+
+  @override
+  bool shouldReplay(AlgorithmState state) {
+    if(state is AlgorithmContentState) {
+      return true;
+    }
+    return false;
+  }
+
+  AlgorithmState? fromJson(Map<String, dynamic> json) {
+    return AlgorithmContentState.fromJson(json);
+  }
+
+  Map<String, dynamic>? toJson(AlgorithmState state) {
+    if(state is AlgorithmContentState) {
+      return state.toJson();
+    }
+    return null;
   }
 }
