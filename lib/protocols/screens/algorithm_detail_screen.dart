@@ -118,7 +118,7 @@ class _AlgorithmDetailScreenState extends State<AlgorithmDetailScreen> {
               icon: const Icon(Icons.notes),
             ),
           ],
-          floatingActionButton: bloc.canUndo
+          floatingActionButton: !docView && bloc.canUndo
               ? FloatingActionButton(
                   onPressed: () => bloc.undo(),
                   child: const Icon(Icons.undo),

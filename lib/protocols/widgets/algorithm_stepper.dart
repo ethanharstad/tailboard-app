@@ -17,19 +17,17 @@ class AlgorithmStepper extends StatefulWidget {
 
 class _AlgorithmStepperState extends State<AlgorithmStepper> {
   final ScrollController _controller = ScrollController();
-  final Stopwatch _stopwatch = Stopwatch();
   late Timer _ticker;
-  Duration duration = const Duration();
+  DateTime now = DateTime.now();
 
   @override
   void initState() {
     super.initState();
     _ticker = Timer.periodic(const Duration(seconds: 1), (_) {
       setState(() {
-        duration = _stopwatch.elapsed;
+        now = DateTime.now();
       });
     });
-    _stopwatch.start();
   }
 
   @override
@@ -43,10 +41,6 @@ class _AlgorithmStepperState extends State<AlgorithmStepper> {
     return BlocConsumer<AlgorithmBloc, AlgorithmState>(
       listener: (BuildContext context, AlgorithmState state) {
         if(state is AlgorithmContentState) {
-          _stopwatch.reset();
-          setState(() {
-            duration = const Duration();
-          });
           if (_controller.positions.isNotEmpty) {
             _controller.jumpTo(_controller.position.maxScrollExtent);
           }
@@ -54,6 +48,7 @@ class _AlgorithmStepperState extends State<AlgorithmStepper> {
       },
       builder: (BuildContext context, AlgorithmState state) {
         if (state is AlgorithmContentState) {
+          var duration = now.difference(state.stepStartTime);
           return ListView(
             controller: _controller,
             children: [
@@ -73,7 +68,7 @@ class _AlgorithmStepperState extends State<AlgorithmStepper> {
                   Text(
                       '${duration.inMinutes}:${duration.inSeconds.remainder(60).toString().padLeft(2, '0')}'),
                   for (var transition in state.currentStep.transitions)
-                    _stopwatch.elapsed.inSeconds > (state.currentStep.duration ?? -1) ?
+                    duration.inSeconds >= (state.currentStep.duration ?? -1) ?
                       ElevatedButton(
                         onPressed: () => BlocProvider.of<AlgorithmBloc>(context)
                             .add(AlgorithmEvent.transition(transition)),

@@ -21,6 +21,7 @@ class AlgorithmBloc extends Bloc<AlgorithmEvent, AlgorithmState> with ReplayBloc
       emit(AlgorithmState.content(
         algorithm: event.algorithm,
         currentStep: start,
+        stepStartTime: DateTime.now(),
         history: LinkedHashMap<DateTime, AlgorithmStep>(),
       ));
       _processTransition(start);
@@ -32,10 +33,12 @@ class AlgorithmBloc extends Bloc<AlgorithmEvent, AlgorithmState> with ReplayBloc
         AlgorithmStep next = prev.algorithm.steps
             .firstWhere((element) => element.id == event.transition.to);
         var history = LinkedHashMap<DateTime, AlgorithmStep>.from(prev.history);
-        history[DateTime.now()] = prev.currentStep;
+        var time = DateTime.now();
+        history[time] = prev.currentStep;
         emit(AlgorithmState.content(
           algorithm: prev.algorithm,
           currentStep: next,
+          stepStartTime: time,
           history: history,
         ));
         _processTransition(next);
