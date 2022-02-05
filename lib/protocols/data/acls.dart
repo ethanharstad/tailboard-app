@@ -4,9 +4,8 @@ final Map<String, dynamic> aclsJson = {
   "tags": ["ALS", "Adult", "Cardiac"],
   "document": "global/protocols/AlgorithmACLS_CA_200612.pdf",
   "start": "1",
-  "notes": [
-    {
-      "id": "1",
+  "notes": {
+    "1": {
       "weight": 1,
       "title": "CPR Quality",
       "body": """
@@ -19,8 +18,7 @@ final Map<String, dynamic> aclsJson = {
   – If Petco2 is low or decreasing, reassess CPR quality.
       """
     },
-    {
-      "id": "2",
+    "2": {
       "weight": 2,
       "title": "Shock Energy for Defibrillation",
       "body": """
@@ -28,8 +26,7 @@ final Map<String, dynamic> aclsJson = {
 - Monophasic: 360 J
       """
     },
-    {
-      "id": "3",
+    "3": {
       "weight": 3,
       "title": "Drug Therapy",
       "body": """
@@ -43,8 +40,7 @@ final Map<String, dynamic> aclsJson = {
     Second dose: 0.5-0.75 mg/kg.
       """
     },
-    {
-      "id": "4",
+    "4": {
       "weight": 4,
       "title": "Advanced Airway",
       "body": """
@@ -53,8 +49,7 @@ final Map<String, dynamic> aclsJson = {
 - Once advanced airway in place, give 1 breath every 6 seconds (10 breaths/min) with continuous chest compressions
       """
     },
-    {
-      "id": "5",
+    "5": {
       "weight": 5,
       "title": "Return of Spontaneous Circulation (ROSC)",
       "body": """
@@ -63,8 +58,7 @@ final Map<String, dynamic> aclsJson = {
 - Spontaneous arterial pressure waves with intra-arterial monitoring
       """
     },
-    {
-      "id": "6",
+    "6": {
       "weight": 6,
       "title": "Reversible Causes",
       "body": """
@@ -80,7 +74,7 @@ final Map<String, dynamic> aclsJson = {
 - Thrombosis, coronary
       """
     },
-  ],
+  },
   "steps": {
     "0": {
       "label": "12",

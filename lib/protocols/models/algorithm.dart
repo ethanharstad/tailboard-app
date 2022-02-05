@@ -17,7 +17,7 @@ class Algorithm with _$Algorithm {
     required Set<String> tags,
     String? document,
     @Default({}) Map<String, AlgorithmStep> steps,
-    @Default([]) List<AlgorithmNote> notes,
+    @Default({}) Map<String, AlgorithmNote> notes,
   }) = _Algorithm;
 
   factory Algorithm.fromJson(Map<String, dynamic> json) => _$AlgorithmFromJson(json);
