@@ -67,7 +67,7 @@ class _AlgorithmStepperState extends State<AlgorithmStepper> {
                 children: <Widget>[
                   Text(
                       '${duration.inMinutes}:${duration.inSeconds.remainder(60).toString().padLeft(2, '0')}'),
-                  for (var transition in state.currentStep.transitions)
+                  for (var transition in state.currentStep.transitions.values)
                     duration.inSeconds >= (state.currentStep.duration ?? -1) ?
                       ElevatedButton(
                         onPressed: () => BlocProvider.of<AlgorithmBloc>(context)

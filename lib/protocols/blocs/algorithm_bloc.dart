@@ -16,8 +16,7 @@ part 'algorithm_bloc.g.dart';
 class AlgorithmBloc extends Bloc<AlgorithmEvent, AlgorithmState> with ReplayBlocMixin {
   AlgorithmBloc() : super(const AlgorithmState.loading()) {
     on<AlgorithmLoaded>((event, emit) {
-      AlgorithmStep start = event.algorithm.steps
-          .firstWhere((element) => element.id == event.algorithm.start);
+      AlgorithmStep start = event.algorithm.steps[event.algorithm.start]!;
       emit(AlgorithmState.content(
         algorithm: event.algorithm,
         currentStep: start,
@@ -30,8 +29,7 @@ class AlgorithmBloc extends Bloc<AlgorithmEvent, AlgorithmState> with ReplayBloc
     on<AlgorithmTransitioned>((event, emit) {
       if(state is AlgorithmContentState) {
         AlgorithmContentState prev = state as AlgorithmContentState;
-        AlgorithmStep next = prev.algorithm.steps
-            .firstWhere((element) => element.id == event.transition.to);
+        AlgorithmStep next = prev.algorithm.steps[event.transition.to]!;
         var history = LinkedHashMap<DateTime, AlgorithmStep>.from(prev.history);
         var time = DateTime.now();
         history[time] = prev.currentStep;
@@ -55,7 +53,7 @@ class AlgorithmBloc extends Bloc<AlgorithmEvent, AlgorithmState> with ReplayBloc
   void _processTransition(AlgorithmStep step) {
     if (step.advance == true) {
       try {
-        add(AlgorithmEvent.transition(step.transitions.single));
+        add(AlgorithmEvent.transition(step.transitions.values.single));
       } on StateError {
         add(const AlgorithmError(
             message:

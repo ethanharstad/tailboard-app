@@ -81,181 +81,163 @@ final Map<String, dynamic> aclsJson = {
       """
     },
   ],
-  "steps": [
-    {
-      "id": "0",
+  "steps": {
+    "0": {
       "label": "12",
       "body": "- If no signs of ROSC, go to 10 or 11\n- If ROSC, go to Post-Cardiac Arrest Care\n- Consider appropriateness of continued resuscitation",
-      "transitions": [
-        {"id": "0-14", "to": "14", "body": "Epi >3 min"},
-        {"id": "0-16", "to": "16", "body": "Epi <3 min"},
-      ],
+      "transitions": {
+        "0-14": {"to": "14", "body": "Epi >3 min"},
+        "0-16": {"to": "16", "body": "Epi <3 min"},
+      },
     },
-    {
-      "id": "1",
+    "1": {
       "label": "1",
       "body": "<bold>Start CPR</bold>\n- Give oxygen\n- Attach monitor/defibrillator",
       "color": "blue",
       "advance": true,
-      "transitions": [
-        {"id": "1-2", "to": "2"}
-      ],
+      "transitions": {
+        "1-2": {"to": "2"}
+      },
     },
-    {
-      "id": "2",
+    "2": {
       "body": "Rhythm shockable?",
       "color": "red",
       "type": "choice",
-      "transitions": [
-        {"id": "2-3", "to": "3", "body": "Yes"},
-        {"id": "2-12", "to": "12", "body": "No"},
-      ],
+      "transitions": {
+        "2-3": {"to": "3", "body": "Yes"},
+        "2-12": {"to": "12", "body": "No"},
+      },
     },
-    {
-      "id": "3",
+    "3": {
       "label": "2",
       "body": "VF/pVT",
       "color": "gray",
       "advance": true,
-      "transitions": [
-        {"id": "3-4", "to": "4"},
-      ],
+      "transitions": {
+        "3-4": {"to": "4"},
+      },
     },
-    {
-      "id": "4",
+    "4": {
       "label": "3",
       "body": "Shock",
       "color": "red",
-      "transitions": [
-        {"id": "4-5", "to": "5", "body": "Shocked"}
-      ],
+      "transitions": {
+        "4-5": {"to": "5", "body": "Shocked"}
+      },
     },
-    {
-      "id": "5",
+    "5": {
       "label": "4",
       "body": "<bold>CPR 2 min</bold>\n- IV/IO access",
       "color": "blue",
       "duration": 120,
-      "transitions": [
-        {"id": "5-6", "to": "6"},
-      ],
+      "transitions": {
+        "5-6": {"to": "6"},
+      },
     },
-    {
-      "id": "6",
+    "6": {
       "body": "Rhythm shockable?",
       "color": "red",
       "type": "choice",
-      "transitions": [
-        {"id": "6-7", "to": "7", "body": "Yes"},
-        {"id": "6-0", "to": "0", "body": "No"},
-      ],
+      "transitions": {
+        "6-7": {"to": "7", "body": "Yes"},
+        "6-0": {"to": "0", "body": "No"},
+      },
     },
-    {
-      "id": "7",
+    "7": {
       "label": "5",
       "body": "Shock",
       "color": "red",
-      "transitions": [
-        {"id": "7-8", "to": "8", "body": "Shocked"}
-      ],
+      "transitions": {
+        "7-8": {"to": "8", "body": "Shocked"}
+      },
     },
-    {
-      "id": "8",
+    "8": {
       "label": "6",
       "body": "<bold>CPR 2 min</bold>\n- <bold>Epinephrine</bold> every 3-5 min\n- Consider advanced airway, capnography",
       "color": "blue",
       "duration": 120,
-      "transitions": [
-        {"id": "8-9", "to": "9"},
-      ],
+      "transitions": {
+        "8-9": {"to": "9"},
+      },
     },
-    {
-      "id": "9",
+    "9": {
       "body": "Rhythm shockable?",
       "color": "red",
       "type": "choice",
-      "transitions": [
-        {"id": "9-10", "to": "10", "body": "Yes"},
-        {"id": "9-0", "to": "0", "body": "No"},
-      ],
+      "transitions": {
+        "9-10": {"to": "10", "body": "Yes"},
+        "9-0": {"to": "0", "body": "No"},
+      },
     },
-    {
-      "id": "10",
+    "10": {
       "label": "7",
       "body": "Shock",
       "color": "red",
-      "transitions": [
-        {"id": "10-11", "to": "11", "body": "Shocked"}
-      ],
+      "transitions": {
+        "10-11": {"to": "11", "body": "Shocked"}
+      },
     },
-    {
-      "id": "11",
+    "11": {
       "label": "8",
       "body": "<bold>CPR 2 min</bold>\n- <bold>Amiodarone</bold> or <bold>lidocaine</bold>\n- Treat reversible causes",
       "color": "blue",
       "duration": 120,
-      "transitions": [
-        {"id": "11-6", "to": "6"},
-      ],
+      "transitions": {
+        "11-6": {"to": "6"},
+      },
     },
-    {
-      "id": "12",
+    "12": {
       "label": "9",
       "body": "Asytole/PEA",
       "color": "gray",
       "advance": true,
-      "transitions": [
-        {"id": "12-13", "to": "13"},
-      ],
+      "transitions": {
+        "12-13": {"to": "13"},
+      },
     },
-    {
-      "id": "13",
+    "13": {
       "body": "<bold>Epinephrine</bold> ASAP",
       "color": "red",
       "advance": true,
-      "transitions": [
-        {"id": "13-14", "to": "14"}
-      ],
+      "transitions": {
+        "13-14": {"to": "14"}
+      },
     },
-    {
-      "id": "14",
+    "14": {
       "label": "10",
       "body": "<bold>CPR 2 min</bold>\n- IV/IO access\n- <bold>Epinephrine</bold> every 3-5 min\n- Consider advanced airway, capnography",
       "color": "blue",
       "duration": 120,
-      "transitions": [
-        {"id": "14-15", "to": "15"},
-      ],
+      "transitions": {
+        "14-15": {"to": "15"},
+      },
     },
-    {
-      "id": "15",
+    "15": {
       "body": "Rhythm shockable?",
       "color": "red",
       "type": "choice",
-      "transitions": [
-        {"id": "17-10", "to": "10", "body": "Yes"},
-        {"id": "15-16", "to": "16", "body": "No"},
-      ],
+      "transitions": {
+        "17-10": {"to": "10", "body": "Yes"},
+        "15-16": {"to": "16", "body": "No"},
+      },
     },
-    {
-      "id": "16",
+    "16": {
       "label": "11",
       "body": "<bold>CPR 2 min</bold>\n- Treat reversible causes",
       "color": "blue",
       "duration": 120,
-      "transitions": [
-        {"id": "16-17", "to": "17"},
-      ],
+      "transitions": {
+        "16-17": {"to": "17"},
+      },
     },
-    {
-      "id": "17",
+    "17": {
       "body": "Rhythm shockable?",
       "color": "red",
       "type": "choice",
-      "transitions": [
-        {"id": "17-10", "to": "10", "body": "Yes"},
-        {"id": "17-0", "to": "0", "body": "No"},
-      ],
+      "transitions": {
+        "17-10": {"to": "10", "body": "Yes"},
+        "17-0": {"to": "0", "body": "No"},
+      },
     },
-  ],
+  },
 };

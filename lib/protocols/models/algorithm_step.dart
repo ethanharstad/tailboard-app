@@ -14,7 +14,7 @@ class AlgorithmStep with _$AlgorithmStep {
     String? color,
     String? type,
     required String body,
-    @Default([]) List<AlgorithmTransition> transitions,
+    @Default({}) Map<String, AlgorithmTransition> transitions,
     @Default(false) bool advance,
     int? duration,
   }) = _AlgorithmStep;
