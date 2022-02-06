@@ -10,6 +10,7 @@ class AlgorithmTransition with _$AlgorithmTransition {
     required String id,
     required String to,
     String? body,
+    @Default(0) int weight,
   }) = _AlgorithmTransition;
 
   factory AlgorithmTransition.fromJson(Map<String, dynamic> json) => _$AlgorithmTransitionFromJson(json);
