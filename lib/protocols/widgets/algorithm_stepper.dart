@@ -40,7 +40,7 @@ class _AlgorithmStepperState extends State<AlgorithmStepper> {
   Widget build(BuildContext context) {
     return BlocConsumer<AlgorithmBloc, AlgorithmState>(
       listener: (BuildContext context, AlgorithmState state) {
-        if(state is AlgorithmContentState) {
+        if (state is AlgorithmContentState) {
           if (_controller.positions.isNotEmpty) {
             _controller.jumpTo(_controller.position.maxScrollExtent);
           }
@@ -68,17 +68,19 @@ class _AlgorithmStepperState extends State<AlgorithmStepper> {
                   Text(
                       '${duration.inMinutes}:${duration.inSeconds.remainder(60).toString().padLeft(2, '0')}'),
                   for (var transition in state.currentStep.transitions.values)
-                    duration.inSeconds >= (state.currentStep.duration ?? -1) ?
-                      ElevatedButton(
-                        onPressed: () => BlocProvider.of<AlgorithmBloc>(context)
-                            .add(AlgorithmEvent.transition(transition)),
-                        child: Text(transition.body ?? 'Next'),
-                      )
+                    duration.inSeconds >= (state.currentStep.duration ?? -1)
+                        ? ElevatedButton(
+                            onPressed: () =>
+                                BlocProvider.of<AlgorithmBloc>(context)
+                                    .add(AlgorithmEvent.transition(transition)),
+                            child: Text(transition.body ?? 'Next'),
+                          )
                         : OutlinedButton(
-                      onPressed: () => BlocProvider.of<AlgorithmBloc>(context)
-                          .add(AlgorithmEvent.transition(transition)),
-                      child: Text(transition.body ?? 'Next'),
-                    )
+                            onPressed: () =>
+                                BlocProvider.of<AlgorithmBloc>(context)
+                                    .add(AlgorithmEvent.transition(transition)),
+                            child: Text(transition.body ?? 'Next'),
+                          )
                 ],
               ),
             ],

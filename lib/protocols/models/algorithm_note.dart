@@ -12,9 +12,10 @@ class AlgorithmNote with _$AlgorithmNote implements Comparable<AlgorithmNote> {
     String? title,
     required String body,
     @Default(0) int weight,
-}) = _AlgorithmNote;
+  }) = _AlgorithmNote;
 
-  factory AlgorithmNote.fromJson(Map<String, dynamic> json) => _$AlgorithmNoteFromJson(json);
+  factory AlgorithmNote.fromJson(Map<String, dynamic> json) =>
+      _$AlgorithmNoteFromJson(json);
 
   @override
   int compareTo(AlgorithmNote other) {

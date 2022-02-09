@@ -15,7 +15,7 @@ final Map<String, dynamic> pedsBlsSingleJson = {
     },
     "2": {
       "body":
-      "- Check for responsiveness.\n- Shout for nearby help.\n- Activate emergency response system via mobile device.",
+          "- Check for responsiveness.\n- Shout for nearby help.\n- Activate emergency response system via mobile device.",
       "color": "orange",
       "advance": true,
       "transitions": {
@@ -24,7 +24,7 @@ final Map<String, dynamic> pedsBlsSingleJson = {
     },
     "3": {
       "body":
-      "Look for no breathing or only gasping and check pulse (simultaneously).\nIs pulse <bold>definitely</bold> felt within 10 seconds?",
+          "Look for no breathing or only gasping and check pulse (simultaneously).\nIs pulse <bold>definitely</bold> felt within 10 seconds?",
       "type": "choice",
       "color": "red",
       "transitions": {
@@ -43,7 +43,7 @@ final Map<String, dynamic> pedsBlsSingleJson = {
     },
     "5": {
       "body":
-      "- Provide rescue breathing, 1 breath every 2-3 seconds.\n- Asses pulse rate for no more than 10 seconds.",
+          "- Provide rescue breathing, 1 breath every 2-3 seconds.\n- Asses pulse rate for no more than 10 seconds.",
       "color": "green",
       "advance": true,
       "transitions": {
@@ -60,7 +60,8 @@ final Map<String, dynamic> pedsBlsSingleJson = {
       },
     },
     "8": {
-      "body": "- Continue rescue breathing; check pulse every 2 minutes.\n- If no pulse, start CPR.",
+      "body":
+          "- Continue rescue breathing; check pulse every 2 minutes.\n- If no pulse, start CPR.",
       "color": "green",
       "duration": 120,
       "transitions": {
@@ -68,8 +69,7 @@ final Map<String, dynamic> pedsBlsSingleJson = {
       },
     },
     "9": {
-      "body":
-      "Witnessed sudden collapse?",
+      "body": "Witnessed sudden collapse?",
       "type": "choice",
       "color": "red",
       "transitions": {
@@ -78,7 +78,8 @@ final Map<String, dynamic> pedsBlsSingleJson = {
       },
     },
     "10": {
-      "body": "Activate emergency response system (if not already done), and retrieve AED/defibrillator.",
+      "body":
+          "Activate emergency response system (if not already done), and retrieve AED/defibrillator.",
       "color": "green",
       "advance": true,
       "transitions": {
@@ -86,7 +87,8 @@ final Map<String, dynamic> pedsBlsSingleJson = {
       },
     },
     "11": {
-      "body": "<bold>Start CPR</bold>\n- 1 rescuer: Perform cycles of 30 compressions and 2 breaths.\n- When second rescuer arrives, perform cycles of 15 compressions and 2 breaths.\n- Use AED as soon as it is available.",
+      "body":
+          "<bold>Start CPR</bold>\n- 1 rescuer: Perform cycles of 30 compressions and 2 breaths.\n- When second rescuer arrives, perform cycles of 15 compressions and 2 breaths.\n- Use AED as soon as it is available.",
       "color": "blue",
       "duration": 120,
       "transitions": {
@@ -94,7 +96,8 @@ final Map<String, dynamic> pedsBlsSingleJson = {
       },
     },
     "12": {
-      "body": "After about 2 minutes, if still alone, activate emergency response system and retrieve AED (if not already done).",
+      "body":
+          "After about 2 minutes, if still alone, activate emergency response system and retrieve AED (if not already done).",
       "color": "orange",
       "advance": true,
       "transitions": {
@@ -111,7 +114,8 @@ final Map<String, dynamic> pedsBlsSingleJson = {
       },
     },
     "14": {
-      "body": "- Give 1 shock. Resume CPR immediately for 2 minutes (until prompted by AED to allow rhythm check).\n- Continue until ALS providers take over or the child starts to move.",
+      "body":
+          "- Give 1 shock. Resume CPR immediately for 2 minutes (until prompted by AED to allow rhythm check).\n- Continue until ALS providers take over or the child starts to move.",
       "color": "blue",
       "duration": 120,
       "transitions": {
@@ -119,7 +123,8 @@ final Map<String, dynamic> pedsBlsSingleJson = {
       },
     },
     "15": {
-      "body": "- Resume CPR immediately for 2 minutes (until prompted by AED to allow rhythm check).\n- Continue until ALS providers take over or the child starts to move.",
+      "body":
+          "- Resume CPR immediately for 2 minutes (until prompted by AED to allow rhythm check).\n- Continue until ALS providers take over or the child starts to move.",
       "color": "blue",
       "duration": 120,
       "transitions": {

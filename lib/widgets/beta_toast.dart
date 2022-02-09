@@ -10,9 +10,13 @@ class BetaToast extends SnackBar {
           key: key,
           content:
               const Text('This is a beta feature and may not work correctly.'),
-          action: id != null ? SnackBarAction(label: 'Dismiss', onPressed: () async {
-            box.put(_getKey(id), true);
-          }) : null,
+          action: id != null
+              ? SnackBarAction(
+                  label: 'Dismiss',
+                  onPressed: () async {
+                    box.put(_getKey(id), true);
+                  })
+              : null,
         );
 
   static void showBetaToast(BuildContext context, [String? id]) async {

@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
 
 class UnimplementedDialog extends StatelessWidget {
-  const UnimplementedDialog({Key? key, this.featureName,}) : super(key: key);
+  const UnimplementedDialog({
+    Key? key,
+    this.featureName,
+  }) : super(key: key);
 
   final String? featureName;
 

@@ -41,8 +41,12 @@ class AlgorithmStepCard extends StatelessWidget {
                     child: StyledText(
                       text: step.body,
                       tags: {
-                        'bold': StyledTextTag(style: const TextStyle(fontWeight: FontWeight.bold)),
-                        'italic': StyledTextTag(style: const TextStyle(fontStyle: FontStyle.italic)),
+                        'bold': StyledTextTag(
+                            style:
+                                const TextStyle(fontWeight: FontWeight.bold)),
+                        'italic': StyledTextTag(
+                            style:
+                                const TextStyle(fontStyle: FontStyle.italic)),
                       },
                     ),
                   ),

@@ -19,5 +19,6 @@ class AlgorithmStep with _$AlgorithmStep {
     int? duration,
   }) = _AlgorithmStep;
 
-  factory AlgorithmStep.fromJson(Map<String, dynamic> json) => _$AlgorithmStepFromJson(json);
+  factory AlgorithmStep.fromJson(Map<String, dynamic> json) =>
+      _$AlgorithmStepFromJson(json);
 }

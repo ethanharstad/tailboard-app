@@ -61,7 +61,8 @@ class DefaultFirebaseOptions {
     messagingSenderId: '273015035146',
     projectId: 'tailboard-dev-112ee',
     storageBucket: 'tailboard-dev-112ee.appspot.com',
-    iosClientId: '273015035146-v8h7b5baaii7crkqjhikhblvjouplc53.apps.googleusercontent.com',
+    iosClientId:
+        '273015035146-v8h7b5baaii7crkqjhikhblvjouplc53.apps.googleusercontent.com',
     iosBundleId: 'dev.strange.tailboard-dev',
   );
 }

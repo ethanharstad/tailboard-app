@@ -78,7 +78,8 @@ final Map<String, dynamic> aclsJson = {
   "steps": {
     "0": {
       "label": "12",
-      "body": "- If no signs of ROSC, go to 10 or 11\n- If ROSC, go to Post-Cardiac Arrest Care\n- Consider appropriateness of continued resuscitation",
+      "body":
+          "- If no signs of ROSC, go to 10 or 11\n- If ROSC, go to Post-Cardiac Arrest Care\n- Consider appropriateness of continued resuscitation",
       "transitions": {
         "0-14": {"to": "14", "body": "Epi >3 min"},
         "0-16": {"to": "16", "body": "Epi <3 min"},
@@ -86,7 +87,8 @@ final Map<String, dynamic> aclsJson = {
     },
     "1": {
       "label": "1",
-      "body": "<bold>Start CPR</bold>\n- Give oxygen\n- Attach monitor/defibrillator",
+      "body":
+          "<bold>Start CPR</bold>\n- Give oxygen\n- Attach monitor/defibrillator",
       "color": "blue",
       "advance": true,
       "transitions": {
@@ -147,7 +149,8 @@ final Map<String, dynamic> aclsJson = {
     },
     "8": {
       "label": "6",
-      "body": "<bold>CPR 2 min</bold>\n- <bold>Epinephrine</bold> every 3-5 min\n- Consider advanced airway, capnography",
+      "body":
+          "<bold>CPR 2 min</bold>\n- <bold>Epinephrine</bold> every 3-5 min\n- Consider advanced airway, capnography",
       "color": "blue",
       "duration": 120,
       "transitions": {
@@ -173,7 +176,8 @@ final Map<String, dynamic> aclsJson = {
     },
     "11": {
       "label": "8",
-      "body": "<bold>CPR 2 min</bold>\n- <bold>Amiodarone</bold> or <bold>lidocaine</bold>\n- Treat reversible causes",
+      "body":
+          "<bold>CPR 2 min</bold>\n- <bold>Amiodarone</bold> or <bold>lidocaine</bold>\n- Treat reversible causes",
       "color": "blue",
       "duration": 120,
       "transitions": {
@@ -199,7 +203,8 @@ final Map<String, dynamic> aclsJson = {
     },
     "14": {
       "label": "10",
-      "body": "<bold>CPR 2 min</bold>\n- IV/IO access\n- <bold>Epinephrine</bold> every 3-5 min\n- Consider advanced airway, capnography",
+      "body":
+          "<bold>CPR 2 min</bold>\n- IV/IO access\n- <bold>Epinephrine</bold> every 3-5 min\n- Consider advanced airway, capnography",
       "color": "blue",
       "duration": 120,
       "transitions": {

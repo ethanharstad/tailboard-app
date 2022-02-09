@@ -13,7 +13,8 @@ part 'algorithm_state.dart';
 part 'algorithm_bloc.freezed.dart';
 part 'algorithm_bloc.g.dart';
 
-class AlgorithmBloc extends Bloc<AlgorithmEvent, AlgorithmState> with ReplayBlocMixin {
+class AlgorithmBloc extends Bloc<AlgorithmEvent, AlgorithmState>
+    with ReplayBlocMixin {
   AlgorithmBloc() : super(const AlgorithmState.loading()) {
     on<AlgorithmLoaded>((event, emit) {
       AlgorithmStep start = event.algorithm.steps[event.algorithm.start]!;
@@ -27,7 +28,7 @@ class AlgorithmBloc extends Bloc<AlgorithmEvent, AlgorithmState> with ReplayBloc
     });
 
     on<AlgorithmTransitioned>((event, emit) {
-      if(state is AlgorithmContentState) {
+      if (state is AlgorithmContentState) {
         AlgorithmContentState prev = state as AlgorithmContentState;
         AlgorithmStep next = prev.algorithm.steps[event.transition.to]!;
         var history = LinkedHashMap<DateTime, AlgorithmStep>.from(prev.history);
@@ -41,7 +42,8 @@ class AlgorithmBloc extends Bloc<AlgorithmEvent, AlgorithmState> with ReplayBloc
         ));
         _processTransition(next);
       } else {
-        add(const AlgorithmEvent.error(message: "Attempted to transition from a non content state."));
+        add(const AlgorithmEvent.error(
+            message: "Attempted to transition from a non content state."));
       }
     });
 
@@ -64,7 +66,7 @@ class AlgorithmBloc extends Bloc<AlgorithmEvent, AlgorithmState> with ReplayBloc
 
   @override
   bool shouldReplay(AlgorithmState state) {
-    if(state is AlgorithmContentState) {
+    if (state is AlgorithmContentState) {
       return true;
     }
     return false;
@@ -75,7 +77,7 @@ class AlgorithmBloc extends Bloc<AlgorithmEvent, AlgorithmState> with ReplayBloc
   }
 
   Map<String, dynamic>? toJson(AlgorithmState state) {
-    if(state is AlgorithmContentState) {
+    if (state is AlgorithmContentState) {
       return state.toJson();
     }
     return null;

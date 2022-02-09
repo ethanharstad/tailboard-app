@@ -20,8 +20,10 @@ class Algorithm with _$Algorithm {
     @Default({}) Map<String, AlgorithmNote> notes,
   }) = _Algorithm;
 
-  factory Algorithm.fromJson(Map<String, dynamic> json) => _$AlgorithmFromJson(json);
-  factory Algorithm.fromSnapshot(DocumentSnapshot<Map<String, dynamic>> snapshot) {
+  factory Algorithm.fromJson(Map<String, dynamic> json) =>
+      _$AlgorithmFromJson(json);
+  factory Algorithm.fromSnapshot(
+      DocumentSnapshot<Map<String, dynamic>> snapshot) {
     Map<String, dynamic> data = snapshot.data()!;
     data['id'] = snapshot.id;
     return Algorithm.fromJson(data);
