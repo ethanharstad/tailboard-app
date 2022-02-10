@@ -1,12 +1,9 @@
-import 'package:flutter/foundation.dart';
-import 'dart:convert';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:tailboard_app/protocols/data/algorithm_repository.dart';
 import 'package:tailboard_app/protocols/models/algorithm.dart';
 
 class FirebaseAlgorithmRepository implements AlgorithmRepository {
   late CollectionReference<Algorithm> algorithmReference;
-  JsonEncoder encoder = const JsonEncoder.withIndent('  ');
 
   FirebaseAlgorithmRepository() {
     algorithmReference = FirebaseFirestore.instance
@@ -15,11 +12,7 @@ class FirebaseAlgorithmRepository implements AlgorithmRepository {
       fromFirestore: (snapshot, _) {
         var data = snapshot.data()!;
         data['id'] = snapshot.id;
-        // debugPrint(encoder.convert(data));
-        var algo = Algorithm.fromJson(data);
-        debugPrint('algo');
-        debugPrint(algo.toString());
-        return algo;
+        return Algorithm.fromJson(data);
       },
       toFirestore: (algorithm, _) {
         var data = algorithm.toJson();
