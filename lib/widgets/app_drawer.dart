@@ -10,7 +10,13 @@ class AppDrawer extends StatelessWidget {
       child: ListView(
         padding: EdgeInsets.zero,
         children: <Widget>[
-          const DrawerHeader(child: Text("Header..."),),
+          const UserAccountsDrawerHeader(
+            accountName: Text('Joe Firefighter'),
+            accountEmail: Text('joe@firefighter.com'),
+            currentAccountPicture: CircleAvatar(
+              child: Text('JF'),
+            ),
+          ),
           ListTile(
             title: const Text('Sign Out'),
             onTap: () async {
@@ -21,5 +27,4 @@ class AppDrawer extends StatelessWidget {
       ),
     );
   }
-
 }
