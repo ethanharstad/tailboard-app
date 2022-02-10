@@ -25,10 +25,12 @@ class AlgorithmDetailScreen extends StatefulWidget {
 
 class _AlgorithmDetailScreenState extends State<AlgorithmDetailScreen> {
   AlgorithmBloc bloc = AlgorithmBloc();
-  bool docView = false;
   Future<PdfDocument>? _pdfDocument;
   PdfController? _pdfController;
   final GlobalKey<ScaffoldState> scaffoldKey = GlobalKey<ScaffoldState>();
+  int _selectedIndex = 0;
+  bool docView = false;
+  bool noteView = false;
 
   @override
   void initState() {
@@ -65,14 +67,53 @@ class _AlgorithmDetailScreenState extends State<AlgorithmDetailScreen> {
     }
   }
 
+  void _onItemTapped(int index) {
+      if(index == 0) {
+        setState(() {
+          docView = false;
+          _selectedIndex = 0;
+        });
+      }
+      else if(index == 1) {
+        if (_pdfController != null) {
+          setState(() {
+            _pdfController = PdfController(
+              document: _pdfDocument!,
+            );
+            docView = true;
+            _selectedIndex = 1;
+          });
+        }
+      }
+      else if(index == 2) {
+        if (widget.algorithm.notes.isNotEmpty) {
+          setState(() {
+            noteView = true;
+            _selectedIndex = 2;
+          });
+        }
+      }
+  }
+
+  Widget _getWidget(int selectedIndex) {
+    if(selectedIndex == 1) {
+      if (_pdfController != null) {
+        return PdfView(controller: _pdfController!);
+      }
+      return const Center(child: CircularProgressIndicator());
+    } else if(selectedIndex == 2) {
+      return AlgorithmDrawer(notes: widget.algorithm.notes);
+    } else {
+      return const AlgorithmStepper();
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return WillPopScope(
       onWillPop: () async {
-        if (docView) {
-          setState(() {
-            docView = false;
-          });
+        if (docView || noteView) {
+          _onItemTapped(0);
           return false;
         }
         return true;
@@ -82,11 +123,15 @@ class _AlgorithmDetailScreenState extends State<AlgorithmDetailScreen> {
         child: AppScaffold(
           scaffoldKey: scaffoldKey,
           title: widget.algorithm.name,
-          endDrawer: widget.algorithm.notes.isNotEmpty
-              ? AlgorithmDrawer(
-                  notes: widget.algorithm.notes,
-                )
-              : null,
+          bottomNavigationBar: BottomNavigationBar(
+            currentIndex: _selectedIndex,
+            onTap: _onItemTapped,
+            items: const <BottomNavigationBarItem>[
+              BottomNavigationBarItem(icon: Icon(Icons.home), label: 'Home'),
+              BottomNavigationBarItem(icon: Icon(Icons.attach_file), label: 'Overview'),
+              BottomNavigationBarItem(icon: Icon(Icons.notes), label: 'Notes'),
+            ],
+          ),
           actions: <Widget>[
             IconButton(
               onPressed: () => showDialog(
@@ -96,29 +141,8 @@ class _AlgorithmDetailScreenState extends State<AlgorithmDetailScreen> {
               ),
               icon: const Icon(Icons.save),
             ),
-            IconButton(
-              onPressed: _pdfController != null
-                  ? () {
-                      setState(() {
-                        _pdfController = PdfController(
-                          document: _pdfDocument!,
-                        );
-                        docView = !docView;
-                      });
-                    }
-                  : null,
-              icon: const Icon(Icons.attach_file),
-            ),
-            IconButton(
-              onPressed: widget.algorithm.notes.isNotEmpty
-                  ? () {
-                      scaffoldKey.currentState!.openEndDrawer();
-                    }
-                  : null,
-              icon: const Icon(Icons.notes),
-            ),
           ],
-          floatingActionButton: !docView && bloc.canUndo
+          floatingActionButton: !docView && !noteView && bloc.canUndo
               ? FloatingActionButton(
                   onPressed: () => bloc.undo(),
                   child: const Icon(Icons.undo),
@@ -126,13 +150,7 @@ class _AlgorithmDetailScreenState extends State<AlgorithmDetailScreen> {
               : null,
           body: Padding(
             padding: const EdgeInsets.all(8),
-            child: docView
-                ? _pdfController != null
-                    ? PdfView(controller: _pdfController!)
-                    : const Center(
-                        child: CircularProgressIndicator(),
-                      )
-                : const AlgorithmStepper(),
+            child: _getWidget(_selectedIndex),
           ),
         ),
       ),

@@ -13,13 +13,11 @@ class AlgorithmDrawer extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Drawer(
-      child: ListView(
-        children: <Widget>[
-          for (AlgorithmNote note in notes.values.sorted())
-            AlgorithmNoteCard(note: note),
-        ],
-      ),
+    return ListView(
+      children: <Widget>[
+        for (AlgorithmNote note in notes.values.sorted())
+          AlgorithmNoteCard(note: note),
+      ],
     );
   }
 }
