@@ -16,7 +16,7 @@ class Algorithm with _$Algorithm {
     required Set<String> tags,
     String? document,
     @JsonKey(fromJson: stepsFromJson) @Default({}) Map<String, AlgorithmStep> steps,
-    @Default({}) Map<String, AlgorithmNote> notes,
+    @JsonKey(fromJson: notesFromJson) @Default({}) Map<String, AlgorithmNote> notes,
   }) = _Algorithm;
 
   factory Algorithm.fromJson(Map<String, dynamic> json) =>
@@ -30,6 +30,18 @@ Map<String, AlgorithmStep> stepsFromJson(Map<String, dynamic> json) {
     var data = entry.value;
     data['id'] = entry.key;
     typed[entry.key] = AlgorithmStep.fromJson(data);
+  }
+
+  return typed;
+}
+
+Map<String, AlgorithmNote> notesFromJson(Map<String, dynamic> json) {
+  Map<String, AlgorithmNote> typed = {};
+
+  for(var entry in json.entries) {
+    var data = entry.value;
+    data['id'] = entry.key;
+    typed[entry.key] = AlgorithmNote.fromJson(data);
   }
 
   return typed;
