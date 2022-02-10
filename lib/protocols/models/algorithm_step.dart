@@ -14,11 +14,23 @@ class AlgorithmStep with _$AlgorithmStep {
     String? color,
     String? type,
     required String body,
-    @Default({}) Map<String, AlgorithmTransition> transitions,
+    @JsonKey(fromJson: transitionsFromJson) @Default({}) Map<String, AlgorithmTransition> transitions,
     @Default(false) bool advance,
     int? duration,
   }) = _AlgorithmStep;
 
   factory AlgorithmStep.fromJson(Map<String, dynamic> json) =>
       _$AlgorithmStepFromJson(json);
+}
+
+Map<String, AlgorithmTransition> transitionsFromJson(Map<String, dynamic> json) {
+  Map<String, AlgorithmTransition> typed = {};
+
+  for(var entry in json.entries) {
+    var data = entry.value;
+    data['id'] = entry.key;
+    typed[entry.key] = AlgorithmTransition.fromJson(data);
+  }
+
+  return typed;
 }

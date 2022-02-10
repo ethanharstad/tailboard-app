@@ -3,7 +3,7 @@ import 'package:tailboard_app/protocols/models/algorithm.dart';
 import 'package:tailboard_app/protocols/screens/algorithm_detail_screen.dart';
 import 'package:tailboard_app/protocols/widgets/algorithm_list_tile.dart';
 import 'package:tailboard_app/widgets/app_scaffold.dart';
-import 'package:tailboard_app/protocols/data/algorithms.dart';
+import 'package:tailboard_app/protocols/data/firebase_algorithm_repository.dart';
 
 class AlgorithmListScreen extends StatefulWidget {
   const AlgorithmListScreen({
@@ -22,6 +22,7 @@ class _AlgorithmListScreenState extends State<AlgorithmListScreen> {
     'Adult',
     'Pediatric',
   };
+  final FirebaseAlgorithmRepository repository = FirebaseAlgorithmRepository();
 
   @override
   Widget build(BuildContext context) {
@@ -59,23 +60,33 @@ class _AlgorithmListScreenState extends State<AlgorithmListScreen> {
             ),
           ),
           Expanded(
-            child: ListView(
-              padding: const EdgeInsets.all(4),
-              children: <Widget>[
-                // Iterate over all the algorithms
-                for (Algorithm algorithm in algorithms)
-                  // Only show if there is no selected filter or it matches any
-                  if (selected.isEmpty || algorithm.tags.any(selected.contains))
-                    AlgorithmListTile(
-                      icon: Icons.error,
-                      title: algorithm.name,
-                      tags: algorithm.tags,
-                      onTap: () => Navigator.of(context).push(MaterialPageRoute(
-                        builder: (BuildContext context) =>
-                            AlgorithmDetailScreen(algorithm: algorithm),
-                      )),
-                    ),
-              ],
+            child: StreamBuilder<List<Algorithm>>(
+              stream: repository.getAlgorithms(),
+              builder: (BuildContext context, AsyncSnapshot<List<Algorithm>> snapshot) {
+                if(snapshot.hasError) {
+                  return const Center(
+                    child: Text("Loading"),
+                  );
+                }
+                return ListView(
+                  padding: const EdgeInsets.all(4),
+                  children: <Widget>[
+                    // Iterate over all the algorithms
+                    for (Algorithm algorithm in snapshot.data ?? [])
+                      // Only show if there is no selected filter or it matches any
+                      if (selected.isEmpty || algorithm.tags.any(selected.contains))
+                        AlgorithmListTile(
+                          icon: Icons.error,
+                          title: algorithm.name,
+                          tags: algorithm.tags,
+                          onTap: () => Navigator.of(context).push(MaterialPageRoute(
+                            builder: (BuildContext context) =>
+                                AlgorithmDetailScreen(algorithm: algorithm),
+                          )),
+                        ),
+                  ],
+                );
+              }
             ),
           ),
         ],
