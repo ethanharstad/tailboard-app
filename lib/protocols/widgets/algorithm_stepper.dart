@@ -42,7 +42,13 @@ class _AlgorithmStepperState extends State<AlgorithmStepper> {
       listener: (BuildContext context, AlgorithmState state) {
         if (state is AlgorithmContentState) {
           if (_controller.positions.isNotEmpty) {
-            _controller.jumpTo(_controller.position.maxScrollExtent);
+            WidgetsBinding.instance?.addPostFrameCallback((_) {
+              _controller.animateTo(
+                _controller.position.maxScrollExtent+50,
+                curve: Curves.fastOutSlowIn,
+                duration: const Duration(milliseconds: 500),
+              );
+            });
           }
         }
       },
@@ -67,7 +73,8 @@ class _AlgorithmStepperState extends State<AlgorithmStepper> {
                 children: <Widget>[
                   Text(
                       '${duration.inMinutes}:${duration.inSeconds.remainder(60).toString().padLeft(2, '0')}'),
-                  for (var transition in state.currentStep.transitions.values.sorted())
+                  for (var transition
+                      in state.currentStep.transitions.values.sorted())
                     duration.inSeconds >= (state.currentStep.duration ?? -1)
                         ? ElevatedButton(
                             onPressed: () =>
