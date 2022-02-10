@@ -3,8 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:tailboard_app/protocols/models/algorithm_note.dart';
 import 'package:tailboard_app/protocols/widgets/algorithm_note_card.dart';
 
-class AlgorithmDrawer extends StatelessWidget {
-  const AlgorithmDrawer({
+class AlgorithmNotesList extends StatelessWidget {
+  const AlgorithmNotesList({
     Key? key,
     this.notes = const {},
   }) : super(key: key);

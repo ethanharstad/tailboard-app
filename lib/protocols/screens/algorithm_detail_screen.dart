@@ -7,7 +7,7 @@ import 'package:native_pdf_view/native_pdf_view.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:tailboard_app/protocols/blocs/algorithm_bloc.dart';
 import 'package:tailboard_app/protocols/models/algorithm.dart';
-import 'package:tailboard_app/protocols/widgets/algorithm_drawer.dart';
+import 'package:tailboard_app/protocols/widgets/algorithm_notes_list.dart';
 import 'package:tailboard_app/protocols/widgets/algorithm_stepper.dart';
 import 'package:tailboard_app/widgets/app_scaffold.dart';
 import 'package:tailboard_app/widgets/beta_toast.dart';
@@ -102,7 +102,7 @@ class _AlgorithmDetailScreenState extends State<AlgorithmDetailScreen> {
       }
       return const Center(child: CircularProgressIndicator());
     } else if(selectedIndex == 2) {
-      return AlgorithmDrawer(notes: widget.algorithm.notes);
+      return AlgorithmNotesList(notes: widget.algorithm.notes);
     } else {
       return const AlgorithmStepper();
     }
