@@ -5,7 +5,8 @@ part 'algorithm_transition.freezed.dart';
 part 'algorithm_transition.g.dart';
 
 @freezed
-class AlgorithmTransition with _$AlgorithmTransition {
+class AlgorithmTransition with _$AlgorithmTransition implements Comparable<AlgorithmTransition> {
+  const AlgorithmTransition._();
   factory AlgorithmTransition({
     required String id,
     required String to,
@@ -15,4 +16,9 @@ class AlgorithmTransition with _$AlgorithmTransition {
 
   factory AlgorithmTransition.fromJson(Map<String, dynamic> json) =>
       _$AlgorithmTransitionFromJson(json);
+
+  @override
+  int compareTo(AlgorithmTransition other) {
+    return weight.compareTo(other.weight);
+  }
 }

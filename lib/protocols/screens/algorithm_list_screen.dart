@@ -61,6 +61,7 @@ class _AlgorithmListScreenState extends State<AlgorithmListScreen> {
           ),
           Expanded(
             child: StreamBuilder<List<Algorithm>>(
+              // TODO handle this stream better
               stream: repository.getAlgorithms(),
               builder: (BuildContext context, AsyncSnapshot<List<Algorithm>> snapshot) {
                 if(snapshot.hasError) {

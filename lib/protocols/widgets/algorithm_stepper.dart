@@ -1,5 +1,5 @@
 import 'dart:async';
-
+import 'package:collection/collection.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:tailboard_app/protocols/blocs/algorithm_bloc.dart';
@@ -67,7 +67,7 @@ class _AlgorithmStepperState extends State<AlgorithmStepper> {
                 children: <Widget>[
                   Text(
                       '${duration.inMinutes}:${duration.inSeconds.remainder(60).toString().padLeft(2, '0')}'),
-                  for (var transition in state.currentStep.transitions.values)
+                  for (var transition in state.currentStep.transitions.values.sorted())
                     duration.inSeconds >= (state.currentStep.duration ?? -1)
                         ? ElevatedButton(
                             onPressed: () =>
