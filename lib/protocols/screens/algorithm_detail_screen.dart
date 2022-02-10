@@ -71,6 +71,7 @@ class _AlgorithmDetailScreenState extends State<AlgorithmDetailScreen> {
       if(index == 0) {
         setState(() {
           docView = false;
+          noteView = false;
           _selectedIndex = 0;
         });
       }
@@ -81,6 +82,7 @@ class _AlgorithmDetailScreenState extends State<AlgorithmDetailScreen> {
               document: _pdfDocument!,
             );
             docView = true;
+            noteView = false;
             _selectedIndex = 1;
           });
         }
@@ -88,6 +90,7 @@ class _AlgorithmDetailScreenState extends State<AlgorithmDetailScreen> {
       else if(index == 2) {
         if (widget.algorithm.notes.isNotEmpty) {
           setState(() {
+            docView = false;
             noteView = true;
             _selectedIndex = 2;
           });

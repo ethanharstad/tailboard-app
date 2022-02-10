@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:styled_text/styled_text.dart';
 import 'package:tailboard_app/protocols/models/algorithm_note.dart';
 
 class AlgorithmNoteCard extends StatelessWidget {
@@ -22,7 +23,17 @@ class AlgorithmNoteCard extends StatelessWidget {
                 note.title!,
                 style: Theme.of(context).textTheme.subtitle2,
               ),
-            Text(note.body),
+            StyledText(
+              text: note.body,
+              tags: {
+                'bold': StyledTextTag(
+                    style:
+                    const TextStyle(fontWeight: FontWeight.bold)),
+                'italic': StyledTextTag(
+                    style:
+                    const TextStyle(fontStyle: FontStyle.italic)),
+              },
+            ),
           ],
         ),
       ),
