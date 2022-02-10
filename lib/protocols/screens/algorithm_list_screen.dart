@@ -61,34 +61,36 @@ class _AlgorithmListScreenState extends State<AlgorithmListScreen> {
           ),
           Expanded(
             child: StreamBuilder<List<Algorithm>>(
-              // TODO handle this stream better
-              stream: repository.getAlgorithms(),
-              builder: (BuildContext context, AsyncSnapshot<List<Algorithm>> snapshot) {
-                if(snapshot.hasError) {
-                  return const Center(
-                    child: Text("Loading"),
+                // TODO handle this stream better
+                stream: repository.getAlgorithms(),
+                builder: (BuildContext context,
+                    AsyncSnapshot<List<Algorithm>> snapshot) {
+                  if (snapshot.hasError) {
+                    return const Center(
+                      child: Text("Loading"),
+                    );
+                  }
+                  return ListView(
+                    padding: const EdgeInsets.all(4),
+                    children: <Widget>[
+                      // Iterate over all the algorithms
+                      for (Algorithm algorithm in snapshot.data ?? [])
+                        // Only show if there is no selected filter or it matches any
+                        if (selected.isEmpty ||
+                            algorithm.tags.any(selected.contains))
+                          AlgorithmListTile(
+                            icon: Icons.error,
+                            title: algorithm.name,
+                            tags: algorithm.tags,
+                            onTap: () =>
+                                Navigator.of(context).push(MaterialPageRoute(
+                              builder: (BuildContext context) =>
+                                  AlgorithmDetailScreen(algorithm: algorithm),
+                            )),
+                          ),
+                    ],
                   );
-                }
-                return ListView(
-                  padding: const EdgeInsets.all(4),
-                  children: <Widget>[
-                    // Iterate over all the algorithms
-                    for (Algorithm algorithm in snapshot.data ?? [])
-                      // Only show if there is no selected filter or it matches any
-                      if (selected.isEmpty || algorithm.tags.any(selected.contains))
-                        AlgorithmListTile(
-                          icon: Icons.error,
-                          title: algorithm.name,
-                          tags: algorithm.tags,
-                          onTap: () => Navigator.of(context).push(MaterialPageRoute(
-                            builder: (BuildContext context) =>
-                                AlgorithmDetailScreen(algorithm: algorithm),
-                          )),
-                        ),
-                  ],
-                );
-              }
-            ),
+                }),
           ),
         ],
       ),

@@ -5,7 +5,9 @@ part 'algorithm_transition.freezed.dart';
 part 'algorithm_transition.g.dart';
 
 @freezed
-class AlgorithmTransition with _$AlgorithmTransition implements Comparable<AlgorithmTransition> {
+class AlgorithmTransition
+    with _$AlgorithmTransition
+    implements Comparable<AlgorithmTransition> {
   const AlgorithmTransition._();
   factory AlgorithmTransition({
     required String id,

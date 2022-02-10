@@ -44,7 +44,7 @@ class _AlgorithmStepperState extends State<AlgorithmStepper> {
           if (_controller.positions.isNotEmpty) {
             WidgetsBinding.instance?.addPostFrameCallback((_) {
               _controller.animateTo(
-                _controller.position.maxScrollExtent+50,
+                _controller.position.maxScrollExtent + 50,
                 curve: Curves.fastOutSlowIn,
                 duration: const Duration(milliseconds: 500),
               );

@@ -68,43 +68,41 @@ class _AlgorithmDetailScreenState extends State<AlgorithmDetailScreen> {
   }
 
   void _onItemTapped(int index) {
-      if(index == 0) {
+    if (index == 0) {
+      setState(() {
+        docView = false;
+        noteView = false;
+        _selectedIndex = 0;
+      });
+    } else if (index == 1) {
+      if (_pdfController != null) {
         setState(() {
-          docView = false;
+          _pdfController = PdfController(
+            document: _pdfDocument!,
+          );
+          docView = true;
           noteView = false;
-          _selectedIndex = 0;
+          _selectedIndex = 1;
         });
       }
-      else if(index == 1) {
-        if (_pdfController != null) {
-          setState(() {
-            _pdfController = PdfController(
-              document: _pdfDocument!,
-            );
-            docView = true;
-            noteView = false;
-            _selectedIndex = 1;
-          });
-        }
+    } else if (index == 2) {
+      if (widget.algorithm.notes.isNotEmpty) {
+        setState(() {
+          docView = false;
+          noteView = true;
+          _selectedIndex = 2;
+        });
       }
-      else if(index == 2) {
-        if (widget.algorithm.notes.isNotEmpty) {
-          setState(() {
-            docView = false;
-            noteView = true;
-            _selectedIndex = 2;
-          });
-        }
-      }
+    }
   }
 
   Widget _getWidget(int selectedIndex) {
-    if(selectedIndex == 1) {
+    if (selectedIndex == 1) {
       if (_pdfController != null) {
         return PdfView(controller: _pdfController!);
       }
       return const Center(child: CircularProgressIndicator());
-    } else if(selectedIndex == 2) {
+    } else if (selectedIndex == 2) {
       return AlgorithmNotesList(notes: widget.algorithm.notes);
     } else {
       return const AlgorithmStepper();
@@ -131,7 +129,8 @@ class _AlgorithmDetailScreenState extends State<AlgorithmDetailScreen> {
             onTap: _onItemTapped,
             items: const <BottomNavigationBarItem>[
               BottomNavigationBarItem(icon: Icon(Icons.home), label: 'Home'),
-              BottomNavigationBarItem(icon: Icon(Icons.attach_file), label: 'Overview'),
+              BottomNavigationBarItem(
+                  icon: Icon(Icons.attach_file), label: 'Overview'),
               BottomNavigationBarItem(icon: Icon(Icons.notes), label: 'Notes'),
             ],
           ),

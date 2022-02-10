@@ -27,11 +27,9 @@ class AlgorithmNoteCard extends StatelessWidget {
               text: note.body,
               tags: {
                 'bold': StyledTextTag(
-                    style:
-                    const TextStyle(fontWeight: FontWeight.bold)),
+                    style: const TextStyle(fontWeight: FontWeight.bold)),
                 'italic': StyledTextTag(
-                    style:
-                    const TextStyle(fontStyle: FontStyle.italic)),
+                    style: const TextStyle(fontStyle: FontStyle.italic)),
               },
             ),
           ],
