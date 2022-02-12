@@ -1,8 +1,12 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:tailboard_app/models/app_user.dart';
+import 'package:tailboard_app/repositories/user_repository.dart';
 
 class AppDrawer extends StatelessWidget {
-  const AppDrawer({Key? key}) : super(key: key);
+  AppDrawer({Key? key}) : super(key: key);
+
+  final UserRepository userRepository = UserRepository();
 
   @override
   Widget build(BuildContext context) {
@@ -10,12 +14,22 @@ class AppDrawer extends StatelessWidget {
       child: ListView(
         padding: EdgeInsets.zero,
         children: <Widget>[
-          const UserAccountsDrawerHeader(
-            accountName: Text('Joe Firefighter'),
-            accountEmail: Text('joe@firefighter.com'),
-            currentAccountPicture: CircleAvatar(
-              child: Text('JF'),
-            ),
+          StreamBuilder<AppUser?>(
+            stream: userRepository.getUser(),
+            builder: (context, snapshot) {
+              if (snapshot.hasData && snapshot.data != null) {
+                return UserAccountsDrawerHeader(
+                  accountName: Text(snapshot.data!.fullName),
+                  accountEmail: Text(snapshot.data!.email),
+                  currentAccountPicture: CircleAvatar(
+                    child: Text(snapshot.data!.fullName.split(' ').map((e) => e[0]).join()),
+                  ),
+                );
+              }
+              return const Center(
+                child: CircularProgressIndicator(),
+              );
+            }
           ),
           ListTile(
             title: const Text('Sign Out'),

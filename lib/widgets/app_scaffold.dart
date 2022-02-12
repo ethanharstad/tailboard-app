@@ -29,7 +29,7 @@ class AppScaffold extends StatelessWidget {
         title: Text(title),
         actions: actions,
       ),
-      drawer: const AppDrawer(),
+      drawer: AppDrawer(),
       endDrawer: endDrawer,
       floatingActionButton: floatingActionButton,
       bottomNavigationBar: bottomNavigationBar,
