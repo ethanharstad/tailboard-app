@@ -24,7 +24,8 @@ class UserRepository {
   Stream<AppUser?> getUser() async* {
     await for (final authUser in FirebaseAuth.instance.userChanges()) {
       if (authUser != null) {
-        await for (final docSnapshot in userReference.doc(authUser.uid).snapshots()) {
+        await for (final docSnapshot
+            in userReference.doc(authUser.uid).snapshots()) {
           yield docSnapshot.data();
         }
       }
