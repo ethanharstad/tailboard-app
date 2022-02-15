@@ -24,8 +24,6 @@ class UserAccessRepository {
   Stream<List<UserAccess>> getUserAccess() async* {
     await for (final authUser in FirebaseAuth.instance.userChanges()) {
       if (authUser != null) {
-        final userRef =
-            FirebaseFirestore.instance.collection('user').doc(authUser.uid);
         await for (final querySnapshot in _accessReference
             .where('user', isEqualTo: authUser.uid)
             .snapshots()) {

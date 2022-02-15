@@ -12,7 +12,8 @@ class AppDrawer extends StatelessWidget {
 
   final UserRepository _userRepository = UserRepository();
   final UserAccessRepository _accessRepository = UserAccessRepository();
-  final OrganizationRepository _organizationRepository = OrganizationRepository();
+  final OrganizationRepository _organizationRepository =
+      OrganizationRepository();
 
   @override
   Widget build(BuildContext context) {
@@ -47,17 +48,17 @@ class AppDrawer extends StatelessWidget {
                   children: <Widget>[
                     for (var userAccess in snapshot.data!)
                       StreamBuilder<Organization?>(
-                        stream: _organizationRepository.getOrganization(userAccess.organization),
-                        builder: (context, snapshot) {
-                          if (snapshot.hasData) {
-                            var org = snapshot.data!;
-                            return ListTile(
-                              title: Text(org.name),
-                            );
-                          }
-                          return Container();
-                        }
-                      ),
+                          stream: _organizationRepository
+                              .getOrganization(userAccess.organization),
+                          builder: (context, snapshot) {
+                            if (snapshot.hasData) {
+                              var org = snapshot.data!;
+                              return ListTile(
+                                title: Text(org.name),
+                              );
+                            }
+                            return Container();
+                          }),
                   ],
                 );
               } else {
