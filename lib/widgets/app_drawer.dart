@@ -1,7 +1,9 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:tailboard_app/models/app_user.dart';
+import 'package:tailboard_app/models/organization.dart';
 import 'package:tailboard_app/models/user_access.dart';
+import 'package:tailboard_app/repositories/organization_repository.dart';
 import 'package:tailboard_app/repositories/user_access_repository.dart';
 import 'package:tailboard_app/repositories/user_repository.dart';
 
@@ -10,6 +12,7 @@ class AppDrawer extends StatelessWidget {
 
   final UserRepository _userRepository = UserRepository();
   final UserAccessRepository _accessRepository = UserAccessRepository();
+  final OrganizationRepository _organizationRepository = OrganizationRepository();
 
   @override
   Widget build(BuildContext context) {
@@ -43,8 +46,17 @@ class AppDrawer extends StatelessWidget {
                 return Column(
                   children: <Widget>[
                     for (var userAccess in snapshot.data!)
-                      ListTile(
-                        title: Text(userAccess.organization),
+                      StreamBuilder<Organization?>(
+                        stream: _organizationRepository.getOrganization(userAccess.organization),
+                        builder: (context, snapshot) {
+                          if (snapshot.hasData) {
+                            var org = snapshot.data!;
+                            return ListTile(
+                              title: Text(org.name),
+                            );
+                          }
+                          return Container();
+                        }
                       ),
                   ],
                 );
