@@ -2,12 +2,14 @@ import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:permission_handler/permission_handler.dart';
+import 'package:tailboard_app/injection.dart';
 import 'package:tailboard_app/widgets/auth_gate.dart';
 import 'firebase_options.dart';
 
 const String appName = "Tailboard";
 
 void main() async {
+  configureDependencies();
   WidgetsFlutterBinding.ensureInitialized();
   await Hive.initFlutter();
   await Firebase.initializeApp(

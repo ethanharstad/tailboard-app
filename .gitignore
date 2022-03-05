@@ -1,6 +1,7 @@
 # Code Generation
 *.freezed.dart
 *.g.dart
+*/injection.config.dart
 
 # Miscellaneous
 *.class
