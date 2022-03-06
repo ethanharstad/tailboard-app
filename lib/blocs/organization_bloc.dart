@@ -21,9 +21,7 @@ class OrganizationBloc extends Cubit<OrganizationState> {
         _organizationRepository = OrganizationRepository(),
         super(const OrganizationState.loading()) {
     _authenticationBloc.stream.listen((authState) {
-      if(authState != null) {
-
-      }
+      if (authState != null) {}
     });
   }
 }
