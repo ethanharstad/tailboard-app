@@ -8,7 +8,7 @@ const String appName = "Tailboard";
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  await configureDependencies();
+  setup();
   await Hive.initFlutter();
   runApp(const TailboardApp());
 }

@@ -3,7 +3,8 @@ import 'package:injectable/injectable.dart';
 
 import 'package:tailboard_app/injection.config.dart';
 
-final locator = GetIt.instance;
+final getIt = GetIt.instance;
 
-@InjectableInit()
-Future<void> configureDependencies() async => await $initGetIt(locator);
+@InjectableInit(preferRelativeImports: false)
+void setup() => getIt.init();
+
