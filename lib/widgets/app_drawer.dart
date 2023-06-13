@@ -43,6 +43,7 @@ class AppDrawer extends StatelessWidget {
               }),
           StreamBuilder<List<UserAccess>>(
             stream: _accessRepository.getUserAccess(),
+            initialData: const [],
             builder: (context, snapshot) {
               if (snapshot.hasData) {
                 return Column(
