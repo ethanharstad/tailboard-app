@@ -28,7 +28,8 @@ LinkedHashMap<DateTime, AlgorithmStep> historyFromJson(
   LinkedHashMap<DateTime, AlgorithmStep> history =
       LinkedHashMap<DateTime, AlgorithmStep>();
   // Ensure correct insertion order
-  for (var timestamp in typed.keys.sorted((a, b) => a.compareTo(b))) {
+  List<DateTime> sorted = typed.keys.toList()..sort((a, b) => a.compareTo(b));
+  for (var timestamp in sorted) {
     history[timestamp] = typed[timestamp] as AlgorithmStep;
   }
   return history;
