@@ -28,7 +28,7 @@ class AuthGate extends StatelessWidget {
                 padding: const EdgeInsets.only(top: 16),
                 child: Text(
                   'By signing in, you agree to our terms and conditions.',
-                  style: Theme.of(context).textTheme.caption,
+                  style: Theme.of(context).textTheme.bodySmall,
                 ),
               );
             },
