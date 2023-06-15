@@ -31,7 +31,7 @@ class _TailboardAppState extends State<TailboardApp> {
   @override
   void initState() {
     super.initState();
-    WidgetsBinding.instance?.addPostFrameCallback((_) {
+    WidgetsBinding.instance.addPostFrameCallback((_) {
       requestStoragePermission();
     });
   }

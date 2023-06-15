@@ -22,7 +22,7 @@ class BetaToast extends SnackBar {
   static void showBetaToast(BuildContext context, [String? id]) async {
     Box box = await Hive.openBox<bool>('betaPreferences');
     if (id == null || box.get(_getKey(id)) != true) {
-      WidgetsBinding.instance?.addPostFrameCallback((_) {
+      WidgetsBinding.instance.addPostFrameCallback((_) {
         ScaffoldMessenger.of(context).showSnackBar(BetaToast(id: id, box: box));
       });
     }
