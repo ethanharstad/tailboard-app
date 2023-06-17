@@ -1,11 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:firebase_core/firebase_core.dart';
-import 'package:hive_flutter/hive_flutter.dart';
 import 'package:permission_handler/permission_handler.dart';
 import 'package:quick_actions/quick_actions.dart';
+import 'package:tailboard_app/injection.dart';
 import 'package:tailboard_app/protocols/screens/algorithm_list_screen.dart';
 import 'package:tailboard_app/widgets/auth_gate.dart';
-import 'firebase_options.dart';
 
 const String appName = "Tailboard";
 
@@ -32,10 +30,7 @@ void main() async {
     ),
   ]);
 
-  await Hive.initFlutter();
-  await Firebase.initializeApp(
-    options: DefaultFirebaseOptions.currentPlatform,
-  );
+  await configureDependencies();
   runApp(TailboardApp(navigatorKey: navigatorKey));
 }
 
@@ -63,7 +58,6 @@ class _TailboardAppState extends State<TailboardApp> {
 
   @override
   void dispose() {
-    Hive.close();
     super.dispose();
   }
 
