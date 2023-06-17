@@ -11,42 +11,55 @@ class HomeScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return AppScaffold(
       title: "Tailboard",
-      body: GridView.count(
-        padding: const EdgeInsets.all(4),
-        crossAxisCount: 2,
+      body: ListView(
         children: <Widget>[
-          LauncherTile(
-            icon: Icons.bolt,
-            title: 'Quick Protocols',
-            onTap: () {
-              Navigator.of(context)
-                  .push(MaterialPageRoute(builder: (BuildContext context) {
-                return const AlgorithmListScreen();
-              }));
-            },
+          const AspectRatio(
+            aspectRatio: 16/9,
+            child: Placeholder(
+              child: Center(
+                  child: Text("Personal Calendar"),
+              ),
+            ),
           ),
-          LauncherTile(
-            icon: Icons.assignment,
-            title: 'Tasks',
-            onTap: () => showDialog<void>(
-                context: context,
-                builder: (BuildContext context) => const UnimplementedDialog()),
+          GridView.count(
+            shrinkWrap: true,
+            padding: const EdgeInsets.all(4),
+            crossAxisCount: 3,
+            children: <Widget>[
+              LauncherTile(
+                icon: Icons.bolt,
+                title: 'Docs',
+                onTap: () {
+                  Navigator.of(context)
+                      .push(MaterialPageRoute(builder: (BuildContext context) {
+                    return const AlgorithmListScreen();
+                  }));
+                },
+              ),
+              LauncherTile(
+                icon: Icons.assignment,
+                title: 'Tasks',
+                onTap: () => showDialog<void>(
+                    context: context,
+                    builder: (BuildContext context) => const UnimplementedDialog()),
+              ),
+              LauncherTile(
+                icon: Icons.calendar_today,
+                title: 'Calendar',
+                onTap: () => showDialog<void>(
+                    context: context,
+                    builder: (BuildContext context) => const UnimplementedDialog()),
+              ),
+              LauncherTile(
+                icon: Icons.description,
+                title: 'Forms',
+                onTap: () => showDialog<void>(
+                    context: context,
+                    builder: (BuildContext context) => const UnimplementedDialog()),
+              ),
+            ],
           ),
-          LauncherTile(
-            icon: Icons.calendar_today,
-            title: 'Calendar',
-            onTap: () => showDialog<void>(
-                context: context,
-                builder: (BuildContext context) => const UnimplementedDialog()),
-          ),
-          LauncherTile(
-            icon: Icons.description,
-            title: 'Forms',
-            onTap: () => showDialog<void>(
-                context: context,
-                builder: (BuildContext context) => const UnimplementedDialog()),
-          ),
-        ],
+        ]
       ),
     );
   }
