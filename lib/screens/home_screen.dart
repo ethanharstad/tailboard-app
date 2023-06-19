@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:table_calendar/table_calendar.dart';
 import 'package:tailboard_app/protocols/screens/algorithm_list_screen.dart';
 import 'package:tailboard_app/widgets/app_scaffold.dart';
 import 'package:tailboard_app/widgets/launcher_tile.dart';
@@ -13,13 +14,11 @@ class HomeScreen extends StatelessWidget {
       title: "Tailboard",
       body: ListView(
         children: <Widget>[
-          const AspectRatio(
-            aspectRatio: 16/9,
-            child: Placeholder(
-              child: Center(
-                  child: Text("Personal Calendar"),
-              ),
-            ),
+          TableCalendar(
+            focusedDay: DateTime.now(),
+            firstDay: DateTime.utc(2020, 1, 1),
+            lastDay: DateTime.utc(2030, 12, 31),
+            calendarFormat: CalendarFormat.twoWeeks,
           ),
           GridView.count(
             shrinkWrap: true,

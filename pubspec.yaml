@@ -55,6 +55,7 @@ dependencies:
   quick_actions: ^1.0.5
   get_it: ^7.6.0
   injectable: ^2.1.2
+  table_calendar: ^3.0.9
 
 dev_dependencies:
   flutter_test:
