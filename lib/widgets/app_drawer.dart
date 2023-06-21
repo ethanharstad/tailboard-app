@@ -22,7 +22,7 @@ class AppDrawer extends StatelessWidget {
         padding: EdgeInsets.zero,
         children: <Widget>[
           StreamBuilder<AppUser?>(
-              stream: _userRepository.getUser(),
+              stream: _userRepository.getUser(FirebaseAuth.instance.currentUser?.uid ?? ''),
               builder: (context, snapshot) {
                 if (snapshot.hasData && snapshot.data != null) {
                   return UserAccountsDrawerHeader(
@@ -42,6 +42,7 @@ class AppDrawer extends StatelessWidget {
               }),
           StreamBuilder<List<UserAccess>>(
             stream: _accessRepository.getUserAccess(),
+            initialData: const [],
             builder: (context, snapshot) {
               if (snapshot.hasData) {
                 return Column(
