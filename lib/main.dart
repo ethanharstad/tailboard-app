@@ -41,7 +41,7 @@ Future<void> requestStoragePermission() async {
 class TailboardApp extends StatefulWidget {
   final GlobalKey<NavigatorState> navigatorKey;
 
-  const TailboardApp({required this.navigatorKey, Key? key}) : super(key: key);
+  const TailboardApp({required this.navigatorKey, super.key});
 
   @override
   State<StatefulWidget> createState() => _TailboardAppState();

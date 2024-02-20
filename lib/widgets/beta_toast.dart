@@ -5,9 +5,8 @@ class BetaToast extends SnackBar {
   final String? id;
   final Box box;
 
-  BetaToast({this.id, required this.box, Key? key})
+  BetaToast({this.id, required this.box, super.key})
       : super(
-          key: key,
           content:
               const Text('This is a beta feature and may not work correctly.'),
           action: id != null

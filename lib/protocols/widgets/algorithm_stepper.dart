@@ -8,8 +8,8 @@ import 'package:tailboard_app/protocols/widgets/algorithm_step_card.dart';
 
 class AlgorithmStepper extends StatefulWidget {
   const AlgorithmStepper({
-    Key? key,
-  }) : super(key: key);
+    super.key,
+  });
 
   @override
   State<StatefulWidget> createState() => _AlgorithmStepperState();

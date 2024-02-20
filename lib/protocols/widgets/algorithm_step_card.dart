@@ -12,10 +12,10 @@ const colorMap = {
 
 class AlgorithmStepCard extends StatelessWidget {
   const AlgorithmStepCard({
-    Key? key,
+    super.key,
     required this.step,
     this.time,
-  }) : super(key: key);
+  });
 
   final AlgorithmStep step;
   final DateTime? time;

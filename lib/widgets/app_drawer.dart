@@ -8,7 +8,7 @@ import 'package:tailboard_app/repositories/user_access_repository.dart';
 import 'package:tailboard_app/repositories/user_repository.dart';
 
 class AppDrawer extends StatelessWidget {
-  AppDrawer({Key? key}) : super(key: key);
+  AppDrawer({super.key});
 
   final UserRepository _userRepository = UserRepository();
   final UserAccessRepository _accessRepository = UserAccessRepository();

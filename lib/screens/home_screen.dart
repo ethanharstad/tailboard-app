@@ -6,7 +6,7 @@ import 'package:tailboard_app/widgets/launcher_tile.dart';
 import 'package:tailboard_app/widgets/unimplemented_dialog.dart';
 
 class HomeScreen extends StatelessWidget {
-  const HomeScreen({Key? key}) : super(key: key);
+  const HomeScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
