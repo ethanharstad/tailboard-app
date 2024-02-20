@@ -23,7 +23,7 @@ class LauncherTile extends StatelessWidget {
           children: <Widget>[
             Icon(icon, size: 64),
             const SizedBox(height: 4),
-            Text(title, style: Theme.of(context).textTheme.headline6),
+            Text(title, style: Theme.of(context).textTheme.titleLarge),
           ],
         ),
       ),

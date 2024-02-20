@@ -21,7 +21,7 @@ class AlgorithmNoteCard extends StatelessWidget {
             if (note.title?.isNotEmpty ?? false)
               Text(
                 note.title!,
-                style: Theme.of(context).textTheme.subtitle2,
+                style: Theme.of(context).textTheme.titleSmall,
               ),
             StyledText(
               text: note.body,

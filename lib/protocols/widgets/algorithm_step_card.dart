@@ -59,12 +59,12 @@ class AlgorithmStepCard extends StatelessWidget {
                         if (step.label != null)
                           Text(
                             step.label!,
-                            style: Theme.of(context).textTheme.subtitle1,
+                            style: Theme.of(context).textTheme.titleMedium,
                           ),
                         if (time != null)
                           Text(
                             "${time?.hour.toString().padLeft(2, '0')}:${time?.minute.toString().padLeft(2, '0')}",
-                            style: Theme.of(context).textTheme.caption,
+                            style: Theme.of(context).textTheme.bodySmall,
                           ),
                       ],
                     ),
