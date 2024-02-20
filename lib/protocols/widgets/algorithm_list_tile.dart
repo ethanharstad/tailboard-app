@@ -2,12 +2,12 @@ import 'package:flutter/material.dart';
 
 class AlgorithmListTile extends StatelessWidget {
   const AlgorithmListTile({
-    Key? key,
+    super.key,
     required this.icon,
     required this.title,
     required this.onTap,
     this.tags = const {},
-  }) : super(key: key);
+  });
 
   final String title;
   final IconData icon;

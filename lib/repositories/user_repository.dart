@@ -1,5 +1,4 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:tailboard_app/models/app_user.dart';
 
 class UserRepository {
@@ -21,15 +20,7 @@ class UserRepository {
     );
   }
 
-  Stream<AppUser?> getUser() async* {
-    await for (final authUser in FirebaseAuth.instance.userChanges()) {
-      if (authUser != null) {
-        await for (final docSnapshot
-            in userReference.doc(authUser.uid).snapshots()) {
-          yield docSnapshot.data();
-        }
-      }
-      yield null;
-    }
+  Stream<AppUser?> getUser(String id) {
+    return userReference.doc(id).snapshots().map((snapshot) => snapshot.data());
   }
 }

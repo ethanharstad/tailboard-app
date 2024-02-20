@@ -14,8 +14,7 @@ import 'package:tailboard_app/widgets/beta_toast.dart';
 import 'package:tailboard_app/widgets/unimplemented_dialog.dart';
 
 class AlgorithmDetailScreen extends StatefulWidget {
-  const AlgorithmDetailScreen({Key? key, required this.algorithm})
-      : super(key: key);
+  const AlgorithmDetailScreen({super.key, required this.algorithm});
 
   final Algorithm algorithm;
 

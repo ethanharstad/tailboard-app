@@ -8,7 +8,7 @@ import 'package:tailboard_app/repositories/user_access_repository.dart';
 import 'package:tailboard_app/repositories/user_repository.dart';
 
 class AppDrawer extends StatelessWidget {
-  AppDrawer({Key? key}) : super(key: key);
+  AppDrawer({super.key});
 
   final UserRepository _userRepository = UserRepository();
   final UserAccessRepository _accessRepository = UserAccessRepository();
@@ -22,7 +22,7 @@ class AppDrawer extends StatelessWidget {
         padding: EdgeInsets.zero,
         children: <Widget>[
           StreamBuilder<AppUser?>(
-              stream: _userRepository.getUser(),
+              stream: _userRepository.getUser(FirebaseAuth.instance.currentUser?.uid ?? ''),
               builder: (context, snapshot) {
                 if (snapshot.hasData && snapshot.data != null) {
                   return UserAccountsDrawerHeader(
@@ -42,6 +42,7 @@ class AppDrawer extends StatelessWidget {
               }),
           StreamBuilder<List<UserAccess>>(
             stream: _accessRepository.getUserAccess(),
+            initialData: const [],
             builder: (context, snapshot) {
               if (snapshot.hasData) {
                 return Column(

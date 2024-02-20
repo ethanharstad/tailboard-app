@@ -7,8 +7,8 @@ import 'package:tailboard_app/protocols/data/firebase_algorithm_repository.dart'
 
 class AlgorithmListScreen extends StatefulWidget {
   const AlgorithmListScreen({
-    Key? key,
-  }) : super(key: key);
+    super.key,
+  });
 
   @override
   State<StatefulWidget> createState() => _AlgorithmListScreenState();

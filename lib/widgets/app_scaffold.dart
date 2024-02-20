@@ -3,7 +3,7 @@ import 'package:tailboard_app/widgets/app_drawer.dart';
 
 class AppScaffold extends StatelessWidget {
   const AppScaffold({
-    Key? key,
+    super.key,
     required this.title,
     required this.body,
     this.actions = const [],
@@ -11,7 +11,7 @@ class AppScaffold extends StatelessWidget {
     this.bottomNavigationBar,
     this.endDrawer,
     this.scaffoldKey,
-  }) : super(key: key);
+  });
 
   final String title;
   final Widget body;

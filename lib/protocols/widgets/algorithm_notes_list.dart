@@ -5,9 +5,9 @@ import 'package:tailboard_app/protocols/widgets/algorithm_note_card.dart';
 
 class AlgorithmNotesList extends StatelessWidget {
   const AlgorithmNotesList({
-    Key? key,
+    super.key,
     this.notes = const {},
-  }) : super(key: key);
+  });
 
   final Map<String, AlgorithmNote> notes;
 

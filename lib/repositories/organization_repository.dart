@@ -20,10 +20,9 @@ class OrganizationRepository {
     );
   }
 
-  Stream<Organization?> getOrganization(String id) {
-    return _organizationReference
-        .doc(id)
-        .snapshots()
-        .map<Organization?>((snapshot) => snapshot.data());
+  Stream<Organization?> getOrganization(String id) async* {
+    await for (final querySnapshot in _organizationReference.doc(id).snapshots()) {
+      yield querySnapshot.data();
+    }
   }
 }
