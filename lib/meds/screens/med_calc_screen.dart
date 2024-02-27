@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:tailboard_app/meds/widgets/patient_weight.dart';
 import 'package:tailboard_app/widgets/app_scaffold.dart';
 
 import '../models/medication.dart';
@@ -36,33 +37,12 @@ class _MedCalcScreenState extends State<MedCalcScreen> {
         children: <Widget>[
           Text("Patient Weight",
             style: Theme.of(context).textTheme.labelLarge,),
-          Row(
-            children: <Widget>[
-              Expanded(
-                child: Slider(
-                  min: 0,
-                  max: 200,
-                  value: patientWeight,
-                  label: patientWeight.round().toString(),
-                  onChanged: (double value) {
-                    setState(() {
-                      patientWeight = value;
-                    });
-                  },
-                ),
-              ),
-              Column(
-                children: [
-                  Text('${patientWeight.toStringAsFixed(1)} kg'),
-                  Text('${(patientWeight * 2.20462).toStringAsFixed(0)} lbs'),
-                ],
-              ),
-              const SizedBox(width: 4.0),
-              IconButton.outlined(
-                icon: const Icon(Icons.question_mark),
-                onPressed: () {},
-              ),
-            ],
+          PatientWeightInput(
+            onChanged: (double value) {
+              setState(() {
+                patientWeight = value;
+              });
+            },
           ),
           Text(
             medication?.name ?? "Medication",
