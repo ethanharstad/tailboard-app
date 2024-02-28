@@ -102,7 +102,7 @@ class _MedCalcScreenState extends State<MedCalcScreen> {
                       children: <Widget>[
                         Column(
                           children: <Widget>[
-                            Text('Rate - ${doseRate} mg/kg'),
+                            Text('Rate - ${doseRate} mg/kg (Max ${maxDose})'),
                             Text(
                                 'Total Dose - ${(doseRate * patientWeight).toStringAsFixed(1)}'),
                           ],
