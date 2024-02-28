@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:tailboard_app/meds/widgets/patient_height.dart';
+
+import '../models/weight.dart';
 
 class PatientWeightInput extends StatefulWidget {
   void Function(double) onChanged;
@@ -10,37 +13,62 @@ class PatientWeightInput extends StatefulWidget {
 }
 
 class _PatientWeightInputState extends State<PatientWeightInput> {
-  double patientWeight = 70.0;
+  late Weight patientWeight;
+  bool estimate = false;
+
+  @override
+  void initState() {
+    patientWeight = Weight(70);
+  }
 
   @override
   Widget build(BuildContext context) {
-    return Row(
-      children: <Widget>[
-        Expanded(
-          child: Slider(
-            min: 0,
-            max: 200,
-            value: patientWeight,
-            label: patientWeight.round().toString(),
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.stretch,
+      children: [
+        Row(
+          children: <Widget>[
+            Expanded(
+              child: Slider(
+                min: 0,
+                max: 200,
+                value: patientWeight.value,
+                onChanged: (double value) {
+                  setState(() {
+                    patientWeight = Weight(value);
+                    widget.onChanged(value);
+                  });
+                },
+              ),
+            ),
+            Column(
+              children: [
+                Text(patientWeight.formatKg()),
+                Text(patientWeight.formatLb()),
+              ],
+            ),
+            const SizedBox(width: 4.0),
+            IconButton.outlined(
+              icon: const Icon(Icons.straighten),
+              onPressed: () {
+                setState(() {
+                  estimate = !estimate;
+                });
+              },
+            ),
+          ],
+        ),
+        if (estimate) ...[
+          const Center(child: Text('Estimated from height using Corpulence Index of 13')),
+          Text('Patient Height',style: Theme.of(context).textTheme.labelMedium),
+          PatientHeightInput(
             onChanged: (double value) {
               setState(() {
-                patientWeight = value;
-                widget.onChanged(value);
+                patientWeight = Weight.fromHeight(value);
               });
             },
           ),
-        ),
-        Column(
-          children: [
-            Text('${patientWeight.toStringAsFixed(1)} kg'),
-            Text('${(patientWeight * 2.20462).toStringAsFixed(0)} lbs'),
-          ],
-        ),
-        const SizedBox(width: 4.0),
-        IconButton.outlined(
-          icon: const Icon(Icons.question_mark),
-          onPressed: () {},
-        ),
+        ]
       ],
     );
   }
