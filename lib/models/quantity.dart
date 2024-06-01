@@ -37,9 +37,6 @@ class Quantity {
     }
     Quantity a = standardize();
     Quantity b = other.standardize();
-    // print("Add: $this + $other");
-    // print(a);
-    // print(b);
     return Quantity(
       value: (a.value + b.value) * unit.multiplier,
       unit: unit,

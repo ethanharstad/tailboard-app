@@ -54,18 +54,18 @@ void main() {
 
   group('multiplication', () {
     test('compatible units', () {
-      expect(Quantity(value: 1, unit: LENGTH.meter.unit) * Quantity(value: 1, unit: LENGTH.meter.unit), Quantity(value: 1, unit: Unit(multiplier: 1, name: "???", symbol: "?", length: 2)));
-      expect(Quantity(value: 1, unit: LENGTH.meter.unit) * Quantity(value: 1, unit: TIME.second.unit), Quantity(value: 1, unit: Unit(multiplier: 1, name: "???", symbol: "?", length: 1, time: 1)));
-      expect(Quantity(value: 2, unit: LENGTH.meter.unit) * Quantity(value: 3, unit: TIME.minute.unit), Quantity(value: 6, unit: Unit(multiplier: 60, name: "???", symbol: "?", length: 1, time: 1)));
+      expect(Quantity(value: 1, unit: LENGTH.meter.unit) * Quantity(value: 1, unit: LENGTH.meter.unit), const Quantity(value: 1, unit: Unit(multiplier: 1, name: "???", symbol: "?", length: 2)));
+      expect(Quantity(value: 1, unit: LENGTH.meter.unit) * Quantity(value: 1, unit: TIME.second.unit), const Quantity(value: 1, unit: Unit(multiplier: 1, name: "???", symbol: "?", length: 1, time: 1)));
+      expect(Quantity(value: 2, unit: LENGTH.meter.unit) * Quantity(value: 3, unit: TIME.minute.unit), const Quantity(value: 6, unit: Unit(multiplier: 60, name: "???", symbol: "?", length: 1, time: 1)));
     });
   });
 
   group('division', () {
     test('compatible units', () {
-      expect(Quantity(value: 1, unit: LENGTH.meter.unit) / Quantity(value: 1, unit: LENGTH.meter.unit), Quantity(value: 1, unit: Unit(multiplier: 1, name: "???", symbol: "?", length: 0)));
-      expect(Quantity(value: 1, unit: LENGTH.meter.unit) / Quantity(value: 1, unit: TIME.second.unit), Quantity(value: 1, unit: Unit(multiplier: 1, name: "???", symbol: "?", length: 1, time: -1)));
+      expect(Quantity(value: 1, unit: LENGTH.meter.unit) / Quantity(value: 1, unit: LENGTH.meter.unit), const Quantity(value: 1, unit: Unit(multiplier: 1, name: "???", symbol: "?", length: 0)));
+      expect(Quantity(value: 1, unit: LENGTH.meter.unit) / Quantity(value: 1, unit: TIME.second.unit), const Quantity(value: 1, unit: Unit(multiplier: 1, name: "???", symbol: "?", length: 1, time: -1)));
       Quantity result = Quantity(value: 2, unit: LENGTH.meter.unit) / Quantity(value: 3, unit: TIME.minute.unit);
-      Quantity truth = Quantity(value: 2/3, unit: Unit(multiplier: 1/60, name: "???", symbol: "?", length: 1, time: 1));
+      Quantity truth = const Quantity(value: 2/3, unit: Unit(multiplier: 1/60, name: "???", symbol: "?", length: 1, time: 1));
       expect(result.value, closeTo(truth.value, .001));
       expect(result.unit.multiplier, closeTo(truth.unit.multiplier, .001));
     });
