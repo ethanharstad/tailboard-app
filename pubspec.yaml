@@ -37,7 +37,6 @@ dependencies:
   pdfx: ^2.3.0
   firebase_core: ^2.24.2
   firebase_auth: ^4.16.5
-  flutterfire_ui: ^0.4.3+20
   flutter_native_splash: ^2.3.10
   firebase_storage: ^11.6.0
   path_provider: ^2.0.8
@@ -56,6 +55,7 @@ dependencies:
   get_it: ^7.6.0
   injectable: ^2.1.2
   table_calendar: ^3.0.9
+  firebase_ui_auth: ^1.14.0
 
 dev_dependencies:
   flutter_test:

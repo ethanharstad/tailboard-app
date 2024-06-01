@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:firebase_auth/firebase_auth.dart';
-import 'package:flutterfire_ui/auth.dart';
+import 'package:firebase_auth/firebase_auth.dart' hide EmailAuthProvider;
+import 'package:firebase_ui_auth/firebase_ui_auth.dart';
 import 'package:tailboard_app/screens/home_screen.dart';
 
 class AuthGate extends StatelessWidget {
@@ -53,8 +53,8 @@ class AuthGate extends StatelessWidget {
                 ),
               );
             },
-            providerConfigs: const [
-              EmailProviderConfiguration(),
+            providers: [
+              EmailAuthProvider(),
             ],
           );
         }
