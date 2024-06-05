@@ -4,9 +4,9 @@ import 'package:tailboard_app/meds/widgets/patient_height.dart';
 import '../models/weight.dart';
 
 class PatientWeightInput extends StatefulWidget {
-  void Function(double) onChanged;
+  final void Function(double) onChanged;
 
-  PatientWeightInput({super.key, required this.onChanged});
+  const PatientWeightInput({super.key, required this.onChanged});
 
   @override
   State<PatientWeightInput> createState() => _PatientWeightInputState();

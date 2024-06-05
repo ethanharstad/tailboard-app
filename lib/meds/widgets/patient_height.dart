@@ -16,6 +16,7 @@ class _PatientHeightInput extends State<PatientHeightInput> {
 
   @override
   void initState() {
+    super.initState();
     patientHeight = const Height(1.7);
   }
 

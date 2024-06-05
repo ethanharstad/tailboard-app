@@ -8,9 +8,9 @@ import '../models/medication.dart';
 import 'med_detail_screen.dart';
 
 class MedCalcScreen extends StatefulWidget {
-  MedCalcScreen({super.key, this.initialMedication});
+  const MedCalcScreen({super.key, this.initialMedication});
 
-  Medication? initialMedication;
+  final Medication? initialMedication;
 
   @override
   State<MedCalcScreen> createState() => _MedCalcScreenState();
