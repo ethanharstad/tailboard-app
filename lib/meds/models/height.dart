@@ -1,7 +1,7 @@
 class Height {
   final double value; // meters
 
-  Height(this.value);
+  const Height(this.value);
 
   String formatM() {
     return "${value.toStringAsFixed(3)} m";

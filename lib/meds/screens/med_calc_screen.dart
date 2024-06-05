@@ -1,7 +1,4 @@
-import 'dart:io';
-
 import 'package:flutter/material.dart';
-import 'package:flutter/foundation.dart';
 import 'package:tailboard_app/meds/widgets/patient_weight.dart';
 import 'package:tailboard_app/widgets/app_scaffold.dart';
 
@@ -102,7 +99,7 @@ class _MedCalcScreenState extends State<MedCalcScreen> {
                       children: <Widget>[
                         Column(
                           children: <Widget>[
-                            Text('Rate - ${doseRate} mg/kg (Max ${maxDose})'),
+                            Text('Rate - $doseRate mg/kg (Max $maxDose)'),
                             Text(
                                 'Total Dose - ${(doseRate * patientWeight).toStringAsFixed(1)}'),
                           ],

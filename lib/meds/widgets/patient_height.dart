@@ -3,9 +3,9 @@ import 'package:flutter/material.dart';
 import '../models/height.dart';
 
 class PatientHeightInput extends StatefulWidget {
-  void Function(double) onChanged;
+  final void Function(double) onChanged;
 
-  PatientHeightInput({super.key, required this.onChanged});
+  const PatientHeightInput({super.key, required this.onChanged});
 
   @override
   State<PatientHeightInput> createState() => _PatientHeightInput();
@@ -16,7 +16,7 @@ class _PatientHeightInput extends State<PatientHeightInput> {
 
   @override
   void initState() {
-    patientHeight = Height(1.7);
+    patientHeight = const Height(1.7);
   }
 
   @override

@@ -21,10 +21,10 @@ class _MedListScreenState extends State<MedListScreen> {
       title: "Med List",
       body: Column(
         children: [
-          Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 4.0),
+          const Padding(
+            padding: EdgeInsets.symmetric(horizontal: 4.0),
             child: SearchBar(
-              leading: const Icon(Icons.search),
+              leading: Icon(Icons.search),
             ),
           ),
           Expanded(

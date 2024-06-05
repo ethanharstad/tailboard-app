@@ -22,7 +22,7 @@ class MedDetailScreen extends StatelessWidget {
         children: <Widget>[
           Text(medication.id),
           Text(medication.name),
-          Text('Generic Names'),
+          const Text('Generic Names'),
         ],
       ),
     );

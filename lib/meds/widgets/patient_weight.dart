@@ -18,6 +18,7 @@ class _PatientWeightInputState extends State<PatientWeightInput> {
 
   @override
   void initState() {
+    super.initState();
     patientWeight = Weight(70);
   }
 
