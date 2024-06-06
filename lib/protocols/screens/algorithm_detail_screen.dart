@@ -110,13 +110,17 @@ class _AlgorithmDetailScreenState extends State<AlgorithmDetailScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return WillPopScope(
-      onWillPop: () async {
+    return PopScope(
+      canPop: false,
+      onPopInvoked: (didPop) async {
+        if (didPop) {
+          return;
+        }
         if (docView || noteView) {
           _onItemTapped(0);
-          return false;
+          return;
         }
-        return true;
+        Navigator.of(context).pop();
       },
       child: BlocProvider.value(
         value: bloc,
