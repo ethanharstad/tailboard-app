@@ -23,10 +23,10 @@ class HomeScreen extends StatelessWidget {
             lastDay: DateTime.utc(2030, 12, 31),
             calendarFormat: CalendarFormat.twoWeeks,
           ),
-          GridView.count(
+          GridView.extent(
             shrinkWrap: true,
             padding: const EdgeInsets.all(4),
-            crossAxisCount: 3,
+            maxCrossAxisExtent: 200,
             children: <Widget>[
               LauncherTile(
                 icon: Icons.bolt,
