@@ -28,11 +28,6 @@ class NotificationService {
   @pragma("vm:entry-point")
   static Future <void> onActionReceivedMethod(ReceivedAction receivedAction) async {
     // Your code goes here
-    final app = getIt<TailboardApp>();
 
-    // Navigate into pages, avoiding to open the notification details page over another details page already opened
-    app.navigatorKey.currentState?.pushNamedAndRemoveUntil('/notification-page',
-            (route) => (route.settings.name != '/notification-page') || route.isFirst,
-        arguments: receivedAction);
   }
 }

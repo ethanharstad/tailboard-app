@@ -1,13 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:awesome_notifications/awesome_notifications.dart';
 import 'package:get_it/get_it.dart';
-import 'package:injectable/injectable.dart';
 import 'package:permission_handler/permission_handler.dart';
 import 'package:quick_actions/quick_actions.dart';
 import 'package:tailboard_app/injection.dart';
 import 'package:tailboard_app/protocols/screens/algorithm_list_screen.dart';
 import 'package:tailboard_app/services/notification_service.dart';
-import 'package:tailboard_app/widgets/auth_gate.dart';
+import 'package:tailboard_app/app_router.dart';
 
 const String appName = "Tailboard";
 
@@ -43,11 +42,7 @@ void main() async {
   const QuickActions quickActions = QuickActions();
   quickActions.initialize((String shortcutType) {
     if (shortcutType == 'protocols') {
-      navigatorKey.currentState?.push(
-        MaterialPageRoute(builder: (BuildContext context) {
-          return const AlgorithmListScreen();
-        })
-      );
+      router.go('/protocols');
     }
   });
   quickActions.setShortcutItems(<ShortcutItem>[
@@ -59,7 +54,7 @@ void main() async {
   ]);
 
   await configureDependencies();
-  final app = TailboardApp(navigatorKey: navigatorKey);
+  const app = TailboardApp();
   getIt.registerSingleton(app);
   runApp(app);
 }
@@ -73,9 +68,7 @@ Future<void> requestNotificationPermission() async {
 }
 
 class TailboardApp extends StatefulWidget {
-  final GlobalKey<NavigatorState> navigatorKey;
-
-  const TailboardApp({required this.navigatorKey, super.key});
+  const TailboardApp({super.key});
 
   @override
   State<StatefulWidget> createState() => _TailboardAppState();
@@ -104,8 +97,8 @@ class _TailboardAppState extends State<TailboardApp> {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      navigatorKey: widget.navigatorKey,
+    return MaterialApp.router(
+      // navigatorKey: widget.navigatorKey,
       title: appName,
       theme: ThemeData(
         brightness: Brightness.light,
@@ -117,7 +110,7 @@ class _TailboardAppState extends State<TailboardApp> {
         visualDensity: VisualDensity.adaptivePlatformDensity,
         primarySwatch: Colors.red,
       ),
-      home: const AuthGate(),
+      routerConfig: router,
     );
   }
 }

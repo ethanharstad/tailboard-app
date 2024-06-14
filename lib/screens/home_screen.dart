@@ -1,5 +1,6 @@
 import 'package:awesome_notifications/awesome_notifications.dart';
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:table_calendar/table_calendar.dart';
 import 'package:tailboard_app/meds/screens/med_calc_screen.dart';
 import 'package:tailboard_app/protocols/screens/algorithm_list_screen.dart';
@@ -33,30 +34,21 @@ class HomeScreen extends StatelessWidget {
                 icon: Icons.bolt,
                 title: 'Docs',
                 onTap: () {
-                  Navigator.of(context)
-                      .push(MaterialPageRoute(builder: (BuildContext context) {
-                    return const AlgorithmListScreen();
-                  }));
+                  context.go("/protocols");
                 },
               ),
               LauncherTile(
                 icon: Icons.medication,
                 title: 'Meds',
                 onTap: () {
-                  Navigator.of(context)
-                      .push(MaterialPageRoute(builder: (BuildContext context) {
-                    return const MedListScreen();
-                  }));
+                  context.go("/medications");
                 },
               ),
               LauncherTile(
                 icon: Icons.calculate,
                 title: 'Med Calc',
                 onTap: () {
-                  Navigator.of(context)
-                      .push(MaterialPageRoute(builder: (BuildContext context) {
-                    return const MedCalcScreen();
-                  }));
+                  context.go("/medication_calculator");
                 },
               ),
               LauncherTile(
