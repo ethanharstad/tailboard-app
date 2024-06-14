@@ -1,3 +1,4 @@
+import 'package:awesome_notifications/awesome_notifications.dart';
 import 'package:flutter/material.dart';
 import 'package:table_calendar/table_calendar.dart';
 import 'package:tailboard_app/meds/screens/med_calc_screen.dart';
@@ -79,6 +80,20 @@ class HomeScreen extends StatelessWidget {
                     context: context,
                     builder: (BuildContext context) => const UnimplementedDialog()),
               ),
+              LauncherTile(
+                  icon: Icons.notification_important,
+                  title: 'Notification Test',
+                  onTap: () {
+                    AwesomeNotifications().createNotification(
+                        content: NotificationContent(
+                          id: 10,
+                          channelKey: 'basic_channel',
+                          actionType: ActionType.Default,
+                          title: 'Hello World!',
+                          body: 'This is my first notification!',
+                        )
+                    );
+                  }),
             ],
           ),
         ]
