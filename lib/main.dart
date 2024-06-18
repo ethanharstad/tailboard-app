@@ -4,7 +4,6 @@ import 'package:get_it/get_it.dart';
 import 'package:permission_handler/permission_handler.dart';
 import 'package:quick_actions/quick_actions.dart';
 import 'package:tailboard_app/injection.dart';
-import 'package:tailboard_app/protocols/screens/algorithm_list_screen.dart';
 import 'package:tailboard_app/services/notification_service.dart';
 import 'package:tailboard_app/app_router.dart';
 

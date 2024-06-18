@@ -1,6 +1,5 @@
 import 'package:awesome_notifications/awesome_notifications.dart';
 import 'package:get_it/get_it.dart';
-import 'package:tailboard_app/main.dart';
 
 final getIt = GetIt.instance;
 
