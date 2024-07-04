@@ -1,5 +1,6 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:tailboard_app/models/app_user.dart';
 import 'package:tailboard_app/models/organization.dart';
 import 'package:tailboard_app/models/user_access.dart';
@@ -34,6 +35,9 @@ class AppDrawer extends StatelessWidget {
                           .map((e) => e[0])
                           .join()),
                     ),
+                    onDetailsPressed: () {
+                      context.go('/profile');
+                    },
                   );
                 }
                 return const Center(

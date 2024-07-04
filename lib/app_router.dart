@@ -7,6 +7,7 @@ import 'package:tailboard_app/protocols/screens/algorithm_list_screen.dart';
 import 'package:tailboard_app/repositories/user_repository.dart';
 import 'package:tailboard_app/screens/home_screen.dart';
 import 'package:tailboard_app/screens/login_screen.dart';
+import 'package:tailboard_app/screens/user_profile_screen.dart';
 
 final UserRepository _userRepository = UserRepository();
 
@@ -28,6 +29,11 @@ final GoRouter router = GoRouter(
       path: '/login',
       name: 'login',
       builder: (BuildContext context, GoRouterState state) => const LoginScreen(),
+    ),
+    GoRoute(
+      path: '/profile',
+      name: 'profile',
+      builder: (BuildContext context, GoRouterState state) => const UserProfileScreen(),
     ),
     GoRoute(
       path: "/protocols",
