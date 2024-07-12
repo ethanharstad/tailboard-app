@@ -35,11 +35,10 @@ class HomeScreen extends StatelessWidget {
         ),
         GridView.extent(
           shrinkWrap: true,
-          padding: const EdgeInsets.all(4),
           maxCrossAxisExtent: 200,
           children: <Widget>[
             LauncherTile(
-              icon: Icons.alarm,
+              icon: Icons.notifications_active,
               title: 'Incidents',
               onTap: () {
                 context.go("/incidents");
@@ -63,7 +62,7 @@ class HomeScreen extends StatelessWidget {
               icon: Icons.calculate,
               title: 'Med Calc',
               onTap: () {
-                context.go("/medication_calculator");
+                context.go("/medicationCalculator");
               },
             ),
             LauncherTile(

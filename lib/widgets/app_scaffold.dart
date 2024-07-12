@@ -33,7 +33,10 @@ class AppScaffold extends StatelessWidget {
       endDrawer: endDrawer,
       floatingActionButton: floatingActionButton,
       bottomNavigationBar: bottomNavigationBar,
-      body: body,
+      body: Padding(
+        padding: const EdgeInsets.all(4.0),
+        child: body,
+      ),
     );
   }
 }
