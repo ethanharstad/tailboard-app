@@ -18,10 +18,13 @@ class HomeScreen extends StatelessWidget {
     return AppScaffold(
       title: "Tailboard",
       body: ListView(children: <Widget>[
+        const Text('Recent Incidents'),
         StreamBuilder(stream: incidentRepository.getIncidents(), builder: (BuildContext context, AsyncSnapshot<List<Incident>> snapshot) {
-          return IncidentList(
-            title: 'Recent Incidents',
-            incidents: snapshot.data ?? [],
+          return AspectRatio(
+            aspectRatio: 3,
+            child: IncidentList(
+              incidents: snapshot.data ?? [],
+            ),
           );
         }),
         TableCalendar(
