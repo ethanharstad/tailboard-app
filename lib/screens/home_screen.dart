@@ -3,70 +3,27 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:table_calendar/table_calendar.dart';
 import 'package:tailboard_app/models/neris/incident.dart';
-import 'package:tailboard_app/models/neris/location.dart';
+import 'package:tailboard_app/repositories/incident_repository.dart';
 import 'package:tailboard_app/widgets/app_scaffold.dart';
 import 'package:tailboard_app/widgets/incident_list.dart';
 import 'package:tailboard_app/widgets/launcher_tile.dart';
 import 'package:tailboard_app/widgets/unimplemented_dialog.dart';
 
 class HomeScreen extends StatelessWidget {
-  const HomeScreen({super.key});
+  HomeScreen({super.key});
+  final IncidentRepository incidentRepository = IncidentRepository();
 
   @override
   Widget build(BuildContext context) {
     return AppScaffold(
       title: "Tailboard",
       body: ListView(children: <Widget>[
-        IncidentList(title: 'Latest Incidents', incidents: [
-          Incident(
-            id: "1",
-            incidentNumber: '12345',
-            location: const Location(
-              id: '1',
-              anNumber: 123,
-              snStreetName: 'Main',
-              snPostType: 'St',
-              incorporatedMunicipality: 'Boone',
-              state: 'IA',
-              postalCode: '50036',
-              county: 'Boone',
-              country: 'USA',
-            ),
-            timestamp: DateTime.now(),
-          ),
-          Incident(
-            id: "2",
-            incidentNumber: '12346',
-            location: const Location(
-              id: '1',
-              anNumber: 456,
-              snStreetName: 'Foo',
-              snPostType: 'Ln',
-              incorporatedMunicipality: 'Boone',
-              state: 'IA',
-              postalCode: '50036',
-              county: 'Boone',
-              country: 'USA',
-            ),
-            timestamp: DateTime.now(),
-          ),
-          Incident(
-            id: "2",
-            incidentNumber: '12346',
-            location: const Location(
-              id: '1',
-              anNumber: 789,
-              snStreetName: 'Bar',
-              snPostType: 'Ave',
-              incorporatedMunicipality: 'Boone',
-              state: 'IA',
-              postalCode: '50036',
-              county: 'Boone',
-              country: 'USA',
-            ),
-            timestamp: DateTime.now(),
-          ),
-        ]),
+        StreamBuilder(stream: incidentRepository.getIncidents(), builder: (BuildContext context, AsyncSnapshot<List<Incident>> snapshot) {
+          return IncidentList(
+            title: 'Recent Incidents',
+            incidents: snapshot.data ?? [],
+          );
+        }),
         TableCalendar(
           focusedDay: DateTime.now(),
           firstDay: DateTime.utc(2020, 1, 1),
@@ -78,6 +35,13 @@ class HomeScreen extends StatelessWidget {
           padding: const EdgeInsets.all(4),
           maxCrossAxisExtent: 200,
           children: <Widget>[
+            LauncherTile(
+              icon: Icons.alarm,
+              title: 'Incidents',
+              onTap: () {
+                context.go("/incidents");
+              },
+            ),
             LauncherTile(
               icon: Icons.bolt,
               title: 'Docs',

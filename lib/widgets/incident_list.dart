@@ -8,7 +8,7 @@ class IncidentList extends StatelessWidget {
   final String? title;
   final List<Incident> incidents;
 
-  IncidentList({super.key, required this.incidents, this.title});
+  const IncidentList({super.key, required this.incidents, this.title});
 
   @override
   Widget build(BuildContext context) {

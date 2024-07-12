@@ -1,10 +1,11 @@
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:tailboard_app/meds/screens/med_calc_screen.dart';
 import 'package:tailboard_app/meds/screens/med_list_screen.dart';
 import 'package:tailboard_app/protocols/screens/algorithm_list_screen.dart';
 import 'package:tailboard_app/screens/home_screen.dart';
+import 'package:tailboard_app/screens/incident_list_screen.dart';
 import 'package:tailboard_app/screens/login_screen.dart';
 import 'package:tailboard_app/screens/user_profile_screen.dart';
 
@@ -20,8 +21,14 @@ final GoRouter router = GoRouter(
       path: "/",
       name: "home",
       builder: (BuildContext context, GoRouterState state) =>
-          const HomeScreen(),
+          HomeScreen(),
       routes: [
+        GoRoute(
+          path: 'incidents',
+          name: 'incidents',
+          builder: (BuildContext context, GoRouterState state) =>
+              IncidentListScreen(),
+        ),
         GoRoute(
           path: "protocols",
           name: "protocols",
@@ -41,7 +48,7 @@ final GoRouter router = GoRouter(
           const MedCalcScreen(),
         ),
         GoRoute(
-          path: '/profile',
+          path: 'profile',
           name: 'profile',
           builder: (BuildContext context, GoRouterState state) => const UserProfileScreen(),
         ),
