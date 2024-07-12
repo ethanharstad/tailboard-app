@@ -10,32 +10,39 @@ class IncidentTile extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // TODO Update IncidentTile to handle aspect ratio differences
     return Card(
       child: Padding(
         padding: const EdgeInsets.all(4.0),
-        child: Row(
-          children: <Widget>[
-            Column(
+        child: LayoutBuilder(
+          builder: (BuildContext context, BoxConstraints constraints) {
+            Axis mainAxis = constraints.hasBoundedHeight ? Axis.vertical : Axis.horizontal;
+            Axis crossAxis = constraints.hasBoundedHeight ? Axis.horizontal : Axis.vertical;
+            return Wrap(
+              direction: mainAxis,
               children: <Widget>[
-                Text(DateFormat.yMd().format(incident.timestamp)),
-                Text(DateFormat.jms().format(incident.timestamp)),
+                Wrap(
+                  direction: crossAxis,
+                  children: <Widget>[
+                    Text(DateFormat.yMd().format(incident.timestamp)),
+                    Text(DateFormat.jms().format(incident.timestamp)),
+                  ],
+                ),
+                if(mainAxis == Axis.horizontal) const VerticalDivider(),
+                Wrap(
+                  direction: Axis.vertical,
+                  children: <Widget>[
+                    const Text("INCIDENT TYPE"),
+                    Text(incident.location.locationSummary()),
+                    if(incident.location.locationDetail() != null)
+                      Text(incident.location.locationDetail()!),
+                    Text(incident.location.locationMunicipality()),
+                  ],
+                ),
+                if(onTap != null)
+                  const Icon(Icons.chevron_right),
               ],
-            ),
-            const VerticalDivider(),
-            Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: <Widget>[
-                const Text("INCIDENT TYPE"),
-                Text(incident.location.locationSummary()),
-                if(incident.location.locationDetail() != null)
-                  Text(incident.location.locationDetail()!),
-                Text(incident.location.locationMunicipality()),
-              ],
-            ),
-            if(onTap != null)
-              const Icon(Icons.chevron_right),
-          ],
+            );
+          }
         ),
       ),
     );
