@@ -4,9 +4,10 @@ import 'package:tailboard_app/widgets/incident_tile.dart';
 import 'package:tailboard_app/models/neris/incident.dart';
 
 class IncidentList extends StatelessWidget {
+  final Function(String)? onTap;
   final List<Incident> incidents;
 
-  const IncidentList({super.key, required this.incidents});
+  const IncidentList({super.key, required this.incidents, this.onTap});
 
   @override
   Widget build(BuildContext context) {
@@ -17,7 +18,14 @@ class IncidentList extends StatelessWidget {
           scrollDirection: mainAxis,
           children: <Widget>[
             for(Incident incident in incidents)
-              IncidentTile(incident: incident),
+              IncidentTile(
+                incident: incident,
+                onTap: onTap == null ? null : (String incidentId) {
+                  if(onTap != null) {
+                    onTap!(incidentId);
+                  }
+                },
+              ),
           ],
         );
       },

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:tailboard_app/widgets/app_scaffold.dart';
 
 import 'package:tailboard_app/repositories/incident_repository.dart';
@@ -16,6 +17,9 @@ class IncidentListScreen extends StatelessWidget {
       title: "Incidents",
       body: StreamBuilder(stream: incidentRepository.getIncidents(), builder: (BuildContext context, AsyncSnapshot<List<Incident>> snapshot) {
         return IncidentList(
+          onTap: (String incidentId) {
+            context.go('/incidents/$incidentId');
+          },
           incidents: snapshot.data ?? [],
         );
       }),

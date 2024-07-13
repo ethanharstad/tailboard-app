@@ -5,6 +5,7 @@ import 'package:tailboard_app/meds/screens/med_calc_screen.dart';
 import 'package:tailboard_app/meds/screens/med_list_screen.dart';
 import 'package:tailboard_app/protocols/screens/algorithm_list_screen.dart';
 import 'package:tailboard_app/screens/home_screen.dart';
+import 'package:tailboard_app/screens/incident_detail_screen.dart';
 import 'package:tailboard_app/screens/incident_list_screen.dart';
 import 'package:tailboard_app/screens/login_screen.dart';
 import 'package:tailboard_app/screens/user_profile_screen.dart';
@@ -28,6 +29,13 @@ final GoRouter router = GoRouter(
           name: 'incidents',
           builder: (BuildContext context, GoRouterState state) =>
               IncidentListScreen(),
+          routes: [
+            GoRoute(
+              path: ':incidentId',
+              name: 'incident_detail',
+              builder: (BuildContext context, GoRouterState state) => IncidentDetailScreen(incidentId: state.pathParameters['incidentId']!),
+            ),
+          ],
         ),
         GoRoute(
           path: "protocols",
