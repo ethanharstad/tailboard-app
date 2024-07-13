@@ -30,7 +30,7 @@ class IncidentTile extends StatelessWidget {
                     direction: crossAxis,
                     children: <Widget>[
                       Text(DateFormat.yMd().format(incident.timestamp)),
-                      Text(DateFormat.jms().format(incident.timestamp)),
+                      Text(DateFormat.Hms().format(incident.timestamp)),
                     ],
                   ),
                   if(mainAxis == Axis.horizontal) const VerticalDivider(),

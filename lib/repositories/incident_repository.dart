@@ -115,4 +115,10 @@ class IncidentRepository {
   Stream<List<Incident>> getIncidents() async* {
     yield MOCK_INCIDENTS;
   }
+
+  Stream<Incident?> getIncident(String id) async* {
+    yield null;
+    await Future.delayed(const Duration(seconds: 1));
+    yield MOCK_INCIDENTS.firstWhere((Incident x) => x.id == id);
+  }
 }
