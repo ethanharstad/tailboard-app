@@ -13,6 +13,7 @@ class Incident with _$Incident {
     required String incidentNumber,
     required Location location,
     required DateTime timestamp,
+    required String incidentTypeId,
   }) = _Incident;
 
   factory Incident.fromJson(Map<String, dynamic> json) => _$IncidentFromJson(json);

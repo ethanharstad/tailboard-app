@@ -1,6 +1,5 @@
 import 'package:tailboard_app/models/neris/incident.dart';
-
-import '../models/neris/location.dart';
+import 'package:tailboard_app/models/neris/location.dart';
 
 class IncidentRepository {
   static final IncidentRepository _repository = IncidentRepository._internal();
@@ -27,6 +26,7 @@ class IncidentRepository {
         country: 'USA',
       ),
       timestamp: DateTime.now(),
+      incidentTypeId: '6',
     ),
     Incident(
       id: "2",
@@ -43,6 +43,7 @@ class IncidentRepository {
         country: 'USA',
       ),
       timestamp: DateTime.now().subtract(const Duration(hours: 2)),
+      incidentTypeId: '2',
     ),
     Incident(
       id: "3",
@@ -59,6 +60,7 @@ class IncidentRepository {
         country: 'USA',
       ),
       timestamp: DateTime.now().subtract(const Duration(hours: 25)),
+      incidentTypeId: '3',
     ),
     Incident(
       id: "4",
@@ -76,6 +78,7 @@ class IncidentRepository {
         country: 'USA',
       ),
       timestamp: DateTime.now().subtract(const Duration(hours: 31)),
+      incidentTypeId: '4',
     ),
     Incident(
       id: "5",
@@ -93,6 +96,7 @@ class IncidentRepository {
         country: 'USA',
       ),
       timestamp: DateTime.now().subtract(const Duration(hours: 31, minutes: 13)),
+      incidentTypeId: '5',
     ),
     Incident(
       id: "6",
@@ -109,6 +113,7 @@ class IncidentRepository {
         country: 'USA',
       ),
       timestamp: DateTime.now().subtract(const Duration(hours: 33)),
+      incidentTypeId: '1',
     ),
   ];
 
