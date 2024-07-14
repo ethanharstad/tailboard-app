@@ -35,7 +35,7 @@ class HomeScreen extends StatelessWidget {
         ),
         GridView.extent(
           shrinkWrap: true,
-          maxCrossAxisExtent: 200,
+          maxCrossAxisExtent: 150,
           children: <Widget>[
             LauncherTile(
               icon: Icons.notifications_active,
