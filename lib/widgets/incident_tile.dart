@@ -17,7 +17,6 @@ class IncidentTile extends StatelessWidget {
       clipBehavior: Clip.hardEdge,
       child: InkWell(
         onTap: onTap == null ? null : () {
-          debugPrint("onTap");
           onTap!(incident.id);
         },
         child: Padding(

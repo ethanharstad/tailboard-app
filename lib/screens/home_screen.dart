@@ -90,6 +90,13 @@ class HomeScreen extends StatelessWidget {
                       const UnimplementedDialog()),
             ),
             LauncherTile(
+              icon: Icons.settings,
+              title: 'Assets',
+              onTap: () {
+                context.go("/assets");
+              },
+            ),
+            LauncherTile(
                 icon: Icons.notification_important,
                 title: 'Notification Test',
                 onTap: () {
