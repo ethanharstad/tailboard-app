@@ -97,6 +97,13 @@ class HomeScreen extends StatelessWidget {
               },
             ),
             LauncherTile(
+              icon: Icons.location_pin,
+              title: 'Departments',
+              onTap: () {
+                context.goNamed("departments");
+              },
+            ),
+            LauncherTile(
                 icon: Icons.notification_important,
                 title: 'Notification Test',
                 onTap: () {
