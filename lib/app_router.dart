@@ -6,10 +6,13 @@ import 'package:tailboard_app/assets/screens/asset_list_screen.dart';
 import 'package:tailboard_app/meds/screens/med_calc_screen.dart';
 import 'package:tailboard_app/meds/screens/med_list_screen.dart';
 import 'package:tailboard_app/protocols/screens/algorithm_list_screen.dart';
+import 'package:tailboard_app/screens/department_detail_screen.dart';
+import 'package:tailboard_app/screens/department_list_screen.dart';
 import 'package:tailboard_app/screens/home_screen.dart';
 import 'package:tailboard_app/screens/incident_detail_screen.dart';
 import 'package:tailboard_app/screens/incident_list_screen.dart';
 import 'package:tailboard_app/screens/login_screen.dart';
+import 'package:tailboard_app/screens/station_detail_screen.dart';
 import 'package:tailboard_app/screens/user_profile_screen.dart';
 
 final GoRouter router = GoRouter(
@@ -25,6 +28,30 @@ final GoRouter router = GoRouter(
         name: "home",
         builder: (BuildContext context, GoRouterState state) => HomeScreen(),
         routes: [
+          GoRoute(
+              path: 'departments',
+              name: 'departments',
+              builder: (BuildContext context, GoRouterState state) =>
+                  DepartmentListScreen(),
+              routes: [
+                GoRoute(
+                    path: ':departmentId',
+                    name: 'department_detail',
+                    builder: (BuildContext context, GoRouterState state) =>
+                        DepartmentDetailScreen(
+                          departmentId: state.pathParameters['departmentId']!,
+                        ),
+                    routes: [
+                      GoRoute(
+                        path: ':stationId',
+                        name: 'station_detail',
+                        builder: (BuildContext context, GoRouterState state) =>
+                            StationDetailScreen(
+                          stationId: state.pathParameters['stationId']!,
+                        ),
+                      ),
+                    ]),
+              ]),
           GoRoute(
             path: 'incidents',
             name: 'incidents',
