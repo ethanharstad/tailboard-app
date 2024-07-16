@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:tailboard_app/models/neris/department.dart';
 import 'package:tailboard_app/models/neris/station.dart';
 import 'package:tailboard_app/repositories/department_repository.dart';
@@ -45,6 +46,15 @@ class DepartmentDetailScreen extends StatelessWidget {
                                 for(Station s in snapshot.data!)
                                   ListTile(
                                     title: Text(s.name),
+                                    onTap: () {
+                                      context.goNamed(
+                                        'station_detail',
+                                        pathParameters: {
+                                          'departmentId': dept.id,
+                                          'stationId': s.id,
+                                        }
+                                      );
+                                    },
                                   ),
                               ],
                             ),
