@@ -6,6 +6,7 @@ import 'package:tailboard_app/assets/screens/asset_list_screen.dart';
 import 'package:tailboard_app/meds/screens/med_calc_screen.dart';
 import 'package:tailboard_app/meds/screens/med_list_screen.dart';
 import 'package:tailboard_app/protocols/screens/algorithm_list_screen.dart';
+import 'package:tailboard_app/screens/department_detail_screen.dart';
 import 'package:tailboard_app/screens/department_list_screen.dart';
 import 'package:tailboard_app/screens/home_screen.dart';
 import 'package:tailboard_app/screens/incident_detail_screen.dart';
@@ -27,11 +28,20 @@ final GoRouter router = GoRouter(
         builder: (BuildContext context, GoRouterState state) => HomeScreen(),
         routes: [
           GoRoute(
-            path: 'departments',
-            name: 'departments',
-            builder: (BuildContext context, GoRouterState state) =>
-                DepartmentListScreen(),
-          ),
+              path: 'departments',
+              name: 'departments',
+              builder: (BuildContext context, GoRouterState state) =>
+                  DepartmentListScreen(),
+              routes: [
+                GoRoute(
+                  path: ':departmentId',
+                  name: 'department_detail',
+                  builder: (BuildContext context, GoRouterState state) =>
+                      DepartmentDetailScreen(
+                    departmentId: state.pathParameters['departmentId']!,
+                  ),
+                ),
+              ]),
           GoRoute(
             path: 'incidents',
             name: 'incidents',
