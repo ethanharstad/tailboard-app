@@ -1,0 +1,6 @@
+{
+    "appName": "Tailboard",
+    "@appName": {
+        "description": "The rear step of a firetruck, used as the app name."
+    }
+}

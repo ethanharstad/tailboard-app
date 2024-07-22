@@ -6,8 +6,7 @@ import 'package:quick_actions/quick_actions.dart';
 import 'package:tailboard_app/injection.dart';
 import 'package:tailboard_app/services/notification_service.dart';
 import 'package:tailboard_app/app_router.dart';
-
-const String appName = "Tailboard";
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 final getIt = GetIt.instance;
 
@@ -98,7 +97,7 @@ class _TailboardAppState extends State<TailboardApp> {
   Widget build(BuildContext context) {
     return MaterialApp.router(
       // navigatorKey: widget.navigatorKey,
-      title: appName,
+      onGenerateTitle: (BuildContext context) => AppLocalizations.of(context)!.appName,
       theme: ThemeData(
         brightness: Brightness.light,
         visualDensity: VisualDensity.adaptivePlatformDensity,
@@ -110,6 +109,8 @@ class _TailboardAppState extends State<TailboardApp> {
         colorSchemeSeed: Colors.red,
       ),
       routerConfig: router,
+      localizationsDelegates: AppLocalizations.localizationsDelegates,
+      supportedLocales: AppLocalizations.supportedLocales,
     );
   }
 }

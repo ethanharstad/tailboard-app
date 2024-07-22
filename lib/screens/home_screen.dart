@@ -8,6 +8,7 @@ import 'package:tailboard_app/widgets/app_scaffold.dart';
 import 'package:tailboard_app/widgets/incident_list.dart';
 import 'package:tailboard_app/widgets/launcher_tile.dart';
 import 'package:tailboard_app/widgets/unimplemented_dialog.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class HomeScreen extends StatelessWidget {
   HomeScreen({super.key});
@@ -16,7 +17,7 @@ class HomeScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return AppScaffold(
-      title: "Tailboard",
+      title: AppLocalizations.of(context)!.appName,
       body: ListView(children: <Widget>[
         const Text('Recent Incidents'),
         StreamBuilder(stream: incidentRepository.getIncidents(), builder: (BuildContext context, AsyncSnapshot<List<Incident>> snapshot) {
