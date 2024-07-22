@@ -2,5 +2,13 @@
     "appName": "Tailboard",
     "@appName": {
         "description": "The rear step of a firetruck, used as the app name."
+    },
+    "recentIncidents": "Recent Incidents",
+    "@recentIncidents": {
+        "description": "Label for the most recent incidents."
+    },
+    "incidents": "Incidents",
+    "@incidents": {
+        "description": "Plural form of incident, used as a feature label."
     }
 }

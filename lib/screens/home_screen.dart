@@ -19,7 +19,7 @@ class HomeScreen extends StatelessWidget {
     return AppScaffold(
       title: AppLocalizations.of(context)!.appName,
       body: ListView(children: <Widget>[
-        const Text('Recent Incidents'),
+        Text(AppLocalizations.of(context)!.recentIncidents),
         StreamBuilder(stream: incidentRepository.getIncidents(), builder: (BuildContext context, AsyncSnapshot<List<Incident>> snapshot) {
           return AspectRatio(
             aspectRatio: 3,
@@ -40,7 +40,7 @@ class HomeScreen extends StatelessWidget {
           children: <Widget>[
             LauncherTile(
               icon: Icons.notifications_active,
-              title: 'Incidents',
+              title: AppLocalizations.of(context)!.incidents,
               onTap: () {
                 context.go("/incidents");
               },
