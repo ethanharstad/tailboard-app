@@ -3,6 +3,10 @@
     "@appName": {
         "description": "The rear step of a firetruck, used as the app name."
     },
+    "signOut": "Sign Out",
+    "@signOut": {
+        "description": "Sign out your user account."
+    },
     "settings": "Settings",
     "@settings": {
         "description": "Application settings"

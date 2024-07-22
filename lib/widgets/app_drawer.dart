@@ -78,7 +78,7 @@ class AppDrawer extends StatelessWidget {
             onTap: () => context.goNamed("settings"),
           ),
           ListTile(
-            title: const Text('Sign Out'),
+            title: Text(AppLocalizations.of(context)!.signOut),
             leading: const Icon(Icons.logout),
             onTap: () async {
               await FirebaseAuth.instance.signOut();
