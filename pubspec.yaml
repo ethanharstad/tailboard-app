@@ -62,6 +62,7 @@ dependencies:
   intl: any
   flutter_localizations:
     sdk: flutter
+  package_info_plus: ^8.0.0
 
 dev_dependencies:
   flutter_test:
@@ -98,6 +99,7 @@ flutter:
   #   - images/a_dot_burr.jpeg
   #   - images/a_dot_ham.jpeg
   assets:
+    - assets/tailboard_logo.png
     - assets/protocols/
 
   # An image asset can refer to one or more resolution-specific "variants", see

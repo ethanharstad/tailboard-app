@@ -1,5 +1,7 @@
 {
     "appName": "Trasera",
+    "settings": "Configuración",
+    "moreInfo": "Más Información",
     "recentIncidents": "Incidentes Recientes",
     "incidents": "Incidentes"
 }

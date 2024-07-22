@@ -7,6 +7,7 @@ import 'package:tailboard_app/models/user_access.dart';
 import 'package:tailboard_app/repositories/organization_repository.dart';
 import 'package:tailboard_app/repositories/user_access_repository.dart';
 import 'package:tailboard_app/repositories/user_repository.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class AppDrawer extends StatelessWidget {
   AppDrawer({super.key});
@@ -72,7 +73,13 @@ class AppDrawer extends StatelessWidget {
             },
           ),
           ListTile(
+            title: Text(AppLocalizations.of(context)!.settings),
+            leading: const Icon(Icons.settings),
+            onTap: () => context.goNamed("settings"),
+          ),
+          ListTile(
             title: const Text('Sign Out'),
+            leading: const Icon(Icons.logout),
             onTap: () async {
               await FirebaseAuth.instance.signOut();
             },

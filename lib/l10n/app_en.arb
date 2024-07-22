@@ -3,6 +3,14 @@
     "@appName": {
         "description": "The rear step of a firetruck, used as the app name."
     },
+    "settings": "Settings",
+    "@settings": {
+        "description": "Application settings"
+    },
+    "moreInfo": "More Info",
+    "@moreInfo": {
+        "description": "Text that links to the app legal info."
+    },
     "recentIncidents": "Recent Incidents",
     "@recentIncidents": {
         "description": "Label for the most recent incidents."

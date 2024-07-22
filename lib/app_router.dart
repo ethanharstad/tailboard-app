@@ -13,6 +13,7 @@ import 'package:tailboard_app/screens/home_screen.dart';
 import 'package:tailboard_app/screens/incident_detail_screen.dart';
 import 'package:tailboard_app/screens/incident_list_screen.dart';
 import 'package:tailboard_app/screens/login_screen.dart';
+import 'package:tailboard_app/screens/settings_screen.dart';
 import 'package:tailboard_app/screens/station_detail_screen.dart';
 import 'package:tailboard_app/screens/user_profile_screen.dart';
 
@@ -112,6 +113,11 @@ final GoRouter router = GoRouter(
             name: 'profile',
             builder: (BuildContext context, GoRouterState state) =>
                 const UserProfileScreen(),
+          ),
+          GoRoute(
+            path: 'settings',
+            name: 'settings',
+            builder: (BuildContext context, GoRouterState state) => const SettingsScreen(),
           ),
         ]),
     GoRoute(
