@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:tailboard_app/assets/screens/asset_detail_screen.dart';
 import 'package:tailboard_app/assets/screens/asset_list_screen.dart';
+import 'package:tailboard_app/forms/screens/form_demo_screen.dart';
 import 'package:tailboard_app/meds/screens/med_calc_screen.dart';
 import 'package:tailboard_app/meds/screens/med_list_screen.dart';
 import 'package:tailboard_app/personnel/screens/personnel_detail_screen.dart';
@@ -56,7 +57,9 @@ final GoRouter router = GoRouter(
                         path: 'personnel/:personnelId',
                         name: 'personnel_detail',
                         builder: (BuildContext context, GoRouterState state) =>
-                            PersonnelDetailScreen(personnelId: state.pathParameters['personnelId']!),
+                            PersonnelDetailScreen(
+                                personnelId:
+                                    state.pathParameters['personnelId']!),
                       ),
                     ]),
               ]),
@@ -109,6 +112,12 @@ final GoRouter router = GoRouter(
                 const MedCalcScreen(),
           ),
           GoRoute(
+            path: "formDemo",
+            name: "form_demo",
+            builder: (BuildContext context, GoRouterState state) =>
+                const FormDemoScreen(),
+          ),
+          GoRoute(
             path: 'profile',
             name: 'profile',
             builder: (BuildContext context, GoRouterState state) =>
@@ -117,7 +126,8 @@ final GoRouter router = GoRouter(
           GoRoute(
             path: 'settings',
             name: 'settings',
-            builder: (BuildContext context, GoRouterState state) => const SettingsScreen(),
+            builder: (BuildContext context, GoRouterState state) =>
+                const SettingsScreen(),
           ),
         ]),
     GoRoute(

@@ -1,5 +1,6 @@
 import 'package:awesome_notifications/awesome_notifications.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:go_router/go_router.dart';
 import 'package:table_calendar/table_calendar.dart';
 import 'package:tailboard_app/models/neris/incident.dart';
@@ -8,10 +9,10 @@ import 'package:tailboard_app/widgets/app_scaffold.dart';
 import 'package:tailboard_app/widgets/incident_list.dart';
 import 'package:tailboard_app/widgets/launcher_tile.dart';
 import 'package:tailboard_app/widgets/unimplemented_dialog.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class HomeScreen extends StatelessWidget {
   HomeScreen({super.key});
+
   final IncidentRepository incidentRepository = IncidentRepository();
 
   @override
@@ -20,14 +21,17 @@ class HomeScreen extends StatelessWidget {
       title: AppLocalizations.of(context)!.appName,
       body: ListView(children: <Widget>[
         Text(AppLocalizations.of(context)!.recentIncidents),
-        StreamBuilder(stream: incidentRepository.getIncidents(), builder: (BuildContext context, AsyncSnapshot<List<Incident>> snapshot) {
-          return AspectRatio(
-            aspectRatio: 3,
-            child: IncidentList(
-              incidents: snapshot.data ?? [],
-            ),
-          );
-        }),
+        StreamBuilder(
+            stream: incidentRepository.getIncidents(),
+            builder:
+                (BuildContext context, AsyncSnapshot<List<Incident>> snapshot) {
+              return AspectRatio(
+                aspectRatio: 3,
+                child: IncidentList(
+                  incidents: snapshot.data ?? [],
+                ),
+              );
+            }),
         TableCalendar(
           focusedDay: DateTime.now(),
           firstDay: DateTime.utc(2020, 1, 1),
@@ -85,10 +89,7 @@ class HomeScreen extends StatelessWidget {
             LauncherTile(
               icon: Icons.description,
               title: 'Forms',
-              onTap: () => showDialog<void>(
-                  context: context,
-                  builder: (BuildContext context) =>
-                      const UnimplementedDialog()),
+              onTap: () => context.goNamed("form_demo"),
             ),
             LauncherTile(
               icon: Icons.settings,
