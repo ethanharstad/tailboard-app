@@ -1,20 +1,37 @@
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 import 'package:tailboard_app/personnel/data/personnel_repository.dart';
+import 'package:tailboard_app/personnel/data/rank_repository.dart';
 import 'package:tailboard_app/personnel/models/personnel.dart';
+import 'package:tailboard_app/personnel/models/rank.dart';
 import 'package:tailboard_app/widgets/app_scaffold.dart';
 
-class PersonnelDetailScreen extends StatelessWidget {
-  final PersonnelRepository personnelRepository = PersonnelRepository();
+class PersonnelDetailScreen extends StatefulWidget {
   final String personnelId;
 
-  PersonnelDetailScreen({required this.personnelId, super.key});
+  const PersonnelDetailScreen({required this.personnelId, super.key});
+
+  @override
+  State<PersonnelDetailScreen> createState() => _PersonnelDetailScreenState();
+}
+
+class _PersonnelDetailScreenState extends State<PersonnelDetailScreen> {
+  final PersonnelRepository personnelRepository = PersonnelRepository();
+  final RankRepository rankRepository = RankRepository();
+  late final Stream<Personnel?> _personnelStream;
+
+  @override
+  void initState() {
+    super.initState();
+    _personnelStream = personnelRepository.getPersonnel(widget.personnelId);
+  }
 
   @override
   Widget build(BuildContext context) {
     return AppScaffold(
       title: 'Personnel Detail',
       body: StreamBuilder(
-        stream: personnelRepository.getPersonnel(personnelId),
+        stream: _personnelStream,
         builder: (BuildContext context, AsyncSnapshot<Personnel?> snapshot) {
           if(snapshot.hasData) {
             if(snapshot.data != null) {
@@ -26,6 +43,17 @@ class PersonnelDetailScreen extends StatelessWidget {
                     "${p.firstName} ${p.lastName}",
                     style: Theme.of(context).textTheme.titleMedium,
                   ),
+                  StreamBuilder(
+                    stream: rankRepository.getRank(p.rankId),
+                    builder: (BuildContext context, AsyncSnapshot<Rank?> snapshot) {
+                      if(snapshot.hasData && snapshot.data != null) {
+                        return Text(snapshot.data!.name);
+                      }
+                      return const SizedBox.shrink();
+                    },
+                  ),
+                  Text("Service Start: ${DateFormat.yMd().format(p.serviceStart)}"),
+                  Text("Rank Start: ${DateFormat.yMd().format(p.rankStart)}"),
                 ],
               );
             }

@@ -13,6 +13,8 @@ class Personnel with _$Personnel {
     required String firstName,
     required String lastName,
     required String rankId,
+    required DateTime serviceStart,
+    required DateTime rankStart,
   }) = _Personnel;
 
   factory Personnel.fromJson(Map<String, dynamic> json) => _$PersonnelFromJson(json);
