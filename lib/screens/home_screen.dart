@@ -8,6 +8,7 @@ import 'package:tailboard_app/widgets/app_scaffold.dart';
 import 'package:tailboard_app/widgets/incident_list.dart';
 import 'package:tailboard_app/widgets/launcher_tile.dart';
 import 'package:tailboard_app/widgets/unimplemented_dialog.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class HomeScreen extends StatelessWidget {
   HomeScreen({super.key});
@@ -16,9 +17,9 @@ class HomeScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return AppScaffold(
-      title: "Tailboard",
+      title: AppLocalizations.of(context)!.appName,
       body: ListView(children: <Widget>[
-        const Text('Recent Incidents'),
+        Text(AppLocalizations.of(context)!.recentIncidents),
         StreamBuilder(stream: incidentRepository.getIncidents(), builder: (BuildContext context, AsyncSnapshot<List<Incident>> snapshot) {
           return AspectRatio(
             aspectRatio: 3,
@@ -39,7 +40,7 @@ class HomeScreen extends StatelessWidget {
           children: <Widget>[
             LauncherTile(
               icon: Icons.notifications_active,
-              title: 'Incidents',
+              title: AppLocalizations.of(context)!.incidents,
               onTap: () {
                 context.go("/incidents");
               },
