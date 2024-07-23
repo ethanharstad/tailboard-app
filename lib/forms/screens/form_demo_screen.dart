@@ -12,6 +12,25 @@ class FormDemoScreen extends StatelessWidget {
     "type": "object",
     "properties": {
       "name": {
+        "title": "Name",
+        "type": "object",
+        "description": "Name of this resource",
+        "properties": {
+          "first": {
+            "type": "string",
+            "title": "First Name"
+          },
+          "last": {
+            "type": "string",
+            "title": "Last Name"
+          }
+        }
+      },
+      "inServiceDate": {
+        "type": "string",
+        "description": "Name of this resource"
+      },
+      "description": {
         "type": "string",
         "description": "Name of this resource"
       }

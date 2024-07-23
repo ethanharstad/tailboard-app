@@ -1,5 +1,7 @@
 import 'dart:convert';
+
 import 'package:flutter/material.dart';
+import 'package:tailboard_app/forms/widgets/form_element.dart';
 
 class DataDrivenForm extends StatefulWidget {
   final String schema;
@@ -22,7 +24,13 @@ class _DataDrivenFormState extends State<DataDrivenForm> {
   @override
   Widget build(BuildContext context) {
     return Column(
-      children: [],
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        FormElement(
+          dataKey: "_root",
+          schema: schema,
+        ),
+      ],
     );
   }
 }

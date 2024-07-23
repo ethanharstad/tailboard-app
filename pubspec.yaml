@@ -63,6 +63,7 @@ dependencies:
   flutter_localizations:
     sdk: flutter
   package_info_plus: ^8.0.0
+  json_schema: ^5.1.7
 
 dev_dependencies:
   flutter_test:
