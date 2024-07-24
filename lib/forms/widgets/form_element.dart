@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:tailboard_app/forms/widgets/array_form_widget.dart';
 import 'package:tailboard_app/forms/widgets/boolean_form_widget.dart';
 import 'package:tailboard_app/forms/widgets/number_form_widget.dart';
 import 'package:tailboard_app/forms/widgets/object_form_widget.dart';
@@ -36,6 +37,11 @@ class _FormElementState extends State<FormElement> {
         );
       case 'object':
         return ObjectFormWidget(
+          dataKey: widget.dataKey,
+          schema: widget.schema,
+        );
+      case 'array':
+        return ArrayFormWidget(
           dataKey: widget.dataKey,
           schema: widget.schema,
         );

@@ -43,6 +43,12 @@ class FormDemoScreen extends StatelessWidget {
       "description": {
         "type": "string",
         "description": "Name of this resource"
+      },
+      "tags": {
+        "type": "array",
+        "items": {
+          "type": "number"
+        }
       }
     }
   }
