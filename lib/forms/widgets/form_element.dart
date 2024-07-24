@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:tailboard_app/forms/widgets/boolean_form_widget.dart';
+import 'package:tailboard_app/forms/widgets/number_form_widget.dart';
 import 'package:tailboard_app/forms/widgets/object_form_widget.dart';
 import 'package:tailboard_app/forms/widgets/string_form_widget.dart';
 
@@ -21,6 +22,12 @@ class _FormElementState extends State<FormElement> {
         return BooleanFormWidget(
           dataKey: widget.dataKey,
           schema: widget.schema,
+        );
+      case 'number' || 'integer':
+        return NumberFormWidget(
+          dataKey: widget.dataKey,
+          schema: widget.schema,
+          integerOnly: widget.schema['type'] == 'integer',
         );
       case 'string':
         return StringFormWidget(

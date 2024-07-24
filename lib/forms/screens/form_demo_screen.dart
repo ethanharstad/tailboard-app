@@ -52,8 +52,10 @@ class FormDemoScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return AppScaffold(
       title: "Form Demo",
-      body: DataDrivenForm(
-        schema: jsonSchema,
+      body: SingleChildScrollView(
+        child: DataDrivenForm(
+          schema: jsonSchema,
+        ),
       ),
     );
   }
