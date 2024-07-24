@@ -26,6 +26,12 @@ class FormDemoScreen extends StatelessWidget {
           }
         }
       },
+      "quantity": {
+        "type": "integer"
+      },
+      "weight": {
+        "type": "number"
+      },
       "inServiceDate": {
         "type": "string",
         "description": "Name of this resource"
