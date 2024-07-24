@@ -4,8 +4,11 @@ class StringFormWidget extends StatelessWidget {
   final String dataKey;
   final Map<String, dynamic> schema;
 
-  const StringFormWidget(
-      {required this.dataKey, required this.schema, super.key});
+  const StringFormWidget({
+    required this.dataKey,
+    required this.schema,
+    super.key,
+  });
 
   String labelText() {
     if (schema.containsKey('title')) {

@@ -6,8 +6,11 @@ class ObjectFormWidget extends StatelessWidget {
   final String dataKey;
   final Map<String, dynamic> schema;
 
-  const ObjectFormWidget(
-      {required this.dataKey, required this.schema, super.key});
+  const ObjectFormWidget({
+    required this.dataKey,
+    required this.schema,
+    super.key,
+  });
 
   @override
   Widget build(BuildContext context) {
