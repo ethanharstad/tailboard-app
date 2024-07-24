@@ -8,14 +8,14 @@ class StringFormWidget extends StatelessWidget {
       {required this.dataKey, required this.schema, super.key});
 
   String labelText() {
-    if(schema.containsKey('title')) {
+    if (schema.containsKey('title')) {
       return schema['title'] as String;
     }
     return dataKey;
   }
 
   String? hintText() {
-    if(schema.containsKey('description')) {
+    if (schema.containsKey('description')) {
       return schema['description'] as String;
     }
     return null;

@@ -31,12 +31,10 @@ class _DataDrivenFormState extends State<DataDrivenForm> {
             schema['title'],
             style: Theme.of(context).textTheme.titleMedium,
           ),
-        if (schema['description'] != null)
-          Text(schema['description']),
+        if (schema['description'] != null) Text(schema['description']),
         const SizedBox(height: 4.0),
         for (MapEntry<String, dynamic> property
-        in (schema['properties'] as Map<String, dynamic>)
-            .entries)
+            in (schema['properties'] as Map<String, dynamic>).entries)
           FormElement(
             dataKey: property.key,
             schema: property.value,
