@@ -32,6 +32,10 @@ class FormDemoScreen extends StatelessWidget {
       "weight": {
         "type": "number"
       },
+      "isUnique": {
+        "type": "boolean",
+        "title": "Unique"
+      },
       "inServiceDate": {
         "type": "string",
         "description": "Name of this resource"

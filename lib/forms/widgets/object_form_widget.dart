@@ -21,11 +21,6 @@ class ObjectFormWidget extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            // if (schema['title'] != null)
-            //   Text(
-            //     schema['title'],
-            //     style: Theme.of(context).textTheme.titleMedium,
-            //   ),
             if (schema['description'] != null)
               Text(schema['description']),
             if (schema.containsKey("properties"))

@@ -26,10 +26,21 @@ class _DataDrivenFormState extends State<DataDrivenForm> {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        FormElement(
-          dataKey: "_root",
-          schema: schema,
-        ),
+        if (schema['title'] != null)
+          Text(
+            schema['title'],
+            style: Theme.of(context).textTheme.titleMedium,
+          ),
+        if (schema['description'] != null)
+          Text(schema['description']),
+        const SizedBox(height: 4.0),
+        for (MapEntry<String, dynamic> property
+        in (schema['properties'] as Map<String, dynamic>)
+            .entries)
+          FormElement(
+            dataKey: property.key,
+            schema: property.value,
+          ),
       ],
     );
   }
