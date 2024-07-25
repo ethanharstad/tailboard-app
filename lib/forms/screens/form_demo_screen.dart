@@ -29,7 +29,8 @@ class FormDemoScreen extends StatelessWidget {
         }
       },
       "quantity": {
-        "type": "integer"
+        "type": "integer",
+        "minimum": 0
       },
       "weight": {
         "type": "number"

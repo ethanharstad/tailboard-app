@@ -34,7 +34,10 @@ class NumberFormWidget extends StatelessWidget {
       return null;
     }
     dynamic numVal =
-        schema['type'] == 'integer' ? int.parse(value) : double.parse(value);
+        schema['type'] == 'integer' ? int.tryParse(value) : double.tryParse(value);
+    if(numVal == null) {
+      return "Not a number.";
+    }
     ValidationResults results = validatingSchema.validate(numVal);
     if (results.isValid) return null;
     return results.errors.firstOrNull?.message;
