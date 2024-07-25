@@ -1,14 +1,16 @@
 import 'package:flutter/material.dart';
+import 'package:json_schema/json_schema.dart';
 
 class StringFormWidget extends StatelessWidget {
   final String dataKey;
   final Map<String, dynamic> schema;
+  final JsonSchema validatingSchema;
 
-  const StringFormWidget({
+  StringFormWidget({
     required this.dataKey,
     required this.schema,
     super.key,
-  });
+  }) : validatingSchema = JsonSchema.create(schema);
 
   String labelText() {
     if (schema.containsKey('title')) {
@@ -25,26 +27,24 @@ class StringFormWidget extends StatelessWidget {
   }
 
   int? minLength() {
-    if(schema.containsKey('minLength')) {
+    if (schema.containsKey('minLength')) {
       return schema['minLength'] is int ? schema['minLength'] : null;
     }
   }
 
   int? maxLength() {
-    if(schema.containsKey('maxLength')) {
+    if (schema.containsKey('maxLength')) {
       return schema['maxLength'] is int ? schema['maxLength'] : null;
     }
   }
 
   String? validator(String? value) {
-    if(value == null) {
+    if (value == null) {
       return null;
     }
-    if(minLength() != null) {
-      if(value!.length < minLength()!) {
-        return "Must be at least ${minLength()} characters.";
-      }
-    }
+    ValidationResults results = validatingSchema.validate(value);
+    if (results.isValid) return null;
+    return results.errors.firstOrNull?.message;
   }
 
   @override
