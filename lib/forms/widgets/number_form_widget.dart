@@ -1,17 +1,19 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:json_schema/json_schema.dart';
 
 class NumberFormWidget extends StatelessWidget {
   final String dataKey;
   final Map<String, dynamic> schema;
   final bool integerOnly;
+  final JsonSchema validatingSchema;
 
-  const NumberFormWidget({
+  NumberFormWidget({
     required this.dataKey,
     required this.schema,
     this.integerOnly = false,
     super.key,
-  });
+  }) : validatingSchema = JsonSchema.create(schema);
 
   String labelText() {
     if (schema.containsKey('title')) {
@@ -27,6 +29,17 @@ class NumberFormWidget extends StatelessWidget {
     return null;
   }
 
+  String? validator(String? value) {
+    if (value == null || value.isEmpty) {
+      return null;
+    }
+    dynamic numVal =
+        schema['type'] == 'integer' ? int.parse(value) : double.parse(value);
+    ValidationResults results = validatingSchema.validate(numVal);
+    if (results.isValid) return null;
+    return results.errors.firstOrNull?.message;
+  }
+
   @override
   Widget build(BuildContext context) {
     return TextFormField(
@@ -34,11 +47,13 @@ class NumberFormWidget extends StatelessWidget {
         labelText: labelText(),
         helperText: hintText(),
       ),
+      validator: validator,
+      autovalidateMode: AutovalidateMode.onUserInteraction,
       keyboardType: TextInputType.number,
       inputFormatters: [
         integerOnly
-            ? FilteringTextInputFormatter.digitsOnly
-            : FilteringTextInputFormatter.allow(RegExp(r'[0-9\.]')),
+            ? FilteringTextInputFormatter.allow(RegExp(r'[0-9\-]'))
+            : FilteringTextInputFormatter.allow(RegExp(r'[0-9\-\.]')),
       ],
     );
   }
