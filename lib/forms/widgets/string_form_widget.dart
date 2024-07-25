@@ -24,6 +24,29 @@ class StringFormWidget extends StatelessWidget {
     return null;
   }
 
+  int? minLength() {
+    if(schema.containsKey('minLength')) {
+      return schema['minLength'] is int ? schema['minLength'] : null;
+    }
+  }
+
+  int? maxLength() {
+    if(schema.containsKey('maxLength')) {
+      return schema['maxLength'] is int ? schema['maxLength'] : null;
+    }
+  }
+
+  String? validator(String? value) {
+    if(value == null) {
+      return null;
+    }
+    if(minLength() != null) {
+      if(value!.length < minLength()!) {
+        return "Must be at least ${minLength()} characters.";
+      }
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return TextFormField(
@@ -31,6 +54,9 @@ class StringFormWidget extends StatelessWidget {
         labelText: labelText(),
         helperText: hintText(),
       ),
+      maxLength: maxLength(),
+      validator: validator,
+      autovalidateMode: AutovalidateMode.onUserInteraction,
     );
   }
 }

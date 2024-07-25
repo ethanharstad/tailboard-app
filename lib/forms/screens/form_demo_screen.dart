@@ -18,7 +18,9 @@ class FormDemoScreen extends StatelessWidget {
         "properties": {
           "first": {
             "type": "string",
-            "title": "First Name"
+            "title": "First Name",
+            "minLength": 1,
+            "maxLength": 10
           },
           "last": {
             "type": "string",

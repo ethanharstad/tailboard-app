@@ -66,9 +66,9 @@ class RankRepository {
       name: 'Firefighter (POC)',
       abbreviation: 'FF (POC)',
     ),
-    '52': Rank(
+    '53': Rank(
       departmentId: '1',
-      id: '52',
+      id: '53',
       rankOrder: 52,
       name: 'Firefighter (POC)',
       abbreviation: 'FF (POC)',
