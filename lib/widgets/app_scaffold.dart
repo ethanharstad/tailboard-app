@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:tailboard_app/widgets/app_drawer.dart';
 
 class AppScaffold extends StatelessWidget {
@@ -27,7 +28,13 @@ class AppScaffold extends StatelessWidget {
       key: scaffoldKey,
       appBar: AppBar(
         title: Text(title),
-        actions: actions,
+        actions: [
+          ...actions,
+          IconButton(
+            icon: const Icon(Icons.notifications_none),
+            onPressed: () => context.goNamed('alerts'),
+          ),
+        ],
       ),
       drawer: AppDrawer(),
       endDrawer: endDrawer,

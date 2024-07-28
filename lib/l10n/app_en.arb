@@ -22,5 +22,9 @@
     "incidents": "Incidents",
     "@incidents": {
         "description": "Plural form of incident, used as a feature label."
+    },
+    "alerts": "Alerts",
+    "@alerts": {
+        "description": "Plural form of alerts, used as a featuree label."
     }
 }

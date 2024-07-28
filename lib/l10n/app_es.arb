@@ -4,5 +4,6 @@
     "settings": "Configuración",
     "moreInfo": "Más Información",
     "recentIncidents": "Incidentes Recientes",
-    "incidents": "Incidentes"
+    "incidents": "Incidentes",
+    "alerts": "Alertas"
 }

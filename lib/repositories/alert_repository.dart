@@ -29,4 +29,8 @@ class AlertRepository {
       body: 'Foo bar baz',
     ),
   ];
+
+  Stream<List<Alert>> getAlerts() async* {
+    yield alerts;
+  }
 }

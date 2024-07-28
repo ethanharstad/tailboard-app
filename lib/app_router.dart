@@ -8,6 +8,7 @@ import 'package:tailboard_app/meds/screens/med_calc_screen.dart';
 import 'package:tailboard_app/meds/screens/med_list_screen.dart';
 import 'package:tailboard_app/personnel/screens/personnel_detail_screen.dart';
 import 'package:tailboard_app/protocols/screens/algorithm_list_screen.dart';
+import 'package:tailboard_app/screens/alerts_screen.dart';
 import 'package:tailboard_app/screens/department_detail_screen.dart';
 import 'package:tailboard_app/screens/department_list_screen.dart';
 import 'package:tailboard_app/screens/home_screen.dart';
@@ -128,6 +129,12 @@ final GoRouter router = GoRouter(
             name: 'settings',
             builder: (BuildContext context, GoRouterState state) =>
                 const SettingsScreen(),
+          ),
+          GoRoute(
+            path: 'alerts',
+            name: 'alerts',
+            builder: (BuildContext context, GoRouterState state) =>
+                AlertsScreen(),
           ),
         ]),
     GoRoute(
