@@ -7,30 +7,42 @@ class AlertRepository {
 
   factory AlertRepository() => _singleton;
 
-  List<Alert> alerts = [
-    Alert(
+  Map<String, Alert> alerts = {
+    '1': Alert(
       id: '1',
       created: DateTime.now().subtract(const Duration(hours: 24)),
       unread: false,
       dismissed: DateTime.now().subtract(const Duration(hours: 23)),
       title: 'Dismissed alert',
     ),
-    Alert(
+    '2': Alert(
       id: '2',
       created: DateTime.now().subtract(const Duration(hours: 6)),
       unread: false,
       title: 'This is an alert',
     ),
-    Alert(
-      id: '2',
+    '3': Alert(
+      id: '3',
       created: DateTime.now().subtract(const Duration(minutes: 1)),
       unread: true,
       title: 'Longer alert',
       body: 'Foo bar baz',
     ),
-  ];
+  };
 
   Stream<List<Alert>> getAlerts() async* {
-    yield alerts;
+    yield alerts.values.toList(growable: false);
+  }
+
+  Stream<Alert?> getAlert(String id) async* {
+    await Future.delayed(const Duration(seconds: 1));
+    if (alerts.containsKey(id)) {
+      yield alerts[id];
+    }
+  }
+
+  Alert updateAlert(Alert newAlert) {
+    alerts[newAlert.id] = newAlert;
+    return newAlert;
   }
 }
