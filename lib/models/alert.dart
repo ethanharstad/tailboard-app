@@ -8,9 +8,9 @@ class Alert with _$Alert {
   factory Alert({
     required String id,
     required DateTime created,
-    required bool unread,
     required String title,
     String? body,
+    @Default(true) bool unread,
     DateTime? dismissed,
   }) = _Alert;
 
