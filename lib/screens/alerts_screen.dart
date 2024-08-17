@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:intl/intl.dart';
 import 'package:tailboard_app/models/alert.dart';
 import 'package:tailboard_app/widgets/app_scaffold.dart';
 
@@ -37,6 +38,12 @@ class AlertsScreen extends StatelessWidget {
                 children: [
                   for (Alert alert in alerts)
                     ListTile(
+                      trailing: Column(
+                        children: [
+                          Text(DateFormat.yMd().format(alert.created)),
+                          Text(DateFormat.Hms().format(alert.created)),
+                        ],
+                      ),
                       title: Text(
                         alert.title,
                         style: alert.unread ? Theme
@@ -47,6 +54,9 @@ class AlertsScreen extends StatelessWidget {
                             .textTheme
                             .bodyMedium,
                       ),
+                      onTap: () {
+                        context.read<AlertCubit>().alertRead(alert);
+                      },
                     ),
                 ],
               );
