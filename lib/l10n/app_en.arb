@@ -25,6 +25,10 @@
     },
     "alerts": "Alerts",
     "@alerts": {
-        "description": "Plural form of alerts, used as a featuree label."
+        "description": "Plural form of alerts, used as a feature label."
+    },
+    "loading": "Loading",
+    "@loading": {
+        "description": "Data loading label."
     }
 }

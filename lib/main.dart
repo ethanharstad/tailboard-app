@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:awesome_notifications/awesome_notifications.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get_it/get_it.dart';
 import 'package:permission_handler/permission_handler.dart';
 import 'package:quick_actions/quick_actions.dart';
+import 'package:tailboard_app/blocs/alert_cubit.dart';
 import 'package:tailboard_app/injection.dart';
 import 'package:tailboard_app/services/notification_service.dart';
 import 'package:tailboard_app/app_router.dart';
@@ -95,22 +97,25 @@ class _TailboardAppState extends State<TailboardApp> {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp.router(
-      // navigatorKey: widget.navigatorKey,
-      onGenerateTitle: (BuildContext context) => AppLocalizations.of(context)!.appName,
-      theme: ThemeData(
-        brightness: Brightness.light,
-        visualDensity: VisualDensity.adaptivePlatformDensity,
-        colorSchemeSeed: Colors.red,
+    return BlocProvider(
+      create: (BuildContext context) => AlertCubit(),
+      child: MaterialApp.router(
+        // navigatorKey: widget.navigatorKey,
+        onGenerateTitle: (BuildContext context) => AppLocalizations.of(context)!.appName,
+        theme: ThemeData(
+          brightness: Brightness.light,
+          visualDensity: VisualDensity.adaptivePlatformDensity,
+          colorSchemeSeed: Colors.red,
+        ),
+        darkTheme: ThemeData(
+          brightness: Brightness.dark,
+          visualDensity: VisualDensity.adaptivePlatformDensity,
+          colorSchemeSeed: Colors.red,
+        ),
+        routerConfig: router,
+        localizationsDelegates: AppLocalizations.localizationsDelegates,
+        supportedLocales: AppLocalizations.supportedLocales,
       ),
-      darkTheme: ThemeData(
-        brightness: Brightness.dark,
-        visualDensity: VisualDensity.adaptivePlatformDensity,
-        colorSchemeSeed: Colors.red,
-      ),
-      routerConfig: router,
-      localizationsDelegates: AppLocalizations.localizationsDelegates,
-      supportedLocales: AppLocalizations.supportedLocales,
     );
   }
 }

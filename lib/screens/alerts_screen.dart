@@ -1,38 +1,65 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:tailboard_app/models/alert.dart';
-import 'package:tailboard_app/repositories/alert_repository.dart';
 import 'package:tailboard_app/widgets/app_scaffold.dart';
 
-class AlertsScreen extends StatelessWidget {
-  final AlertRepository repository = AlertRepository();
+import '../blocs/alert_cubit.dart';
 
-  AlertsScreen({super.key});
+class AlertsScreen extends StatelessWidget {
+  // final AlertRepository repository = AlertRepository();
+
+  const AlertsScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
     return AppScaffold(
       title: AppLocalizations.of(context)!.alerts,
-      body: StreamBuilder(
-        stream: repository.getAlerts(),
-        builder: (BuildContext context, AsyncSnapshot<List<Alert>> snapshot) {
-          if (snapshot.hasData) {
-            if (snapshot.data!.isNotEmpty) {
+      body: BlocBuilder<AlertCubit, AlertCubitState>(
+        builder: (BuildContext context, AlertCubitState state) {
+          switch (state) {
+            case Loading():
+              return Center(
+                child: Column(
+                  children: [
+                    const CircularProgressIndicator(),
+                    Text(AppLocalizations.of(context)!.loading),
+                  ],
+                ),
+              );
+            case Data(:final alerts):
+              if (alerts.isEmpty) {
+                return const Center(
+                    child: Text('No Alerts.'),
+                );
+              }
               return ListView(
                 children: [
-                  for (Alert alert in snapshot.data!)
+                  for (Alert alert in alerts)
                     ListTile(
                       title: Text(
                         alert.title,
-                        style: alert.unread ? Theme.of(context).textTheme.titleMedium : Theme.of(context).textTheme.bodyMedium,
+                        style: alert.unread ? Theme
+                            .of(context)
+                            .textTheme
+                            .titleMedium : Theme
+                            .of(context)
+                            .textTheme
+                            .bodyMedium,
                       ),
                     ),
                 ],
               );
-            }
-            return const Text('No alerts.');
+            case Error(:final message):
+              return Center(
+                child: Column(
+                  children: [
+                    const Text('Error loading alerts.'),
+                    Text(message)
+                  ],
+                ),
+              );
           }
-          return const Text('Loading');
         },
       ),
     );

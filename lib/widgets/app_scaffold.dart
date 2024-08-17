@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
+import 'package:tailboard_app/blocs/alert_cubit.dart';
 import 'package:tailboard_app/widgets/app_drawer.dart';
 
 class AppScaffold extends StatelessWidget {
@@ -30,9 +32,21 @@ class AppScaffold extends StatelessWidget {
         title: Text(title),
         actions: [
           ...actions,
-          IconButton(
-            icon: const Icon(Icons.notifications_none),
-            onPressed: () => context.goNamed('alerts'),
+          BlocBuilder<AlertCubit, AlertCubitState>(
+            builder: (BuildContext context, AlertCubitState state) {
+              if (state is Data) {
+                  if(state.unread>0) {
+                    return IconButton(
+                      icon: const Icon(Icons.notifications_active),
+                      onPressed: () => context.goNamed('alerts'),
+                    );
+                  }
+              }
+              return IconButton(
+                icon: const Icon(Icons.notifications_none),
+                onPressed: () => context.goNamed('alerts'),
+              );
+            },
           ),
         ],
       ),
