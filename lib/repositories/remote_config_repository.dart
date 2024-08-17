@@ -8,7 +8,6 @@ class RemoteConfigRepository {
 
   factory RemoteConfigRepository() {
     if (_remoteConfig == null) {
-      print('in initializer');
       _remoteConfig = FirebaseRemoteConfig.instance;
       _remoteConfig!.setConfigSettings(RemoteConfigSettings(
         fetchTimeout: const Duration(minutes: 1),
