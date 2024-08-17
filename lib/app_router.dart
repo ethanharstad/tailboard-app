@@ -134,7 +134,7 @@ final GoRouter router = GoRouter(
             path: 'alerts',
             name: 'alerts',
             builder: (BuildContext context, GoRouterState state) =>
-                AlertsScreen(),
+                const AlertsScreen(),
           ),
         ]),
     GoRoute(
