@@ -6,6 +6,7 @@ import 'package:permission_handler/permission_handler.dart';
 import 'package:quick_actions/quick_actions.dart';
 import 'package:tailboard_app/blocs/alert_cubit.dart';
 import 'package:tailboard_app/injection.dart';
+import 'package:tailboard_app/repositories/remote_config_repository.dart';
 import 'package:tailboard_app/services/notification_service.dart';
 import 'package:tailboard_app/app_router.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
@@ -87,6 +88,7 @@ class _TailboardAppState extends State<TailboardApp> {
     WidgetsBinding.instance.addPostFrameCallback((_) {
       requestNotificationPermission();
       requestStoragePermission();
+      RemoteConfigRepository().update();
     });
   }
 
