@@ -1,0 +1,46 @@
+{
+  "project_info": {
+    "project_number": "273015035146",
+    "project_id": "tailboard-dev-112ee",
+    "storage_bucket": "tailboard-dev-112ee.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:273015035146:android:bc85b98ebdb976f7bd56f3",
+        "android_client_info": {
+          "package_name": "dev.strange.tailboard.tailboard_app"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "273015035146-2pvfv6gap1mfrgmv7k0vg1otqjhq1p3f.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAlPEQjG0-sEV-oWZzqtsr9At2ucXKTElI"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "273015035146-2pvfv6gap1mfrgmv7k0vg1otqjhq1p3f.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "273015035146-v8h7b5baaii7crkqjhikhblvjouplc53.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "dev.strange.tailboard-dev"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

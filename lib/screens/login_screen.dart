@@ -1,6 +1,7 @@
-import 'package:flutter/material.dart';
+import 'package:firebase_analytics/firebase_analytics.dart';
 import 'package:firebase_auth/firebase_auth.dart' hide EmailAuthProvider;
 import 'package:firebase_ui_auth/firebase_ui_auth.dart';
+import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
 class LoginScreen extends StatelessWidget {
@@ -33,14 +34,12 @@ class LoginScreen extends StatelessWidget {
           ),
         );
       },
-      headerBuilder:
-          (BuildContext context, BoxConstraints constraints, _) {
+      headerBuilder: (BuildContext context, BoxConstraints constraints, _) {
         return Padding(
           padding: const EdgeInsets.all(16),
           child: AspectRatio(
             aspectRatio: 1,
-            child: Image.network(
-                'https://firebase.flutter.dev/img/flutterfire_300x.png'),
+            child: Image.asset("assets/tailboard_logo.png"),
           ),
         );
       },
@@ -49,8 +48,7 @@ class LoginScreen extends StatelessWidget {
           padding: const EdgeInsets.all(16),
           child: AspectRatio(
             aspectRatio: 1,
-            child: Image.network(
-                'https://firebase.flutter.dev/img/flutterfire_600x.png'),
+            child: Image.asset("assets/tailboard_logo.png"),
           ),
         );
       },
@@ -59,6 +57,10 @@ class LoginScreen extends StatelessWidget {
       ],
       actions: [
         AuthStateChangeAction<SignedIn>((context, _) {
+          FirebaseAnalytics.instance.setUserId(
+            id: FirebaseAuth.instance.currentUser!.uid,
+          );
+          FirebaseAnalytics.instance.logLogin(loginMethod: 'EmailAuth');
           context.go('/');
         }),
       ],
