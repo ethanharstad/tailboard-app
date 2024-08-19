@@ -52,12 +52,11 @@ class DefaultFirebaseOptions {
 
   static const FirebaseOptions ios = FirebaseOptions(
     apiKey: 'AIzaSyAAP1YgpUortFcdxThmzlzB8iyyXu4Qdhs',
-    appId: '1:273015035146:ios:9e146f5a32f932edbd56f3',
+    appId: '1:273015035146:ios:5cbd076b338e8111bd56f3',
     messagingSenderId: '273015035146',
     projectId: 'tailboard-dev-112ee',
     storageBucket: 'tailboard-dev-112ee.appspot.com',
-    iosClientId:
-        '273015035146-v8h7b5baaii7crkqjhikhblvjouplc53.apps.googleusercontent.com',
-    iosBundleId: 'dev.strange.tailboard-dev',
+    iosBundleId: 'dev.strange.tailboard.tailboardApp',
   );
+
 }
