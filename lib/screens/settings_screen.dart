@@ -40,6 +40,11 @@ class SettingsScreen extends StatelessWidget {
               title: const Text("Minimum Version"),
               subtitle: Text(RemoteConfigRepository().getMinimumVersion()),
             ),
+            ListTile(
+              leading: const Icon(Icons.error),
+              title: const Text("Throw Exception"),
+              onTap: () => throw Exception(),
+            ),
           ],
         ),
       ),

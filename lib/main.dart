@@ -1,4 +1,6 @@
-import 'package:firebase_analytics/firebase_analytics.dart';
+import 'dart:ui';
+
+import 'package:firebase_crashlytics/firebase_crashlytics.dart';
 import 'package:flutter/material.dart';
 import 'package:awesome_notifications/awesome_notifications.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -58,6 +60,14 @@ void main() async {
   await configureDependencies();
   const app = TailboardApp();
   getIt.registerSingleton(app);
+
+  // Crashlytics Setup
+  FlutterError.onError = FirebaseCrashlytics.instance.recordFlutterFatalError;
+  PlatformDispatcher.instance.onError = (error, stack) {
+    FirebaseCrashlytics.instance.recordError(error, stack, fatal: true);
+    return true;
+  };
+
   runApp(app);
 }
 
