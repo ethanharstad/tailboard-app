@@ -1,18 +1,20 @@
 import 'dart:ui';
 
-import 'package:firebase_crashlytics/firebase_crashlytics.dart';
-import 'package:flutter/material.dart';
 import 'package:awesome_notifications/awesome_notifications.dart';
+import 'package:firebase_app_check/firebase_app_check.dart';
+import 'package:firebase_crashlytics/firebase_crashlytics.dart';
+import 'package:flutter/foundation.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:get_it/get_it.dart';
 import 'package:permission_handler/permission_handler.dart';
 import 'package:quick_actions/quick_actions.dart';
+import 'package:tailboard_app/app_router.dart';
 import 'package:tailboard_app/blocs/alert_cubit.dart';
 import 'package:tailboard_app/injection.dart';
 import 'package:tailboard_app/repositories/remote_config_repository.dart';
 import 'package:tailboard_app/services/notification_service.dart';
-import 'package:tailboard_app/app_router.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 final getIt = GetIt.instance;
 
@@ -22,7 +24,7 @@ void main() async {
 
   // Setup notifications
   AwesomeNotifications().initialize(
-    // set the icon to null if you want to use the default app icon
+      // set the icon to null if you want to use the default app icon
       null,
       [
         NotificationChannel(
@@ -39,8 +41,7 @@ void main() async {
             channelGroupKey: 'basic_channel_group',
             channelGroupName: 'Basic group')
       ],
-      debug: true
-  );
+      debug: true);
 
   // Setup quick actions
   const QuickActions quickActions = QuickActions();
@@ -68,6 +69,15 @@ void main() async {
     return true;
   };
 
+  // App Check Setup
+  await FirebaseAppCheck.instance.activate(
+    androidProvider:
+        kDebugMode ? AndroidProvider.debug : AndroidProvider.playIntegrity,
+    appleProvider: kDebugMode ? AppleProvider.debug : AppleProvider.appAttest,
+    // TODO AppCheck Web - ReCaptchaEnterprise
+    // webProvider: ReCaptchaEnterpriseProvider('siteKey'),
+  );
+
   runApp(app);
 }
 
@@ -91,11 +101,13 @@ class _TailboardAppState extends State<TailboardApp> {
   void initState() {
     super.initState();
     AwesomeNotifications().setListeners(
-        onActionReceivedMethod:         NotificationService.onActionReceivedMethod,
-        onNotificationCreatedMethod:    NotificationService.onNotificationCreatedMethod,
-        onNotificationDisplayedMethod:  NotificationService.onNotificationDisplayedMethod,
-        onDismissActionReceivedMethod:  NotificationService.onDismissActionReceivedMethod
-    );
+        onActionReceivedMethod: NotificationService.onActionReceivedMethod,
+        onNotificationCreatedMethod:
+            NotificationService.onNotificationCreatedMethod,
+        onNotificationDisplayedMethod:
+            NotificationService.onNotificationDisplayedMethod,
+        onDismissActionReceivedMethod:
+            NotificationService.onDismissActionReceivedMethod);
     WidgetsBinding.instance.addPostFrameCallback((_) {
       requestNotificationPermission();
       requestStoragePermission();
@@ -114,7 +126,8 @@ class _TailboardAppState extends State<TailboardApp> {
       create: (BuildContext context) => AlertCubit(),
       child: MaterialApp.router(
         // navigatorKey: widget.navigatorKey,
-        onGenerateTitle: (BuildContext context) => AppLocalizations.of(context)!.appName,
+        onGenerateTitle: (BuildContext context) =>
+            AppLocalizations.of(context)!.appName,
         theme: ThemeData(
           brightness: Brightness.light,
           visualDensity: VisualDensity.adaptivePlatformDensity,
