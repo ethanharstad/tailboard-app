@@ -1,10 +1,10 @@
 import 'dart:io';
 
+import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:firebase_storage/firebase_storage.dart';
-import 'package:pdfx/pdfx.dart';
 import 'package:path_provider/path_provider.dart';
+import 'package:pdfx/pdfx.dart';
 import 'package:tailboard_app/protocols/blocs/algorithm_bloc.dart';
 import 'package:tailboard_app/protocols/models/algorithm.dart';
 import 'package:tailboard_app/protocols/widgets/algorithm_notes_list.dart';
@@ -22,11 +22,13 @@ class AlgorithmDetailScreen extends StatefulWidget {
   State<StatefulWidget> createState() => _AlgorithmDetailScreenState();
 }
 
-class _AlgorithmDetailScreenState extends State<AlgorithmDetailScreen> {
+class _AlgorithmDetailScreenState extends State<AlgorithmDetailScreen>
+    with SingleTickerProviderStateMixin {
   AlgorithmBloc bloc = AlgorithmBloc();
   Future<PdfDocument>? _pdfDocument;
   PdfController? _pdfController;
   final GlobalKey<ScaffoldState> scaffoldKey = GlobalKey<ScaffoldState>();
+  late TabController _tabController;
   int _selectedIndex = 0;
   bool docView = false;
   bool noteView = false;
@@ -34,6 +36,7 @@ class _AlgorithmDetailScreenState extends State<AlgorithmDetailScreen> {
   @override
   void initState() {
     super.initState();
+    _tabController = TabController(length: 3, vsync: this);
     bloc.add(AlgorithmLoaded(algorithm: widget.algorithm));
     if (widget.algorithm.document != null) {
       downloadDocument(widget.algorithm.document!);
@@ -95,19 +98,6 @@ class _AlgorithmDetailScreenState extends State<AlgorithmDetailScreen> {
     }
   }
 
-  Widget _getWidget(int selectedIndex) {
-    if (selectedIndex == 1) {
-      if (_pdfController != null) {
-        return PdfView(controller: _pdfController!);
-      }
-      return const Center(child: CircularProgressIndicator());
-    } else if (selectedIndex == 2) {
-      return AlgorithmNotesList(notes: widget.algorithm.notes);
-    } else {
-      return const AlgorithmStepper();
-    }
-  }
-
   @override
   Widget build(BuildContext context) {
     return PopScope(
@@ -127,16 +117,6 @@ class _AlgorithmDetailScreenState extends State<AlgorithmDetailScreen> {
         child: AppScaffold(
           scaffoldKey: scaffoldKey,
           title: widget.algorithm.name,
-          bottomNavigationBar: BottomNavigationBar(
-            currentIndex: _selectedIndex,
-            onTap: _onItemTapped,
-            items: const <BottomNavigationBarItem>[
-              BottomNavigationBarItem(icon: Icon(Icons.home), label: 'Home'),
-              BottomNavigationBarItem(
-                  icon: Icon(Icons.attach_file), label: 'Overview'),
-              BottomNavigationBarItem(icon: Icon(Icons.notes), label: 'Notes'),
-            ],
-          ),
           actions: <Widget>[
             IconButton(
               onPressed: () => showDialog(
@@ -153,9 +133,32 @@ class _AlgorithmDetailScreenState extends State<AlgorithmDetailScreen> {
                   child: const Icon(Icons.undo),
                 )
               : null,
-          body: Padding(
-            padding: const EdgeInsets.all(8),
-            child: _getWidget(_selectedIndex),
+          body: Column(
+            children: [
+              TabBar(
+                controller: _tabController,
+                tabs: const [
+                  Tab(text: 'Home'),
+                  Tab(text: 'Overview'),
+                  Tab(text: 'Notes'),
+                ],
+              ),
+              Expanded(
+                child: Padding(
+                  padding: const EdgeInsets.all(8),
+                  child: TabBarView(
+                    controller: _tabController,
+                    children: [
+                      const AlgorithmStepper(),
+                      _pdfController != null
+                          ? PdfView(controller: _pdfController!)
+                          : const Center(child: CircularProgressIndicator()),
+                      AlgorithmNotesList(notes: widget.algorithm.notes),
+                    ],
+                  ),
+                ),
+              ),
+            ],
           ),
         ),
       ),
