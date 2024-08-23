@@ -63,11 +63,13 @@ void main() async {
   getIt.registerSingleton(app);
 
   // Crashlytics Setup
-  FlutterError.onError = FirebaseCrashlytics.instance.recordFlutterFatalError;
-  PlatformDispatcher.instance.onError = (error, stack) {
-    FirebaseCrashlytics.instance.recordError(error, stack, fatal: true);
-    return true;
-  };
+  if(!kIsWeb) {
+    FlutterError.onError = FirebaseCrashlytics.instance.recordFlutterFatalError;
+    PlatformDispatcher.instance.onError = (error, stack) {
+      FirebaseCrashlytics.instance.recordError(error, stack, fatal: true);
+      return true;
+    };
+  }
 
   // App Check Setup
   await FirebaseAppCheck.instance.activate(
@@ -75,7 +77,7 @@ void main() async {
         kDebugMode ? AndroidProvider.debug : AndroidProvider.playIntegrity,
     appleProvider: kDebugMode ? AppleProvider.debug : AppleProvider.appAttest,
     // TODO AppCheck Web - ReCaptchaEnterprise
-    // webProvider: ReCaptchaEnterpriseProvider('siteKey'),
+    webProvider: ReCaptchaEnterpriseProvider('siteKey'),
   );
 
   runApp(app);
