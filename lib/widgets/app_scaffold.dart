@@ -35,12 +35,12 @@ class AppScaffold extends StatelessWidget {
           BlocBuilder<AlertCubit, AlertCubitState>(
             builder: (BuildContext context, AlertCubitState state) {
               if (state is Data) {
-                  if(state.unread>0) {
-                    return IconButton(
-                      icon: const Icon(Icons.notifications_active),
-                      onPressed: () => context.goNamed('alerts'),
-                    );
-                  }
+                if (state.unread > 0) {
+                  return IconButton(
+                    icon: const Icon(Icons.notifications_active),
+                    onPressed: () => context.goNamed('alerts'),
+                  );
+                }
               }
               return IconButton(
                 icon: const Icon(Icons.notifications_none),
@@ -48,10 +48,18 @@ class AppScaffold extends StatelessWidget {
               );
             },
           ),
+          Builder(
+            builder: (context) {
+              return IconButton(
+                onPressed: () => Scaffold.of(context).openEndDrawer(),
+                icon: const Icon(Icons.account_circle),
+              );
+            }
+          ),
         ],
       ),
-      drawer: AppDrawer(),
-      endDrawer: endDrawer,
+      drawer: endDrawer,
+      endDrawer: AppDrawer(),
       floatingActionButton: floatingActionButton,
       bottomNavigationBar: bottomNavigationBar,
       body: Padding(
