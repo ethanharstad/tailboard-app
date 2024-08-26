@@ -12,6 +12,8 @@ import 'package:permission_handler/permission_handler.dart';
 import 'package:quick_actions/quick_actions.dart';
 import 'package:tailboard_app/app_router.dart';
 import 'package:tailboard_app/blocs/alert_cubit.dart';
+import 'package:tailboard_app/blocs/authentication_bloc.dart';
+import 'package:tailboard_app/blocs/organization_bloc.dart';
 import 'package:tailboard_app/injection.dart';
 import 'package:tailboard_app/repositories/remote_config_repository.dart';
 import 'package:tailboard_app/services/notification_service.dart';
@@ -99,6 +101,8 @@ class TailboardApp extends StatefulWidget {
 }
 
 class _TailboardAppState extends State<TailboardApp> {
+  final AuthenticationBloc authenticationBloc = AuthenticationBloc();
+
   @override
   void initState() {
     super.initState();
@@ -124,8 +128,11 @@ class _TailboardAppState extends State<TailboardApp> {
 
   @override
   Widget build(BuildContext context) {
-    return BlocProvider(
-      create: (BuildContext context) => AlertCubit(),
+    return MultiBlocProvider(
+      providers: [
+        BlocProvider(create: (BuildContext context) => AlertCubit()),
+        BlocProvider(create: (BuildContext context) => OrganizationBloc(authenticationBloc: authenticationBloc))
+      ],
       child: MaterialApp.router(
         // navigatorKey: widget.navigatorKey,
         onGenerateTitle: (BuildContext context) =>

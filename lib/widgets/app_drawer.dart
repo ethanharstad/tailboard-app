@@ -1,6 +1,8 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
+import 'package:tailboard_app/blocs/organization_bloc.dart';
 import 'package:tailboard_app/models/app_user.dart';
 import 'package:tailboard_app/models/organization.dart';
 import 'package:tailboard_app/models/user_access.dart';
@@ -45,34 +47,24 @@ class AppDrawer extends StatelessWidget {
                   child: CircularProgressIndicator(),
                 );
               }),
-          StreamBuilder<List<UserAccess>>(
-            stream: _accessRepository.getUserAccess(),
-            initialData: const [],
-            builder: (context, snapshot) {
-              if (snapshot.hasData) {
-                return Column(
-                  children: <Widget>[
-                    Text(
-                      'Organizations',
-                      style: Theme.of(context).textTheme.titleSmall,
-                    ),
-                    for (var userAccess in snapshot.data!)
-                      StreamBuilder<Organization?>(
-                          stream: _organizationRepository
-                              .getOrganization(userAccess.organization),
-                          builder: (context, snapshot) {
-                            if (snapshot.hasData) {
-                              var org = snapshot.data!;
-                              return ListTile(
-                                title: Text(org.name),
-                              );
-                            }
-                            return Container();
-                          }),
-                  ],
-                );
-              } else {
-                return Container();
+          BlocBuilder<OrganizationBloc, OrganizationState>(
+            builder: (BuildContext context, OrganizationState state) {
+              switch(state) {
+                case OrganizationsContent():
+                  return Column(
+                    children: [
+                      for(Organization o in state.organizations)
+                        ListTile(
+                          title: Text(o.name),
+                          selected: state.selectedOrganization?.id == o.id,
+                          onTap: () => context.read<OrganizationBloc>().selectOrg(o),
+                        ),
+                    ],
+                  );
+                default:
+                  return ListTile(
+                    title: Text('Loading...'),
+                  );
               }
             },
           ),

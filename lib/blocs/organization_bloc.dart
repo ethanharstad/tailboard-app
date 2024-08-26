@@ -28,46 +28,62 @@ class OrganizationBloc extends Cubit<OrganizationState> {
         _accessRepository = UserAccessRepository(),
         _organizationRepository = OrganizationRepository(),
         super(const OrganizationState.loading()) {
+    getOrgs(_authenticationBloc.state?.uid);
     _authenticationBloc.stream.listen((authState) {
-      if (authState != null) {
-        emit(const OrganizationState.loading());
-        // Subscribe to access list for current user
-        _accessRepository.getUserAccess().listen((List<UserAccess> access) {
-          Organization? selected;
-          // Update access cache
-          Set<String> previousAccess = Set.from(accessCache.keys);
-          for(UserAccess a in access) {
-            accessCache[a.id] = a;
-            previousAccess.remove(a.id);
-            if(a.organization == (state as OrganizationsContent).selectedOrganization?.id) {
-              selected = (state as OrganizationsContent).selectedOrganization;
-            }
-            // Resolve organization
-            if(!orgListeners.containsKey(a.organization)) {
-              orgListeners[a.organization] = _organizationRepository.getOrganization(a.organization).listen((Organization? data) {
-                if(data != null) {
-                  orgCache[data!.id] = data!;
-                  List<Organization> alphabetical = orgCache.values.sorted((Organization a, Organization b) => a.name.compareTo(b.name));
-                  emit(OrganizationsContent(
-                    selectedOrganization: selected,
-                    organizations: alphabetical,
-                  ));
-                }
-              });
-            }
-          }
-          // Clean up revoked access
-          for(String toRemove in previousAccess) {
-            UserAccess a = accessCache[toRemove]!;
-            orgCache.remove(a.organization);
-            orgListeners[a.organization]?.cancel();
-            orgListeners.remove(a.organization);
-            accessCache.remove(toRemove);
-          }
-        });
-      } else {
-        emit(const OrganizationState.content());
-      }
+      getOrgs(authState?.uid);
     });
+  }
+
+  void getOrgs(String? userId) {
+    if (userId != null) {
+      emit(const OrganizationState.loading());
+      // Subscribe to access list for current user
+      _accessRepository.getUserAccess().listen((List<UserAccess> access) {
+        Organization? selected;
+        // Update access cache
+        Set<String> previousAccess = Set.from(accessCache.keys);
+        for(UserAccess a in access) {
+          accessCache[a.id] = a;
+          previousAccess.remove(a.id);
+          if(state is OrganizationsContent && a.organization == (state as OrganizationsContent).selectedOrganization?.id) {
+            selected = (state as OrganizationsContent).selectedOrganization;
+          }
+          // Resolve organization
+          if(!orgListeners.containsKey(a.organization)) {
+            orgListeners[a.organization] = _organizationRepository.getOrganization(a.organization).listen((Organization? data) {
+              if(data != null) {
+                orgCache[data!.id] = data!;
+                List<Organization> alphabetical = orgCache.values.sorted((Organization a, Organization b) => a.name.compareTo(b.name));
+                emit(OrganizationsContent(
+                  selectedOrganization: selected,
+                  organizations: alphabetical,
+                ));
+              }
+            });
+          }
+        }
+        // Clean up revoked access
+        for(String toRemove in previousAccess) {
+          UserAccess a = accessCache[toRemove]!;
+          orgCache.remove(a.organization);
+          orgListeners[a.organization]?.cancel();
+          orgListeners.remove(a.organization);
+          accessCache.remove(toRemove);
+        }
+      });
+    } else {
+      emit(const OrganizationState.content());
+    }
+  }
+
+  selectOrg(Organization org) {
+    if(state is OrganizationsContent) {
+      if((state as OrganizationsContent).organizations.contains(org)) {
+        emit(OrganizationsContent(
+          organizations: (state as OrganizationsContent).organizations,
+          selectedOrganization: org,
+        ));
+      }
+    }
   }
 }
