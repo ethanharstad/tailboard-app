@@ -52,6 +52,10 @@ class AppDrawer extends StatelessWidget {
               if (snapshot.hasData) {
                 return Column(
                   children: <Widget>[
+                    Text(
+                      'Organizations',
+                      style: Theme.of(context).textTheme.titleSmall,
+                    ),
                     for (var userAccess in snapshot.data!)
                       StreamBuilder<Organization?>(
                           stream: _organizationRepository
@@ -72,6 +76,7 @@ class AppDrawer extends StatelessWidget {
               }
             },
           ),
+          Divider(),
           ListTile(
             title: Text(AppLocalizations.of(context)!.settings),
             leading: const Icon(Icons.settings),
