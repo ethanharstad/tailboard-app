@@ -50,13 +50,13 @@ class AppDrawer extends StatelessWidget {
           BlocBuilder<OrganizationBloc, OrganizationState>(
             builder: (BuildContext context, OrganizationState state) {
               switch(state) {
-                case OrganizationsContent():
+                case OrganizationsContent(:final organizations, :final selectedOrganization):
                   return Column(
                     children: [
-                      for(Organization o in state.organizations)
+                      for(Organization o in organizations)
                         ListTile(
                           title: Text(o.name),
-                          selected: state.selectedOrganization?.id == o.id,
+                          selected: selectedOrganization?.id == o.id,
                           onTap: () => context.read<OrganizationBloc>().selectOrg(o),
                         ),
                     ],

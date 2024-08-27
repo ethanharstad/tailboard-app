@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:tailboard_app/blocs/alert_cubit.dart';
+import 'package:tailboard_app/blocs/organization_bloc.dart';
 import 'package:tailboard_app/widgets/app_drawer.dart';
 
 class AppScaffold extends StatelessWidget {
@@ -10,6 +11,7 @@ class AppScaffold extends StatelessWidget {
     required this.title,
     required this.body,
     this.actions = const [],
+    this.requiresOrg = true,
     this.floatingActionButton,
     this.bottomNavigationBar,
     this.endDrawer,
@@ -23,6 +25,7 @@ class AppScaffold extends StatelessWidget {
   final Widget? bottomNavigationBar;
   final List<Widget> actions;
   final Key? scaffoldKey;
+  final bool requiresOrg;
 
   @override
   Widget build(BuildContext context) {
@@ -48,14 +51,12 @@ class AppScaffold extends StatelessWidget {
               );
             },
           ),
-          Builder(
-            builder: (context) {
-              return IconButton(
-                onPressed: () => Scaffold.of(context).openEndDrawer(),
-                icon: const Icon(Icons.account_circle),
-              );
-            }
-          ),
+          Builder(builder: (context) {
+            return IconButton(
+              onPressed: () => Scaffold.of(context).openEndDrawer(),
+              icon: const Icon(Icons.account_circle),
+            );
+          }),
         ],
       ),
       drawer: endDrawer,
@@ -64,7 +65,38 @@ class AppScaffold extends StatelessWidget {
       bottomNavigationBar: bottomNavigationBar,
       body: Padding(
         padding: const EdgeInsets.all(4.0),
-        child: body,
+        child: BlocBuilder<OrganizationBloc, OrganizationState>(
+          builder: (BuildContext context, OrganizationState state) {
+            switch (state) {
+              case OrganizationsContent(:final selectedOrganization):
+                if (requiresOrg == false || selectedOrganization != null) {
+                  return body;
+                }
+                return Builder(
+                  builder: (BuildContext context) {
+                    return Expanded(
+                      child: Center(
+                        child: Column(
+                          children: [
+                            const Text(
+                                'Select your current organization to continue.'),
+                            ElevatedButton(
+                              child: const Text('Select Organization'),
+                              onPressed: () => Scaffold.of(context).openEndDrawer(),
+                            ),
+                          ],
+                        ),
+                      ),
+                    );
+                  }
+                );
+              default:
+                return const Center(
+                  child: CircularProgressIndicator(),
+                );
+            }
+          },
+        ),
       ),
     );
   }

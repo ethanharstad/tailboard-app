@@ -114,10 +114,10 @@ class _TailboardAppState extends State<TailboardApp> {
             NotificationService.onNotificationDisplayedMethod,
         onDismissActionReceivedMethod:
             NotificationService.onDismissActionReceivedMethod);
-    WidgetsBinding.instance.addPostFrameCallback((_) {
-      requestNotificationPermission();
-      requestStoragePermission();
-      RemoteConfigRepository().update();
+    WidgetsBinding.instance.addPostFrameCallback((_) async {
+      await requestNotificationPermission();
+      await requestStoragePermission();
+      await RemoteConfigRepository().update();
     });
   }
 
