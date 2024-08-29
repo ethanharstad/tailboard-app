@@ -15,6 +15,7 @@ class Personnel with _$Personnel {
     required String rankId,
     required DateTime serviceStart,
     required DateTime rankStart,
+    String? uid,
   }) = _Personnel;
 
   factory Personnel.fromJson(Map<String, dynamic> json) => _$PersonnelFromJson(json);

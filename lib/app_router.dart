@@ -55,6 +55,7 @@ final GoRouter router = GoRouter(
                         name: 'station_detail',
                         builder: (BuildContext context, GoRouterState state) =>
                             StationDetailScreen(
+                          departmentId: state.pathParameters['departmentId']!,
                           stationId: state.pathParameters['stationId']!,
                         ),
                       ),
