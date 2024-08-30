@@ -14,12 +14,14 @@ class StationRepository {
       SnapshotOptions? options) {
     var json = snapshot.data()!;
     json['id'] = snapshot.id;
+    json['departmentId'] = snapshot.reference.parent.parent!.id;
     return Station.fromJson(json);
   }
 
   Map<String, Object?> _toFirestore(Station station, SetOptions? options) {
     var json = station.toJson();
     json.remove('id');
+    json.remove('departmentId');
     return json;
   }
 
@@ -33,7 +35,6 @@ class StationRepository {
           fromFirestore: _fromFirestore,
           toFirestore: _toFirestore,
         );
-    print("/organizations/qCaIqv2FKIrryf3tKPBT/stations");
     print(collectionReference.path);
     await for (final querySnapshot in collectionReference.snapshots()) {
       print(querySnapshot.size);
