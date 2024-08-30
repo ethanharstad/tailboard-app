@@ -74,18 +74,16 @@ class AppScaffold extends StatelessWidget {
                 }
                 return Builder(
                   builder: (BuildContext context) {
-                    return Expanded(
-                      child: Center(
-                        child: Column(
-                          children: [
-                            const Text(
-                                'Select your current organization to continue.'),
-                            ElevatedButton(
-                              child: const Text('Select Organization'),
-                              onPressed: () => Scaffold.of(context).openEndDrawer(),
-                            ),
-                          ],
-                        ),
+                    return Center(
+                      child: Column(
+                        children: [
+                          const Text(
+                              'Select your current organization to continue.'),
+                          ElevatedButton(
+                            child: const Text('Select Organization'),
+                            onPressed: () => Scaffold.of(context).openEndDrawer(),
+                          ),
+                        ],
                       ),
                     );
                   }
